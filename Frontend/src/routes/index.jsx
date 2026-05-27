@@ -14,13 +14,23 @@ const OrdersPage = lazy(() => import('../modules/user/pages/OrdersPage'));
 const ProfilePage = lazy(() => import('../modules/user/pages/ProfilePage'));
 const DoctorAppointmentsPage = lazy(() => import('../modules/user/pages/DoctorAppointmentsPage'));
 const LabTestsPage = lazy(() => import('../modules/user/pages/LabTestsPage'));
+const DoctorBookingPage = lazy(() => import('../modules/user/pages/DoctorBookingPage'));
+const LabTestBookingPage = lazy(() => import('../modules/user/pages/LabTestBookingPage'));
+const LabDetailsPage = lazy(() => import('../modules/user/pages/LabDetailsPage'));
 
-// Auth Page
+
+// Auth Page (Customer)
 const LoginPage = lazy(() => import('../modules/auth/pages/LoginPage'));
 
 // Layouts (Admin & Vendor)
 const AdminLayout = lazy(() => import('../modules/admin/layouts/AdminLayout'));
 const VendorLayout = lazy(() => import('../modules/vendor/layouts/VendorLayout'));
+
+// Super Admin Auth Page Modules
+const AdminLoginPage = lazy(() => import('../modules/auth/admin/pages/AdminLoginPage'));
+const AdminForgotPasswordPage = lazy(() => import('../modules/auth/admin/pages/AdminForgotPasswordPage'));
+const AdminVerifyOtpPage = lazy(() => import('../modules/auth/admin/pages/AdminVerifyOtpPage'));
+const AdminResetPasswordPage = lazy(() => import('../modules/auth/admin/pages/AdminResetPasswordPage'));
 
 // Super Admin Page Modules
 const AdminDashboard = lazy(() => import('../modules/admin/pages/AdminDashboard'));
@@ -32,6 +42,13 @@ const DoctorManagement = lazy(() => import('../modules/admin/pages/DoctorManagem
 const LabTestsManagement = lazy(() => import('../modules/admin/pages/LabTestsManagement'));
 const CMSManagement = lazy(() => import('../modules/admin/pages/CMSManagement'));
 const SettingsPage = lazy(() => import('../modules/admin/pages/SettingsPage'));
+
+// Multi-Vendor Auth Page Modules
+const VendorLoginPage = lazy(() => import('../modules/auth/vendor/pages/VendorLoginPage'));
+const VendorSignupPage = lazy(() => import('../modules/auth/vendor/pages/VendorSignupPage'));
+const VendorForgotPasswordPage = lazy(() => import('../modules/auth/vendor/pages/VendorForgotPasswordPage'));
+const VendorVerifyOtpPage = lazy(() => import('../modules/auth/vendor/pages/VendorVerifyOtpPage'));
+const OnboardingPending = lazy(() => import('../modules/vendor/pages/OnboardingPending'));
 
 // Multi-Vendor Page Modules
 const VendorDashboard = lazy(() => import('../modules/vendor/pages/VendorDashboard'));
@@ -67,19 +84,32 @@ export default function AppRoutes() {
         <Route index element={<PageSuspense><HomePage /></PageSuspense>} />
         <Route path="product/:id" element={<PageSuspense><ProductDetailsPage /></PageSuspense>} />
         <Route path="categories" element={<PageSuspense><CategoriesPage /></PageSuspense>} />
+        <Route path="medicines" element={<PageSuspense><CategoriesPage /></PageSuspense>} />
+        <Route path="wellness" element={<PageSuspense><CategoriesPage /></PageSuspense>} />
+        <Route path="ayurveda" element={<PageSuspense><CategoriesPage /></PageSuspense>} />
         <Route path="search" element={<PageSuspense><SearchPage /></PageSuspense>} />
         <Route path="cart" element={<PageSuspense><CartPage /></PageSuspense>} />
         <Route path="checkout" element={<PageSuspense><CheckoutPage /></PageSuspense>} />
         <Route path="orders" element={<PageSuspense><OrdersPage /></PageSuspense>} />
+        <Route path="track-orders" element={<PageSuspense><OrdersPage /></PageSuspense>} />
         <Route path="profile" element={<PageSuspense><ProfilePage /></PageSuspense>} />
         <Route path="doctor-appointments" element={<PageSuspense><DoctorAppointmentsPage /></PageSuspense>} />
+        <Route path="doctors/:doctorId/book" element={<PageSuspense><DoctorBookingPage /></PageSuspense>} />
         <Route path="lab-tests" element={<PageSuspense><LabTestsPage /></PageSuspense>} />
+        <Route path="lab-tests/:testId/book" element={<PageSuspense><LabTestBookingPage /></PageSuspense>} />
+        <Route path="labs/:labId" element={<PageSuspense><LabDetailsPage /></PageSuspense>} />
         
-        {/* Auth page routed inside layout to preserve navigation bars, but with separate wrapper */}
+        {/* Auth page routed inside layout to preserve navigation bars */}
         <Route path="login" element={<PageSuspense><LoginPage /></PageSuspense>} />
       </Route>
 
-      {/* 2. Super Admin Module Protected Router */}
+      {/* 2. Super Admin Auth Public Routes */}
+      <Route path="/admin/login" element={<PageSuspense><AdminLoginPage /></PageSuspense>} />
+      <Route path="/admin/forgot-password" element={<PageSuspense><AdminForgotPasswordPage /></PageSuspense>} />
+      <Route path="/admin/verify-otp" element={<PageSuspense><AdminVerifyOtpPage /></PageSuspense>} />
+      <Route path="/admin/reset-password" element={<PageSuspense><AdminResetPasswordPage /></PageSuspense>} />
+
+      {/* 3. Super Admin Module Protected Router */}
       <Route path="/admin" element={<PageSuspense><AdminLayout /></PageSuspense>}>
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<PageSuspense><AdminDashboard /></PageSuspense>} />
@@ -93,7 +123,14 @@ export default function AppRoutes() {
         <Route path="settings" element={<PageSuspense><SettingsPage /></PageSuspense>} />
       </Route>
 
-      {/* 3. Multi-Vendor Module Protected Router */}
+      {/* 4. Multi-Vendor Auth Public Routes */}
+      <Route path="/vendor/login" element={<PageSuspense><VendorLoginPage /></PageSuspense>} />
+      <Route path="/vendor/signup" element={<PageSuspense><VendorSignupPage /></PageSuspense>} />
+      <Route path="/vendor/forgot-password" element={<PageSuspense><VendorForgotPasswordPage /></PageSuspense>} />
+      <Route path="/vendor/verify-otp" element={<PageSuspense><VendorVerifyOtpPage /></PageSuspense>} />
+      <Route path="/vendor/onboarding-pending" element={<PageSuspense><OnboardingPending /></PageSuspense>} />
+
+      {/* 5. Multi-Vendor Module Protected Router */}
       <Route path="/vendor" element={<PageSuspense><VendorLayout /></PageSuspense>}>
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<PageSuspense><VendorDashboard /></PageSuspense>} />

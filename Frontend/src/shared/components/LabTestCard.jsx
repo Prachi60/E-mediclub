@@ -1,41 +1,28 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiCalendar, FiCheck, FiInfo } from 'react-icons/fi';
-import { addToCart, removeFromCart } from '../../modules/user/store/cartSlice';
+import { FiCalendar, FiCheckCircle, FiInfo, FiActivity, FiShield } from 'react-icons/fi';
 
 export default function LabTestCard({ test }) {
-  const dispatch = useDispatch();
-  const cartItems = useSelector(state => state.cart.items);
+  const navigate = useNavigate();
 
-  // Find if this lab test is already in the cart
-  const isBooked = cartItems.some(item => item.id === test.id && item.type === 'labtest');
-
-  const handleBookingToggle = (e) => {
+  const handleBookingRedirect = (e) => {
     e.stopPropagation();
-    if (isBooked) {
-      dispatch(removeFromCart({ id: test.id, type: 'labtest' }));
-    } else {
-      dispatch(addToCart({
-        id: test.id,
-        name: test.name,
-        type: 'labtest',
-        price: test.price,
-        discountPrice: test.discountPrice,
-        image: 'https://images.unsplash.com/photo-1579154261294-88752594e687?auto=format&fit=crop&w=150&h=150&q=80', // standard medical laboratory image
-        subtitle: test.parameters,
-        details: test.timeframe
-      }));
+    navigate(`/lab-tests/${test.id}/book`);
+  };
+
+  const handleLabRedirect = (e) => {
+    e.stopPropagation();
+    if (test.labId) {
+      navigate(`/labs/${test.labId}`);
     }
   };
 
   return (
     <div
-      className={`bg-white rounded-3xl p-5 border shadow-premium hover:shadow-premium-hover hover:-translate-y-1.5 flex flex-col justify-between select-none relative overflow-hidden transition-all duration-300 group ${
-        isBooked ? 'border-teal/50 bg-teal-light/20' : 'border-slate-100 hover:border-teal/30'
-      }`}
+      className="bg-white rounded-3xl p-5 border border-slate-100 hover:border-teal/30 shadow-premium hover:shadow-premium-hover hover:-translate-y-1.5 flex flex-col justify-between select-none relative overflow-hidden transition-all duration-300 group"
     >
-      {/* Test Specialty Tag */}
+      {/* Test Specialty / Lab Certified Tag */}
       {test.tag && (
         <span className="absolute top-0 right-0 bg-teal text-white text-[9px] font-black uppercase tracking-wider px-3.5 py-1 rounded-bl-2xl shadow-sm">
           {test.tag}
@@ -43,13 +30,34 @@ export default function LabTestCard({ test }) {
       )}
 
       <div>
+        {/* Lab Provider Link with Badges */}
+        {test.labName && (
+          <div className="flex items-center justify-between mb-2">
+            <button
+              onClick={handleLabRedirect}
+              className="text-[10px] text-teal-dark hover:text-teal hover:underline font-black uppercase tracking-wider bg-transparent border-0 p-0 cursor-pointer text-left"
+            >
+              🏢 {test.labName}
+            </button>
+            <div className="flex gap-1.5 shrink-0">
+              <span className="text-[8px] font-black uppercase bg-emerald-50 text-emerald-600 border border-emerald-100 px-1.5 py-0.5 rounded" title="NABL Certified Clinic">
+                NABL
+              </span>
+              <span className="text-[8px] font-black uppercase bg-slate-50 text-slate-500 border border-slate-100 px-1.5 py-0.5 rounded" title="ISO 9001:2015 Approved">
+                ISO
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Title */}
-        <h4 className="text-base font-extrabold text-slate-800 leading-snug line-clamp-2 max-w-[90%]">
+        <h4 className="text-sm font-extrabold text-slate-800 leading-snug line-clamp-2 max-w-[90%] group-hover:text-teal transition-colors">
           {test.name}
         </h4>
 
         {/* Parameter count */}
-        <span className="text-[11px] text-teal font-black uppercase tracking-wider block mt-1.5">
+        <span className="text-[10.5px] text-teal font-black uppercase tracking-wider block mt-1.5 flex items-center gap-1.5">
+          <FiActivity className="text-teal" />
           {test.parameters}
         </span>
 
@@ -57,11 +65,11 @@ export default function LabTestCard({ test }) {
         <div className="flex flex-col gap-1.5 mt-3.5 bg-slate-50 p-2.5 rounded-2xl border border-slate-100/50">
           <p className="text-[10px] text-slate-500 font-bold flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
-            {test.timeframe}
+            ⏱️ {test.timeframe}
           </p>
           <p className="text-[10px] text-slate-500 font-bold flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
-            {test.fastingRequired}
+            🥣 {test.fastingRequired}
           </p>
         </div>
       </div>
@@ -89,32 +97,29 @@ export default function LabTestCard({ test }) {
             </span>
           )}
           {test.homeCollection && (
-            <span className="text-[9px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md font-bold mt-1 inline-block w-fit">
-              FREE HOME COLLECTION
+            <span className="text-[9px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md font-bold mt-1.5 inline-block w-fit uppercase tracking-wider">
+              🏠 Home Sample Collection
             </span>
           )}
         </div>
 
-        <div>
-          {isBooked ? (
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={handleBookingToggle}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-sm flex items-center gap-1"
-            >
-              <FiCheck className="w-4 h-4 stroke-[3px]" />
-              <span>ADDED</span>
-            </motion.button>
-          ) : (
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={handleBookingToggle}
-              className="bg-forest hover:bg-forest-dark text-white font-bold text-xs px-5 py-2.5 rounded-full shadow-sm hover:shadow transition-all flex items-center gap-1"
-            >
-              <FiCalendar className="w-4 h-4" />
-              <span>BOOK TEST</span>
-            </motion.button>
-          )}
+        <div className="flex items-center gap-2">
+          {/* View Lab Profile shortcut */}
+          <button 
+            onClick={handleLabRedirect}
+            className="px-3 py-2.5 bg-slate-50 hover:bg-slate-100 text-[9px] font-black text-slate-650 hover:text-teal rounded-full shadow-sm cursor-pointer border-0 uppercase tracking-wider flex items-center gap-0.5"
+          >
+            Info
+          </button>
+
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={handleBookingRedirect}
+            className="bg-forest hover:bg-forest-dark text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-sm hover:shadow transition-all flex items-center gap-1 cursor-pointer border-0"
+          >
+            <FiCalendar className="w-4 h-4 shrink-0" />
+            <span>BOOK NOW</span>
+          </motion.button>
         </div>
       </div>
     </div>

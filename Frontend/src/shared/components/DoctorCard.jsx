@@ -1,73 +1,53 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiUser, FiCalendar, FiClock, FiCheckCircle } from 'react-icons/fi';
-import { bookDoctorAppointment } from '../../modules/user/store/productSlice';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FiCalendar, FiCheckCircle, FiClock, FiActivity, FiArrowRight, FiStar } from 'react-icons/fi';
 
-export default function DoctorCard({ doctor }) {
-  const dispatch = useDispatch();
+export default function DoctorCard({ doctor, onViewProfile }) {
+  const navigate = useNavigate();
   const appointments = useSelector(state => state.products.appointments);
 
-  // States
-  const [showSlots, setShowSlots] = useState(false);
-  const [bookingSuccess, setBookingSuccess] = useState(false);
-  const [selectedSlot, setSelectedSlot] = useState(null);
-
   // Check if user already has an appointment booked with this doctor
-  const isBooked = appointments.some(apt => apt.doctorName === doctor.name && apt.status === 'Confirmed');
-
-  const mockSlots = [
-    '04:00 PM - 04:30 PM',
-    '04:30 PM - 05:00 PM',
-    '05:00 PM - 05:30 PM',
-    '05:30 PM - 06:00 PM'
-  ];
-
-  const handleBooking = (slot) => {
-    setSelectedSlot(slot);
-    dispatch(bookDoctorAppointment({
-      id: `APT-${Date.now()}`,
-      doctorName: doctor.name,
-      specialty: doctor.specialty,
-      date: new Date().toISOString().split('T')[0],
-      timeSlot: slot,
-      type: 'Online Consultation',
-      status: 'Confirmed'
-    }));
-
-    setBookingSuccess(true);
-    setTimeout(() => {
-      setBookingSuccess(false);
-      setShowSlots(false);
-    }, 2000);
-  };
+  const isBooked = appointments.some(apt => apt.doctorName === doctor.name && (apt.status === 'Confirmed' || apt.status === 'Scheduled'));
 
   return (
     <div
       className="bg-white rounded-3xl p-5 border border-slate-100 hover:border-forest/30 shadow-premium hover:shadow-premium-hover hover:-translate-y-1.5 flex flex-col justify-between relative overflow-hidden select-none transition-all duration-300 group"
     >
       <div>
+        {/* Rating and Specialization row */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <span className="text-[10px] text-teal bg-teal-light/20 px-2 py-0.5 rounded font-black uppercase tracking-wider">
+            {doctor.specialty}
+          </span>
+          <div className="flex items-center gap-1 text-[10px] text-amber-500 font-extrabold bg-amber-50 px-2 py-0.5 rounded">
+            <FiStar className="fill-amber-500 stroke-[3px]" />
+            <span>{doctor.rating}</span>
+            <span className="text-slate-350 font-bold">•</span>
+            <span className="text-slate-400 font-bold">{doctor.reviewsCount} reviews</span>
+          </div>
+        </div>
+
         {/* Doctor Identity Header */}
         <div className="flex gap-4 items-start">
-          <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-sm bg-slate-100 flex-shrink-0 relative">
+          <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-sm bg-slate-100 shrink-0 relative border border-slate-50">
             <img
               src={doctor.avatar}
               alt={doctor.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+              className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
               loading="lazy"
             />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h4 className="text-sm font-extrabold text-slate-800">
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <h4 className="text-sm font-extrabold text-slate-800 leading-tight">
                 {doctor.name}
               </h4>
-              {doctor.online && (
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse block shrink-0" />
-              )}
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse block shrink-0" title="Active Online" />
             </div>
-            <span className="text-[11px] text-teal font-black uppercase tracking-wider block mt-0.5">
-              {doctor.specialty}
+            <span className="text-[10.5px] text-slate-500 font-semibold block mt-0.5 truncate">
+              {doctor.subSpecialty}
             </span>
             <p className="text-[10px] text-slate-400 font-bold block mt-1">
               {doctor.qualification}
@@ -76,84 +56,74 @@ export default function DoctorCard({ doctor }) {
         </div>
 
         {/* Doctor Quick stats grid */}
-        <div className="grid grid-cols-2 gap-2 mt-4 bg-slate-50 p-2.5 rounded-2xl border border-slate-100/50 text-[10px] text-slate-500 font-bold">
+        <div className="grid grid-cols-2 gap-2 mt-4 bg-slate-50 p-2.5 rounded-2xl border border-slate-100/50 text-[10px] text-slate-550 font-bold">
           <p className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
             {doctor.experience}
           </p>
           <p className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-slate-400 shrink-0" />
-            Lang: Hindi, Eng
+            Languages: {doctor.languages?.[0] || 'English'}, {doctor.languages?.[1] || 'Hindi'}
           </p>
         </div>
 
-        {/* Availability text */}
-        <p className="text-[10px] text-teal-dark font-black mt-3 flex items-center gap-1.5">
-          <FiClock className="text-teal" />
-          {doctor.availability}
-        </p>
+        {/* Availability and hospital affiliation */}
+        <div className="mt-3.5 flex flex-col gap-1 text-[10px]">
+          <p className="text-slate-450 font-bold flex items-center gap-1.5 truncate">
+            <span>🏥</span> {doctor.hospital}
+          </p>
+          <p className="text-teal-dark font-black flex items-center gap-1.5">
+            <FiClock className="text-teal" /> {doctor.availability}
+          </p>
+        </div>
       </div>
 
       {/* Pricing and Action Slot */}
       <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col gap-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <div className="flex flex-col">
-            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Consultation Fee</span>
-            <span className="text-lg font-black text-slate-900">₹{doctor.fee}</span>
+            <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider leading-none">Consultation Fee</span>
+            <div className="flex items-baseline gap-1.5 mt-1">
+              <span className="text-base font-black text-slate-800">₹{doctor.fee}</span>
+              <span className="text-[9px] text-slate-400 font-semibold uppercase">Online</span>
+            </div>
+            <span className="text-[9px] text-slate-400 font-bold mt-0.5">In-Clinic: ₹{doctor.offlineFee}</span>
           </div>
 
-          <div>
+          <div className="flex items-center gap-2">
+            {/* View Profile Button */}
+            <button 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                if (onViewProfile) {
+                  onViewProfile();
+                } else {
+                  navigate('/doctor-appointments');
+                }
+              }}
+              className="px-3.5 py-2.5 bg-slate-50 hover:bg-slate-100 text-[10px] font-black text-teal hover:underline rounded-full shadow-sm cursor-pointer transition-colors border-0 flex items-center gap-0.5 uppercase tracking-wide"
+            >
+              <span>Profile</span>
+              <FiArrowRight className="text-[10px]" />
+            </button>
+
             {isBooked ? (
-              <span className="bg-emerald-50 text-emerald-600 text-xs font-black px-4 py-2.5 rounded-full flex items-center gap-1">
+              <span className="bg-emerald-50 text-emerald-600 text-[10px] font-black px-4 py-2.5 rounded-full flex items-center gap-1 border border-emerald-100">
                 <FiCheckCircle className="stroke-[3px]" />
                 BOOKED
               </span>
             ) : (
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setShowSlots(!showSlots)}
-                className="bg-forest hover:bg-forest-dark text-white font-bold text-xs px-5 py-2.5 rounded-full shadow-sm hover:shadow transition-all flex items-center gap-1"
+                onClick={() => navigate(`/doctors/${doctor.id}/book`)}
+                className="bg-forest hover:bg-forest-dark text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-sm hover:shadow transition-all flex items-center gap-1 cursor-pointer border-0"
               >
-                <FiCalendar className="w-4 h-4" />
-                <span>BOOK APPOINTMENT</span>
+                <FiCalendar className="w-4 h-4 shrink-0" />
+                <span>BOOK</span>
               </motion.button>
             )}
           </div>
         </div>
-
-        {/* Slots panel */}
-        <AnimatePresence>
-          {showSlots && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden pt-2.5 border-t border-slate-50 flex flex-col gap-2"
-            >
-              {bookingSuccess ? (
-                <div className="bg-emerald-50 text-emerald-600 p-3 rounded-2xl text-xs font-bold text-center flex items-center justify-center gap-2">
-                  <FiCheckCircle className="w-5 h-5 animate-bounce" />
-                  <span>Appointment Confirmed Instantly!</span>
-                </div>
-              ) : (
-                <>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-wide">Select a Time Slot (Today)</p>
-                  <div className="grid grid-cols-2 gap-1.5">
-                    {mockSlots.map((slot) => (
-                      <button
-                        key={slot}
-                        onClick={() => handleBooking(slot)}
-                        className="py-2 bg-slate-50 border border-slate-100 hover:border-teal hover:bg-teal-light rounded-xl text-[10px] font-semibold text-slate-700 text-center transition-all"
-                      >
-                        {slot.split(' ')[0] + ' ' + slot.split(' ')[1]}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Stepper, Step, StepLabel, TextField, Button, 
+  Box, Stepper, Step, StepLabel, TextField, Button, 
   Radio, RadioGroup, FormControlLabel, FormControl, FormLabel
 } from '@mui/material';
 import { FiMapPin, FiCreditCard, FiSmartphone, FiCheckCircle, FiShield, FiPlus, FiArrowLeft } from 'react-icons/fi';

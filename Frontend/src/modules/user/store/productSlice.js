@@ -433,6 +433,510 @@ const initialMedicines = [
     warnings: 'For external use only. Keep away from eyes. Dilute strictly before skin contact.',
     dosage: 'Mix 1 tablespoon in 250ml water for clinical cleaning.',
     inStock: true
+  },
+  {
+    id: 'med-25',
+    name: 'Pantocid 40mg Tablet',
+    category: 'Medicines',
+    brand: 'Alkem Laboratories Ltd',
+    price: 150,
+    discountPrice: 127,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 180,
+    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 15 tablets',
+    composition: 'Pantoprazole 40mg',
+    benefits: 'Relieves acid reflux, heartburn, GERD, and peptic ulcer clinical symptoms.',
+    warnings: 'Consult a physician. Swallow as whole, do not chew.',
+    dosage: '1 tablet daily on an empty stomach in the morning.',
+    inStock: true
+  },
+  {
+    id: 'med-26',
+    name: 'Gelusil MPS Liquid Mint',
+    category: 'Medicines',
+    brand: 'Pfizer Limited India',
+    price: 180,
+    discountPrice: 153,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 390,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 200 ml',
+    composition: 'Activated Dimethicone, Magnesium Hydroxide, Aluminium Hydroxide',
+    benefits: 'Fast relief from acidity, gas, flatulence, and stomach bloating.',
+    warnings: 'Shake well. Do not exceed 8 teaspoons daily.',
+    dosage: '2 teaspoons after meals or as recommended.',
+    inStock: true
+  },
+  {
+    id: 'med-27',
+    name: 'Allegra 120mg Tablet',
+    category: 'Medicines',
+    brand: 'Sanofi India Ltd',
+    price: 220,
+    discountPrice: 187,
+    discountPercent: 15,
+    rating: 4.5,
+    reviewsCount: 420,
+    image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 10 tablets',
+    composition: 'Fexofenadine Hydrochloride 120mg',
+    benefits: 'Provides non-drowsy 24-hour relief from seasonal allergic rhinitis, sneezing, and runny nose.',
+    warnings: 'Do not take with fruit juices. Consult doctor if pregnant.',
+    dosage: 'One tablet daily with water.',
+    inStock: true
+  },
+  {
+    id: 'med-28',
+    name: 'Limcee chewable Vitamin C',
+    category: 'Medicines',
+    brand: 'Abbott Healthcare',
+    price: 30,
+    discountPrice: 25,
+    discountPercent: 16,
+    rating: 4.8,
+    reviewsCount: 1540,
+    image: 'https://images.unsplash.com/photo-1626645738196-c2a792747f14?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 15 tablets',
+    composition: 'Vitamin C (Ascorbic Acid) 500mg',
+    benefits: 'Boosts natural immunity, collagen synthesis, and antioxidant defenses.',
+    warnings: 'Chew fully before swallowing. Keep in cool storage.',
+    dosage: '1 tablet daily or as advised.',
+    inStock: true
+  },
+  {
+    id: 'med-29',
+    name: 'Combiflam Pain Relief Tablet',
+    category: 'Medicines',
+    brand: 'Sanofi India Ltd',
+    price: 50,
+    discountPrice: 42,
+    discountPercent: 16,
+    rating: 4.7,
+    reviewsCount: 2200,
+    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 20 tablets',
+    composition: 'Ibuprofen 400mg & Paracetamol 325mg',
+    benefits: 'Powerful dual action formula for muscular pain, dental ache, and reducing fever.',
+    warnings: 'Take after meals. Not for patients with gastric ulcers.',
+    dosage: '1 tablet twice daily after meals.',
+    inStock: true
+  },
+  {
+    id: 'med-30',
+    name: 'Otrivin Adult Nasal Drops',
+    category: 'Medicines',
+    brand: 'GSK Consumer Healthcare',
+    price: 95,
+    discountPrice: 80,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 650,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 10 ml',
+    composition: 'Xylometazoline Hydrochloride 0.1%',
+    benefits: 'Fast and long-lasting nasal decongestion, clears nasal blocks inside 2 minutes.',
+    warnings: 'For adults only. Limit usage to maximum 5 days.',
+    dosage: '2-3 drops in each nostril, 3 times daily.',
+    inStock: true
+  },
+  {
+    id: 'med-31',
+    name: 'Digene Gel Mint flavor',
+    category: 'Medicines',
+    brand: 'Abbott Healthcare',
+    price: 140,
+    discountPrice: 119,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 840,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 200 ml',
+    composition: 'Magnesium Hydroxide, Aluminium Hydroxide, Simethicone',
+    benefits: 'High-efficacy antacid that relieves acidity, sour stomach, and flatulence.',
+    warnings: 'Store away from children. Consult doctor if renal disease exists.',
+    dosage: '2 teaspoons after meals as needed.',
+    inStock: true
+  },
+  {
+    id: 'med-32',
+    name: 'Strepsils Sore Throat Lozenges',
+    category: 'Medicines',
+    brand: 'Reckitt Benckiser India',
+    price: 40,
+    discountPrice: 34,
+    discountPercent: 15,
+    rating: 4.8,
+    reviewsCount: 2900,
+    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 8 lozenges',
+    composition: 'Dichlorobenzyl Alcohol, Amylmetacresol',
+    benefits: 'Antibacterial throat lozenges that relieve sore throat, throat tickle, and oral irritation.',
+    warnings: 'Do not consume more than 8 lozenges per day.',
+    dosage: 'Dissolve one lozenge slowly in the mouth every 2-3 hours.',
+    inStock: true
+  },
+  {
+    id: 'med-33',
+    name: 'Orofar Throat Decongestant Spray',
+    category: 'Medicines',
+    brand: 'Novartis India',
+    price: 280,
+    discountPrice: 238,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 140,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Can of 30 ml',
+    composition: 'Benzoxonium Chloride & Lidocaine Hydrochloride',
+    benefits: 'Double action local anesthetic and antiseptic spray for instant throat relief.',
+    warnings: 'Avoid spraying near eyes. Not for kids under 4 years.',
+    dosage: '3 sprays directed to the throat, 3-4 times daily.',
+    inStock: true
+  },
+  {
+    id: 'med-34',
+    name: 'Evion 400 Vitamin E Capsule',
+    category: 'Medicines',
+    brand: 'Merck Limited India',
+    price: 90,
+    discountPrice: 76,
+    discountPercent: 15,
+    rating: 4.8,
+    reviewsCount: 3800,
+    image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 10 capsules',
+    composition: 'Tocopheryl Acetate (Vitamin E) 400mg',
+    benefits: 'Supports cellular health, nourishes hair & skin, and acts as a powerful antioxidant.',
+    warnings: 'Consult a physician. Do not take on empty stomach.',
+    dosage: '1 capsule daily with water after meals.',
+    inStock: true
+  },
+  {
+    id: 'med-35',
+    name: 'ON Gold Standard 100% Whey',
+    category: 'Wellness',
+    brand: 'Optimum Nutrition Inc',
+    price: 3800,
+    discountPrice: 3230,
+    discountPercent: 15,
+    rating: 4.8,
+    reviewsCount: 1950,
+    image: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Tub of 1 kg (2.2 lbs)',
+    composition: 'Whey Protein Isolates, Glutamine & BCAAs',
+    benefits: 'Premium quality post-workout protein that supports lean muscle building and rapid recovery.',
+    warnings: 'Contains milk derivatives. Not for medicinal use.',
+    dosage: 'Mix 1 scoop in 200ml cold water, shake well and drink after workout.',
+    inStock: true
+  },
+  {
+    id: 'med-36',
+    name: 'Olay Regenerist Revitalizing Cream',
+    category: 'Wellness',
+    brand: 'Procter & Gamble India',
+    price: 1699,
+    discountPrice: 1444,
+    discountPercent: 15,
+    rating: 4.5,
+    reviewsCount: 280,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Jar of 50 g',
+    composition: 'Niacinamide, Amino-Peptides, Hyaluronic Acid',
+    benefits: 'Advanced anti-aging moisturizer that firms skin cells, reduces wrinkles, and hydrates.',
+    warnings: 'For external applications only. Avoid direct eye contact.',
+    dosage: 'Apply evenly on clean face and neck daily morning and evening.',
+    inStock: true
+  },
+  {
+    id: 'med-37',
+    name: 'Horlicks Clinical Plus Drink',
+    category: 'Wellness',
+    brand: 'Hindustan Unilever Ltd',
+    price: 550,
+    discountPrice: 467,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 1100,
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Jar of 500 g',
+    composition: 'Malted Barley, Wheat Flour, Milk Solids, Vitamins, Minerals',
+    benefits: 'Specialized clinical health drink clinically proven to make children taller, stronger, and sharper.',
+    warnings: 'Store in dry airtight container.',
+    dosage: 'Mix 2 heaped spoonfuls in warm milk, stir well twice daily.',
+    inStock: true
+  },
+  {
+    id: 'med-38',
+    name: 'MuscleBlaze Biozyme Whey Protein',
+    category: 'Wellness',
+    brand: 'MuscleBlaze India',
+    price: 3200,
+    discountPrice: 2720,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 880,
+    image: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Tub of 1 kg',
+    composition: 'Whey Protein Concentrate with Enhanced Absorption Formula (EAF)',
+    benefits: 'Clinically tested whey that reduces stomach bloating and maximizes protein absorption.',
+    warnings: 'Keep in dry, cool cabinets.',
+    dosage: 'Shake 1 scoop with 200ml cold water, consume immediately after workouts.',
+    inStock: true
+  },
+  {
+    id: 'med-39',
+    name: 'Himalaya Herbal Lip Balm Care',
+    category: 'Wellness',
+    brand: 'The Himalaya Drug Company',
+    price: 45,
+    discountPrice: 38,
+    discountPercent: 15,
+    rating: 4.4,
+    reviewsCount: 1200,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Tube of 10 g',
+    composition: 'Wheatgerm Oil & Carrot Seed Oil',
+    benefits: 'Prevents chapping, hydrates, and protects lips from seasonal cold winds.',
+    warnings: 'Keep away from extreme heat.',
+    dosage: 'Apply evenly on lips as often as needed.',
+    inStock: true
+  },
+  {
+    id: 'med-40',
+    name: 'Revlon Flex Professional Shampoo',
+    category: 'Wellness',
+    brand: 'Revlon India',
+    price: 450,
+    discountPrice: 382,
+    discountPercent: 15,
+    rating: 4.5,
+    reviewsCount: 340,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 590 ml',
+    composition: 'Hydrolyzed Silk, Keratin Protein, Panthenol',
+    benefits: 'Cleanses hair roots, builds active volume, and restores shiny texture.',
+    warnings: 'Rinse with clean water immediately if contact in eyes.',
+    dosage: 'Apply to wet hair, lather gently, and rinse clean twice weekly.',
+    inStock: true
+  },
+  {
+    id: 'med-41',
+    name: 'Nivea Men Active Clean Body Wash',
+    category: 'Wellness',
+    brand: 'Nivea India Pvt Ltd',
+    price: 250,
+    discountPrice: 212,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 960,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 250 ml',
+    composition: 'Natural Charcoal clay formula',
+    benefits: 'Deep cleansing shower gel that draws out dirt, impurities, and smells fresh.',
+    warnings: 'For body washes only. Avoid sensitive areas.',
+    dosage: 'Pour on a wet loofah, foam up and apply on body, rinse well.',
+    inStock: true
+  },
+  {
+    id: 'med-42',
+    name: 'Cetaphil Gentle Skin Cleanser',
+    category: 'Wellness',
+    brand: 'Galderma Laboratories',
+    price: 395,
+    discountPrice: 335,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 2200,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 250 ml',
+    composition: 'Niacinamide, Panthenol, Hydrating Glycerin',
+    benefits: 'Hypoallergenic cleanser that nourishes sensitive skin cells and retains vital moisture.',
+    warnings: 'Store below 30°C.',
+    dosage: 'Apply on face, rub gently, rinse clean with warm water.',
+    inStock: true
+  },
+  {
+    id: 'med-43',
+    name: 'Dabur Chyawanprash Immunity',
+    category: 'Ayurveda',
+    brand: 'Dabur India Ltd',
+    price: 395,
+    discountPrice: 335,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 1500,
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Tub of 500 g',
+    composition: 'Amla, Giloy, Ashwagandha, Pippali, Honey',
+    benefits: 'Time-tested immunity booster that strengthens body defenses, fights infections.',
+    warnings: 'Diabetic patients should consult a physician.',
+    dosage: '1 teaspoon twice daily with warm milk or water.',
+    inStock: true
+  },
+  {
+    id: 'med-44',
+    name: 'Patanjali Aloe Vera Juice Pure',
+    category: 'Ayurveda',
+    brand: 'Patanjali Ayurved Ltd',
+    price: 220,
+    discountPrice: 187,
+    discountPercent: 15,
+    rating: 4.4,
+    reviewsCount: 780,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 1 L',
+    composition: 'Pure Aloe Vera (Aloe barbadensis) inner leaf pulp juice',
+    benefits: 'Cleanses stomach systems, treats constipation, reduces joint pain, and improves skin glow.',
+    warnings: 'Do not consume during pregnancy.',
+    dosage: 'Mix 15-20ml with equal warm water and drink on empty stomach morning/evening.',
+    inStock: true
+  },
+  {
+    id: 'med-45',
+    name: 'Organic India Tulsi Green Tea',
+    category: 'Ayurveda',
+    brand: 'Organic India Pvt Ltd',
+    price: 250,
+    discountPrice: 212,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 840,
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Box of 25 infusion bags',
+    composition: 'Rama Tulsi, Krishna Tulsi, Vana Tulsi, Organic Green Tea',
+    benefits: 'Rich in antioxidants, relieves daily stress, boosts metabolism, and supports weight management.',
+    warnings: 'Store in dry cupboards.',
+    dosage: 'Infuse 1 tea bag in 150ml boiling water for 3-5 minutes, sip hot.',
+    inStock: true
+  },
+  {
+    id: 'med-46',
+    name: 'Baidyanath Triphala Churna Digestive',
+    category: 'Ayurveda',
+    brand: 'Shree Baidyanath Ayurved Bhawan',
+    price: 130,
+    discountPrice: 110,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 460,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Jar of 120 g',
+    composition: 'Amla, Haritaki, and Bibhitaki powder',
+    benefits: 'Cleanses colon systems, regulates digestion, cures flatulence, and detoxifies naturally.',
+    warnings: 'Ensure bottle is tightly capped after use.',
+    dosage: '1 teaspoon (5-6g) with warm water at bedtime.',
+    inStock: true
+  },
+  {
+    id: 'med-47',
+    name: 'Zandu Balm Active Pain Relief',
+    category: 'Ayurveda',
+    brand: 'Emami Ltd',
+    price: 90,
+    discountPrice: 76,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 1100,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Jar of 25 g',
+    composition: 'Menthasatva (Menthol), Gaultheria Oil, Cajeput Oil',
+    benefits: 'Number 1 ayurvedic headache and body ache relief balm. Highly effective.',
+    warnings: 'For external applications only. Keep away from nose and eyes.',
+    dosage: 'Rub gently on affected muscles and forehead 3-4 times daily.',
+    inStock: true
+  },
+  {
+    id: 'med-48',
+    name: 'Hamdard Safi Blood Purifier',
+    category: 'Ayurveda',
+    brand: 'Hamdard Laboratories India',
+    price: 200,
+    discountPrice: 170,
+    discountPercent: 15,
+    rating: 4.5,
+    reviewsCount: 980,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 500 ml',
+    composition: 'Sana, Revand Chini, Neem, Chiraita, and Tulsi',
+    benefits: 'Natural blood purifier syrup that treats acne, improves skin glow, and cleanses toxins.',
+    warnings: 'Take with warm water. Not for diabetic patients.',
+    dosage: '2 teaspoons (10ml) once daily in morning with water.',
+    inStock: true
+  },
+  {
+    id: 'med-49',
+    name: 'Dabur Pudin Hara Pearls Acidity',
+    category: 'Ayurveda',
+    brand: 'Dabur India Ltd',
+    price: 30,
+    discountPrice: 25,
+    discountPercent: 16,
+    rating: 4.8,
+    reviewsCount: 1800,
+    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 10 pearls',
+    composition: 'Pudina Satva (Mentha piperita) essential clinical oil extract',
+    benefits: 'Provides instant cooling relief from stomach ache, acidity, gas, and indigestion.',
+    warnings: 'Do not chew. Swallow as whole with water.',
+    dosage: '1 pearl for adults, twice daily with water.',
+    inStock: true
+  },
+  {
+    id: 'med-50',
+    name: 'Patanjali Divya Kanti Lep Skin',
+    category: 'Ayurveda',
+    brand: 'Patanjali Ayurved Ltd',
+    price: 90,
+    discountPrice: 76,
+    discountPercent: 15,
+    rating: 4.5,
+    reviewsCount: 210,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Jar of 50 g',
+    composition: 'Chandan, Haldi, Manjistha, and Aloevera extracts',
+    benefits: 'Treats skin pimples, black spots, and improves overall skin fairness.',
+    warnings: 'For external paste application only.',
+    dosage: 'Mix with rose water to make paste, apply on face, rinse after 20 minutes.',
+    inStock: true
+  },
+  {
+    id: 'med-51',
+    name: 'Himalaya Neem Purifying Tablets',
+    category: 'Ayurveda',
+    brand: 'The Himalaya Drug Company',
+    price: 165,
+    discountPrice: 140,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 820,
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 60 tablets',
+    composition: 'Pure Neem (Azadirachta indica) leaf extract 250mg',
+    benefits: 'Cleanses skin systems, fights acne-causing bacteria, and purifies systemic toxins.',
+    warnings: 'Not advised for children under 5 years.',
+    dosage: '1 tablet twice daily with water after meals.',
+    inStock: true
+  },
+  {
+    id: 'med-52',
+    name: 'Sri Sri Tattva Ojasvita Drink',
+    category: 'Ayurveda',
+    brand: 'Sri Sri Tattva India',
+    price: 350,
+    discountPrice: 297,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 310,
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Jar of 200 g',
+    composition: 'Ashwagandha, Brahmi, Shankhapushpi, Jyotishmati, Shatavari',
+    benefits: 'Premium herbal drink that boosts brain power, daily memory focus, and physical energy.',
+    warnings: 'Store in dry airtight container.',
+    dosage: 'Mix 2 teaspoons in hot milk twice daily, stir well.',
+    inStock: true
   }
 ];
 
@@ -448,7 +952,9 @@ const initialLabTests = [
     discountPercent: 57,
     homeCollection: true,
     fastingRequired: '10-12 hours fasting required',
-    testsIncluded: 'Thyroid Profile, Complete Blood Count, Liver Function, Kidney Function, Lipid Profile (Cholesterol), Blood Sugar Fasting, Vitamin D, Vitamin B12'
+    testsIncluded: 'Thyroid Profile, Complete Blood Count, Liver Function, Kidney Function, Lipid Profile (Cholesterol), Blood Sugar Fasting, Vitamin D, Vitamin B12',
+    labId: 'em-lab-1',
+    labName: 'E Mediclub Clinical Laboratories'
   },
   {
     id: 'lab-2',
@@ -461,7 +967,9 @@ const initialLabTests = [
     discountPercent: 50,
     homeCollection: true,
     fastingRequired: 'Fasting not strictly required',
-    testsIncluded: 'Calcium, Vitamin D3, Rheumatoid Factor (RA), Uric Acid, Phosphorus, Alkaline Phosphatase'
+    testsIncluded: 'Calcium, Vitamin D3, Rheumatoid Factor (RA), Uric Acid, Phosphorus, Alkaline Phosphatase',
+    labId: 'em-lab-2',
+    labName: 'Metropolis Diagnostics Center'
   },
   {
     id: 'lab-3',
@@ -474,7 +982,9 @@ const initialLabTests = [
     discountPercent: 50,
     homeCollection: true,
     fastingRequired: '12 hours fasting mandatory',
-    testsIncluded: 'HbA1c (Average Blood Sugar), Blood Sugar Fasting, Blood Sugar Post-Prandial, Urine Glucose'
+    testsIncluded: 'HbA1c (Average Blood Sugar), Blood Sugar Fasting, Blood Sugar Post-Prandial, Urine Glucose',
+    labId: 'em-lab-3',
+    labName: 'Thyrocare Wellness Center'
   },
   {
     id: 'lab-4',
@@ -487,7 +997,9 @@ const initialLabTests = [
     discountPercent: 50,
     homeCollection: true,
     fastingRequired: 'No fasting required',
-    testsIncluded: 'Vitamin D (25-Hydroxy), Vitamin B12 (Active)'
+    testsIncluded: 'Vitamin D (25-Hydroxy), Vitamin B12 (Active)',
+    labId: 'em-lab-1',
+    labName: 'E Mediclub Clinical Laboratories'
   },
   {
     id: 'lab-5',
@@ -500,7 +1012,9 @@ const initialLabTests = [
     discountPercent: 43,
     homeCollection: true,
     fastingRequired: 'Morning fasting sample recommended',
-    testsIncluded: 'Total Triiodothyronine (T3), Total Thyroxine (T4), Thyroid Stimulating Hormone (TSH)'
+    testsIncluded: 'Total Triiodothyronine (T3), Total Thyroxine (T4), Thyroid Stimulating Hormone (TSH)',
+    labId: 'em-lab-2',
+    labName: 'Metropolis Diagnostics Center'
   },
   {
     id: 'lab-6',
@@ -513,7 +1027,9 @@ const initialLabTests = [
     discountPercent: 45,
     homeCollection: true,
     fastingRequired: '12 hours fasting mandatory',
-    testsIncluded: 'Lipid Profile (Cholesterol, HDL, LDL, VLDL, Triglycerides), Apolipoproteins A1 & B, High-Sensitivity CRP, Homocysteine'
+    testsIncluded: 'Lipid Profile (Cholesterol, HDL, LDL, VLDL, Triglycerides), Apolipoproteins A1 & B, High-Sensitivity CRP, Homocysteine',
+    labId: 'em-lab-3',
+    labName: 'Thyrocare Wellness Center'
   },
   {
     id: 'lab-7',
@@ -526,7 +1042,9 @@ const initialLabTests = [
     discountPercent: 42,
     homeCollection: true,
     fastingRequired: 'Fasting not required',
-    testsIncluded: 'Food Allergens Panel, Inhalant (Dust, Pollen) Allergens Panel, Total IgE Antibodies'
+    testsIncluded: 'Food Allergens Panel, Inhalant (Dust, Pollen) Allergens Panel, Total IgE Antibodies',
+    labId: 'em-lab-1',
+    labName: 'E Mediclub Clinical Laboratories'
   },
   {
     id: 'lab-8',
@@ -539,7 +1057,9 @@ const initialLabTests = [
     discountPercent: 46,
     homeCollection: true,
     fastingRequired: 'Fasting not required',
-    testsIncluded: 'Typhidot IgM/IgG, Dengue NS1 Antigen, Malaria Smear, Complete Blood Count (CBC), ESR'
+    testsIncluded: 'Typhidot IgM/IgG, Dengue NS1 Antigen, Malaria Smear, Complete Blood Count (CBC), ESR',
+    labId: 'em-lab-2',
+    labName: 'Metropolis Diagnostics Center'
   },
   {
     id: 'lab-9',
@@ -552,7 +1072,9 @@ const initialLabTests = [
     discountPercent: 50,
     homeCollection: true,
     fastingRequired: '10 hours fasting recommended',
-    testsIncluded: 'Urea, Creatinine, Uric Acid, Calcium, Phosphorus, Bun/Creatinine Ratio, Total Proteins'
+    testsIncluded: 'Urea, Creatinine, Uric Acid, Calcium, Phosphorus, Bun/Creatinine Ratio, Total Proteins',
+    labId: 'em-lab-3',
+    labName: 'Thyrocare Wellness Center'
   },
   {
     id: 'lab-10',
@@ -565,132 +1087,299 @@ const initialLabTests = [
     discountPercent: 49,
     homeCollection: true,
     fastingRequired: '12 hours fasting mandatory',
-    testsIncluded: 'Bilirubin Total/Direct/Indirect, SGOT (AST), SGPT (ALT), Alkaline Phosphatase, Albumin, Globulin'
+    testsIncluded: 'Bilirubin Total/Direct/Indirect, SGOT (AST), SGPT (ALT), Alkaline Phosphatase, Albumin, Globulin',
+    labId: 'em-lab-1',
+    labName: 'E Mediclub Clinical Laboratories'
+  },
+  {
+    id: 'lab-11',
+    name: 'Women Health Advanced Hormonal Checkup',
+    tag: 'Hormone Check',
+    parameters: '7 Parameters Checked',
+    timeframe: 'Report in 24 Hrs',
+    price: 3200,
+    discountPrice: 1599,
+    discountPercent: 50,
+    homeCollection: true,
+    fastingRequired: 'Morning fasting sample recommended',
+    testsIncluded: 'Thyroid Stimulating Hormone (TSH), Estrogen, Progesterone, LH, FSH, Prolactin, Complete Blood Count',
+    labId: 'em-lab-2',
+    labName: 'Metropolis Diagnostics Center'
+  },
+  {
+    id: 'lab-12',
+    name: 'Advanced Allergy Food Panel',
+    tag: 'Specialized Check',
+    parameters: '36 Parameters Checked',
+    timeframe: 'Report in 48 Hrs',
+    price: 4500,
+    discountPrice: 2499,
+    discountPercent: 44,
+    homeCollection: true,
+    fastingRequired: 'Fasting not strictly required',
+    testsIncluded: 'Egg White/Yolk, Milk, Wheat, Peanut, Soy, Seafood, Dust Mites, Pollens Panel',
+    labId: 'em-lab-3',
+    labName: 'Thyrocare Wellness Center'
+  },
+  {
+    id: 'lab-13',
+    name: 'Full Body Fit & Strong Gym Package',
+    tag: 'Fitness Special',
+    parameters: '56 Parameters Checked',
+    timeframe: 'Report in 12 Hrs',
+    price: 1999,
+    discountPrice: 999,
+    discountPercent: 50,
+    homeCollection: true,
+    fastingRequired: '12 hours fasting mandatory',
+    testsIncluded: 'Lipid Profile, Kidney & Liver Panels, Complete Blood Count, Calcium, Vitamin D3, Uric Acid',
+    labId: 'em-lab-1',
+    labName: 'E Mediclub Clinical Laboratories'
+  },
+  {
+    id: 'lab-14',
+    name: 'Covid RT-PCR Swab Test',
+    tag: 'Express Swab',
+    parameters: '1 Parameter Checked',
+    timeframe: 'Report in 6 Hrs',
+    price: 700,
+    discountPrice: 399,
+    discountPercent: 43,
+    homeCollection: true,
+    fastingRequired: 'Fasting not required',
+    testsIncluded: 'Severe Acute Respiratory Syndrome Coronavirus 2 RT-PCR Swab Detection',
+    labId: 'em-lab-2',
+    labName: 'Metropolis Diagnostics Center'
   }
 ];
 
-const initialDoctors = [
+const initialLabs = [
   {
-    id: 'doc-1',
-    name: 'Dr. Rajesh Sharma',
-    specialty: 'Cardiologist',
-    experience: '15 Years Experience',
-    fee: 800,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'MD, DM (Cardiology) - AIIMS',
-    languages: 'English, Hindi',
-    availability: 'Available Today (4:00 PM - 7:00 PM)'
+    id: 'em-lab-1',
+    name: 'E Mediclub Clinical Laboratories',
+    logo: '🧪',
+    regNumber: 'REG-LAB-892719',
+    nablCertified: true,
+    isoCertified: true,
+    experience: '12 Years',
+    address: 'Plot 42, Health City, Sector 15, Andheri East, Mumbai',
+    homeCollection: true,
+    timings: '06:00 AM - 09:00 PM',
+    rating: 4.8,
+    reviewsCount: 1420,
+    testsCount: 120,
+    gallery: [
+      'https://images.unsplash.com/photo-1579154261294-88752594e687?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80'
+    ],
+    reviews: [
+      { patientName: 'Rajesh K.', rating: 5, reviewText: 'Extremely professional home collector. The technician was gentle and followed all sterile guidelines. Received my report in under 8 hours!', date: 'April 2026' },
+      { patientName: 'Sneha M.', rating: 4, reviewText: 'Very clean lab facilities and quick walk-in experience. Highly recommended for full body screenings.', date: 'March 2026' },
+      { patientName: 'Amit G.', rating: 5, reviewText: 'The best pricing for comprehensive gold package. Authentic digital reports easily accessible.', date: 'February 2026' }
+    ]
   },
   {
-    id: 'doc-2',
-    name: 'Dr. Sunita Rao',
-    specialty: 'Pediatrician',
-    experience: '12 Years Experience',
-    fee: 600,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'MD (Pediatrics), DCH - Mumbai University',
-    languages: 'English, Marathi, Hindi',
-    availability: 'Available Tomorrow (10:00 AM - 1:00 PM)'
+    id: 'em-lab-2',
+    name: 'Metropolis Diagnostics Center',
+    logo: '🔬',
+    regNumber: 'REG-LAB-471289',
+    nablCertified: true,
+    isoCertified: true,
+    experience: '18 Years',
+    address: 'Fortis Chambers, Gr Floor, Nariman Point, Mumbai',
+    homeCollection: true,
+    timings: '06:30 AM - 08:30 PM',
+    rating: 4.7,
+    reviewsCount: 2180,
+    testsCount: 150,
+    gallery: [
+      'https://images.unsplash.com/photo-1579154261294-88752594e687?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=400&q=80'
+    ],
+    reviews: [
+      { patientName: 'Sunita D.', rating: 5, reviewText: 'Highly reliable. I have been doing my monthly diabetic panels here for years. Reports are highly consistent.', date: 'May 2026' },
+      { patientName: 'Vikram R.', rating: 4, reviewText: 'Courteous staff, digital queue management system, very little waiting time.', date: 'April 2026' },
+      { patientName: 'Priya P.', rating: 5, reviewText: 'Great discount through E Mediclub app. Walk-in was seamless and report delivery was super fast.', date: 'March 2026' }
+    ]
   },
   {
-    id: 'doc-3',
-    name: 'Dr. Amit Patel',
-    specialty: 'Dermatologist',
-    experience: '10 Years Experience',
-    fee: 700,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'MD (Dermatology, Venereology) - JIPMER',
-    languages: 'English, Gujarati, Hindi',
-    availability: 'Available Today (6:00 PM - 8:00 PM)'
-  },
-  {
-    id: 'doc-4',
-    name: 'Dr. Priya Verma',
-    specialty: 'Gynecologist',
-    experience: '9 Years Experience',
-    fee: 650,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'MS, DNB (Obstetrics & Gynecology)',
-    languages: 'English, Punjabi, Hindi',
-    availability: 'Available Today (11:00 AM - 2:00 PM)'
-  },
-  {
-    id: 'doc-5',
-    name: 'Dr. Sanjay Gupta',
-    specialty: 'Dentist',
-    experience: '14 Years Experience',
-    fee: 500,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'BDS, MDS (Prosthodontics) - KGMU Lucknow',
-    languages: 'English, Hindi',
-    availability: 'Available Today (2:00 PM - 5:00 PM)'
-  },
-  {
-    id: 'doc-6',
-    name: 'Dr. Shalini Kapoor',
-    specialty: 'Neurologist',
-    experience: '16 Years Experience',
-    fee: 950,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'DM (Neurology) - NIMHANS, MD General Medicine',
-    languages: 'English, Hindi, Kannada',
-    availability: 'Available Tomorrow (4:30 PM - 7:30 PM)'
-  },
-  {
-    id: 'doc-7',
-    name: 'Dr. Vikram Seth',
-    specialty: 'Orthopedic',
-    experience: '18 Years Experience',
-    fee: 800,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'MS (Orthopedics), M.Ch (Ortho) - UK',
-    languages: 'English, Hindi, Punjabi',
-    availability: 'Available Today (5:00 PM - 8:00 PM)'
-  },
-  {
-    id: 'doc-8',
-    name: 'Dr. Anjali Mehta',
-    specialty: 'Ophthalmologist',
-    experience: '11 Years Experience',
-    fee: 550,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'MS (Ophthalmology) - M&J Eye Institute',
-    languages: 'English, Gujarati, Hindi',
-    availability: 'Available Tomorrow (11:00 AM - 1:30 PM)'
-  },
-  {
-    id: 'doc-9',
-    name: 'Dr. Rohan Sen',
-    specialty: 'Psychiatrist',
-    experience: '13 Years Experience',
-    fee: 900,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'MD (Psychiatry) - NIMHANS',
-    languages: 'English, Bengali, Hindi',
-    availability: 'Available Today (6:30 PM - 9:00 PM)'
-  },
-  {
-    id: 'doc-10',
-    name: 'Dr. Meera Nair',
-    specialty: 'Endocrinologist',
-    experience: '14 Years Experience',
-    fee: 850,
-    online: true,
-    avatar: 'https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=200&h=200&q=80',
-    qualification: 'MD, DM (Endocrinology) - CMC Vellore',
-    languages: 'English, Malayalam, Hindi',
-    availability: 'Available Tomorrow (3:00 PM - 6:00 PM)'
+    id: 'em-lab-3',
+    name: 'Thyrocare Wellness Center',
+    logo: '🧬',
+    regNumber: 'REG-LAB-312984',
+    nablCertified: true,
+    isoCertified: true,
+    experience: '15 Years',
+    address: 'Apollo Wellness Center, Chembur, Mumbai',
+    homeCollection: true,
+    timings: '06:00 AM - 08:00 PM',
+    rating: 4.6,
+    reviewsCount: 1890,
+    testsCount: 180,
+    gallery: [
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1579154261294-88752594e687?auto=format&fit=crop&w=400&q=80',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80'
+    ],
+    reviews: [
+      { patientName: 'Arjun S.', rating: 4, reviewText: 'Very affordable diagnostic pricing. The home collector came right on time at 6:30 AM.', date: 'May 2026' },
+      { patientName: 'Meera N.', rating: 5, reviewText: 'ISO certified lab. Clean collection tubes and professional technician. Highly satisfied.', date: 'April 2026' },
+      { patientName: 'Karan J.', rating: 4.5, reviewText: 'Smooth booking and sample drawing. Online reports available within 12 hours.', date: 'May 2026' }
+    ]
   }
 ];
+
+const specialtiesData = {
+  'Dermatology': [
+    { name: 'Dr. Priya Sharma', subSpecialty: 'Cosmetic Dermatology & Trichology', qualification: 'MBBS, MD Dermatology, DNB', experience: 14, hospital: 'Kokilaben Dhirubhai Ambani Hospital, Mumbai', fee: 499, offlineFee: 800, rating: 4.8, reviewsCount: 312, consultationMode: 'Both', registrationNumber: 'MCI-2008-84721', gender: 'female', bio: 'Expert in clinical and aesthetic dermatology with 14+ years of practice. Focuses on safe acne treatments, pigmentation correction, and modern hair therapies.' },
+    { name: 'Dr. Rohit Malhotra', subSpecialty: 'Clinical Dermatology & Vitiligo Care', qualification: 'MBBS, DVD', experience: 9, hospital: 'Fortis Hospital, Mulund, Mumbai', fee: 399, offlineFee: 700, rating: 4.6, reviewsCount: 184, consultationMode: 'Both', registrationNumber: 'MCI-2015-39281', gender: 'male', bio: 'Specialist in chronic skin disorders including vitiligo, psoriasis, and eczema. Integrates systemic therapies and lifestyle modifications.' },
+    { name: 'Dr. Sneha Iyer', subSpecialty: 'Pediatric Dermatology & Skin Infections', qualification: 'MBBS, MD, DNB', experience: 17, hospital: 'Lilavati Hospital & Research Centre, Mumbai', fee: 599, offlineFee: 1000, rating: 4.9, reviewsCount: 520, consultationMode: 'Both', registrationNumber: 'MCI-2005-29831', gender: 'female', bio: 'Renowned pediatric dermatologist focused on atopic dermatitis, infantile eczema, and viral/fungal skin infections in children.' }
+  ],
+  'Gynaecology & Obstetrics': [
+    { name: 'Dr. Meena Kulkarni', subSpecialty: 'High-Risk Obstetrics, PCOS & Fertility', qualification: 'MBBS, MS Gynaecology', experience: 20, hospital: 'Hinduja Hospital, Mahim, Mumbai', fee: 599, offlineFee: 1200, rating: 4.9, reviewsCount: 654, consultationMode: 'Both', registrationNumber: 'MCI-1999-23841', gender: 'female', bio: 'Senior OB-GYN with 20 years of core clinical expertise. Specializes in advanced maternal-fetal medicine, high-risk birth plans, and laparoscopic pelvic surgery.' },
+    { name: 'Dr. Anita Desai', subSpecialty: 'Normal Deliveries, Laparoscopic Surgeries', qualification: 'MBBS, DGO', experience: 12, hospital: 'Wockhardt Hospital, Mumbai Central', fee: 449, offlineFee: 900, rating: 4.7, reviewsCount: 290, consultationMode: 'Both', registrationNumber: 'MCI-2010-84920', gender: 'female', bio: 'Compassionate specialist in natural painless deliveries, C-sections, and minimally invasive diagnostic hysteroscopy.' },
+    { name: 'Dr. Pooja Bhatia', subSpecialty: 'Adolescent Gynecology & Menopause Care', qualification: 'MBBS, MD OBG', experience: 8, hospital: 'Breach Candy Hospital, Mumbai', fee: 399, offlineFee: 750, rating: 4.5, reviewsCount: 140, consultationMode: 'Both', registrationNumber: 'MCI-2016-39108', gender: 'female', bio: 'Dedicated practitioner specializing in hormone replacement therapy, teenage menstrual irregularities, and wellness plans.' }
+  ],
+  'Orthopaedics': [
+    { name: 'Dr. Arjun Patel', subSpecialty: 'Joint Replacements & Sports Medicine', qualification: 'MBBS, MS Ortho, DNB', experience: 18, hospital: 'Nanavati Max Super Speciality Hospital, Mumbai', fee: 549, offlineFee: 1100, rating: 4.8, reviewsCount: 420, consultationMode: 'Both', registrationNumber: 'MCI-2004-98432', gender: 'male', bio: 'Expert orthopedic surgeon specializing in robotic knee/hip replacements, complex trauma reconstructions, and arthroscopic ACL repairs.' },
+    { name: 'Dr. Vikram Sinha', subSpecialty: 'Fracture Care & Geriatric Arthritis', qualification: 'MBBS, MS', experience: 11, hospital: 'Jupiter Hospital, Thane, Mumbai', fee: 449, offlineFee: 850, rating: 4.6, reviewsCount: 215, consultationMode: 'Both', registrationNumber: 'MCI-2012-39284', gender: 'male', bio: 'Dedicated to non-surgical and surgical management of osteoarthritic joint degeneration, lower back pain, and osteoporosis care.' },
+    { name: 'Dr. Kiran Reddy', subSpecialty: 'Pediatric Orthopaedics & Deformities', qualification: 'MBBS, DNB Ortho', experience: 7, hospital: 'KEM Hospital, Parel, Mumbai', fee: 349, offlineFee: 650, rating: 4.4, reviewsCount: 98, consultationMode: 'Both', registrationNumber: 'MCI-2017-94321', gender: 'male', bio: 'Specialized in childhood bone growth anomalies, clubfoot corrections, pediatric trauma, and tailored rehabilitation programs.' }
+  ],
+  'Cardiology': [
+    { name: 'Dr. Suresh Menon', subSpecialty: 'Interventional Cardiology & Coronary Angioplasty', qualification: 'MBBS, MD, DM Cardiology', experience: 22, hospital: 'Bombay Hospital & Medical Research Centre, Mumbai', fee: 699, offlineFee: 1500, rating: 4.9, reviewsCount: 820, consultationMode: 'Both', registrationNumber: 'MCI-1998-38291', gender: 'male', bio: 'Preeminent interventional cardiologist with 22 years experience. Expert in stenting, transcatheter aortic valve replacement, and cardiac failures.' },
+    { name: 'Dr. Nandita Roy', subSpecialty: 'Preventive Cardiology & Clinical Hypertension', qualification: 'MBBS, MD Cardiology', experience: 15, hospital: 'Jaslok Hospital & Research Centre, Mumbai', fee: 599, offlineFee: 1200, rating: 4.8, reviewsCount: 410, consultationMode: 'Both', registrationNumber: 'MCI-2006-29184', gender: 'female', bio: 'Pioneer in preventative heart wellness, metabolic vascular profiling, refractory hypertension, and cardiovascular risk assessments.' },
+    { name: 'Dr. Ramesh Agarwal', subSpecialty: 'Heart Failure & Cardiac Rehabilitation', qualification: 'MBBS, DM', experience: 10, hospital: 'S.L. Raheja Hospital, Mahim, Mumbai', fee: 499, offlineFee: 950, rating: 4.6, reviewsCount: 198, consultationMode: 'Both', registrationNumber: 'MCI-2014-93821', gender: 'male', bio: 'Specialist in 3D echocardiography, chronic heart rhythm management, pacemakers, and post-bypass surgical clinical rehabilitation.' }
+  ],
+  'General Physician': [
+    { name: 'Dr. Kavita Joshi', subSpecialty: 'Internal Medicine & Diabetes Control', qualification: 'MBBS, MD General Medicine', experience: 13, hospital: 'Saifee Hospital, Charni Road, Mumbai', fee: 299, offlineFee: 600, rating: 4.7, reviewsCount: 540, consultationMode: 'Both', registrationNumber: 'MCI-2009-84732', gender: 'female', bio: 'Comprehensive physician specializing in chronic lifestyle disease management, persistent infectious fevers, and multi-system medical diagnosis.' },
+    { name: 'Dr. Anil Sharma', subSpecialty: 'Primary Care & General Wellness', qualification: 'MBBS', experience: 8, hospital: 'Private Clinic, Andheri West, Mumbai', fee: 199, offlineFee: 400, rating: 4.5, reviewsCount: 320, consultationMode: 'Both', registrationNumber: 'MCI-2015-89421', gender: 'male', bio: 'Empathetic family doctor providing comprehensive preventative checkups, seasonal viral management, and medical fitness approvals.' },
+    { name: 'Dr. Deepa Nair', subSpecialty: 'Chronic Care & Geriatric Health', qualification: 'MBBS, DNB', experience: 16, hospital: 'Cumballa Hill Hospital, Mumbai', fee: 349, offlineFee: 700, rating: 4.8, reviewsCount: 460, consultationMode: 'Both', registrationNumber: 'MCI-2007-89104', gender: 'female', bio: 'Dedicated clinical consultant specializing in eldercare medicine, metabolic diseases, and integrated medical management.' }
+  ],
+  'Paediatrics': [
+    { name: 'Dr. Sunita Rao', subSpecialty: 'Neonatal Intensive Care & Infant Nutrition', qualification: 'MD (Pediatrics), DCH', experience: 12, hospital: 'Wadia Children Hospital, Parel, Mumbai', fee: 499, offlineFee: 800, rating: 4.8, reviewsCount: 380, consultationMode: 'Both', registrationNumber: 'MCI-2011-89304', gender: 'female', bio: 'Expert child care physician focusing on newborn development, vaccine schedules, childhood asthmas, and dietary health.' },
+    { name: 'Dr. Vinod Sharma', subSpecialty: 'Child Development & Pediatric Asthma', qualification: 'MBBS, MD Pediatrics', experience: 15, hospital: 'Apollo Hospitals, Navi Mumbai', fee: 449, offlineFee: 900, rating: 4.7, reviewsCount: 220, consultationMode: 'Both', registrationNumber: 'MCI-2008-39281', gender: 'male', bio: 'Trusted pediatrician with vast clinical experience. Expert in behavioral health, juvenile allergies, and acute child illnesses.' },
+    { name: 'Dr. Anjali Gupta', subSpecialty: 'Pediatric Endocrinology & Growth', qualification: 'MBBS, DCH, DNB', experience: 9, hospital: 'Fortis Hiranandani Hospital, Vashi', fee: 399, offlineFee: 700, rating: 4.6, reviewsCount: 160, consultationMode: 'Both', registrationNumber: 'MCI-2014-89320', gender: 'female', bio: 'Dedicated pediatrician focused on developmental milestones, growth hormone evaluations, and juvenile diabetes monitoring.' }
+  ],
+  'Neurology': [
+    { name: 'Dr. Shalini Kapoor', subSpecialty: 'Stroke, Epilepsy & Chronic Migraines', qualification: 'DM (Neurology) - NIMHANS, MD', experience: 16, hospital: 'Kokilaben Dhirubhai Ambani Hospital, Mumbai', fee: 599, offlineFee: 1200, rating: 4.9, reviewsCount: 480, consultationMode: 'Both', registrationNumber: 'MCI-2006-89102', gender: 'female', bio: 'NIMHANS alumnus specializing in stroke thrombolysis, neuro-critical care, drug-resistant epilepsy, and complex chronic headaches.' },
+    { name: 'Dr. Vikram Kumar', subSpecialty: 'Parkinsons & Movement Disorders', qualification: 'MD, DM Neurology', experience: 12, hospital: 'H.N. Reliance Foundation Hospital, Mumbai', fee: 549, offlineFee: 1000, rating: 4.7, reviewsCount: 310, consultationMode: 'Both', registrationNumber: 'MCI-2011-94821', gender: 'male', bio: 'Neurologist with focused clinical interest in deep brain stimulation mapping, tremors, Alzheimers, and degenerative nerve profiles.' },
+    { name: 'Dr. Anand Shah', subSpecialty: 'Neuropathies & Muscle Disorders', qualification: 'MBBS, MD, DNB Neurology', experience: 8, hospital: 'S.L. Raheja Hospital, Mahim, Mumbai', fee: 499, offlineFee: 900, rating: 4.5, reviewsCount: 130, consultationMode: 'Both', registrationNumber: 'MCI-2016-89271', gender: 'male', bio: 'Dedicated nerve specialist focused on demyelinating diseases, muscular dystrophies, and EMG diagnostics.' }
+  ],
+  'Psychiatry & Mental Health': [
+    { name: 'Dr. Rohan Sen', subSpecialty: 'Clinical Depression, OCD & CBT Therapy', qualification: 'MD (Psychiatry) - NIMHANS', experience: 13, hospital: 'Bombay Hospital & Medical Research Centre, Mumbai', fee: 599, offlineFee: 1100, rating: 4.8, reviewsCount: 390, consultationMode: 'Both', registrationNumber: 'MCI-2010-89142', gender: 'male', bio: 'Compassionate psychiatrist expert in cognitive behavioral therapies, panic disorders, obsessive-compulsive distresses, and depressive profiles.' },
+    { name: 'Dr. Smita Patil', subSpecialty: 'Child & Adolescent Psychiatry, Counseling', qualification: 'MBBS, DPM Psychiatry', experience: 10, hospital: 'Breach Candy Hospital, Mumbai', fee: 499, offlineFee: 900, rating: 4.7, reviewsCount: 220, consultationMode: 'Both', registrationNumber: 'MCI-2013-94820', gender: 'female', bio: 'Specialist in student mental health, family counselor, ADHD, autism spectrum counseling, and stress relief frameworks.' },
+    { name: 'Dr. Vijay Verma', subSpecialty: 'Addiction Psychiatry & De-addiction', qualification: 'MBBS, MD Psychiatry', experience: 7, hospital: 'Saifee Hospital, Charni Road, Mumbai', fee: 399, offlineFee: 800, rating: 4.5, reviewsCount: 110, consultationMode: 'Both', registrationNumber: 'MCI-2017-89124', gender: 'male', bio: 'Dedicated practitioner specializing in substance abuse therapy, neuro-chemical balances, and wellness counseling.' }
+  ],
+  'ENT': [
+    { name: 'Dr. Manoj Gupta', subSpecialty: 'Sinusitis, Snoring & Sleep Apnea', qualification: 'MBBS, MS ENT, DNB', experience: 15, hospital: 'Fortis Hospital, Mulund, Mumbai', fee: 399, offlineFee: 800, rating: 4.8, reviewsCount: 340, consultationMode: 'Both', registrationNumber: 'MCI-2007-89104', gender: 'male', bio: 'Expert ENT surgeon specializing in functional endoscopic sinus surgery (FESS), sleep apnea diagnostics, and coblation tonsillectomies.' },
+    { name: 'Dr. Aarti Shah', subSpecialty: 'Micro-Ear Surgery & Hearing Loss', qualification: 'MBBS, MS ENT', experience: 11, hospital: 'Nanavati Max Super Speciality Hospital, Mumbai', fee: 349, offlineFee: 700, rating: 4.6, reviewsCount: 198, consultationMode: 'Both', registrationNumber: 'MCI-2012-98421', gender: 'female', bio: 'Focused specialist in tympanoplasty, cochlear implants, management of vertigo, tinnitus, and pediatric ENT profiles.' },
+    { name: 'Dr. Kishore Kumar', subSpecialty: 'Voice & Throat Disorders, Laryngology', qualification: 'MBBS, DLO ENT', experience: 8, hospital: 'Saifee Hospital, Charni Road, Mumbai', fee: 299, offlineFee: 600, rating: 4.5, reviewsCount: 115, consultationMode: 'Both', registrationNumber: 'MCI-2016-89410', gender: 'male', bio: 'Dedicated ENT professional dealing with professional voice coaching, vocal cord nodules, and structural airway checks.' }
+  ],
+  'Ophthalmology': [
+    { name: 'Dr. Anjali Mehta', subSpecialty: 'Robotic Cataract & Advanced Lasik', qualification: 'MS (Ophthalmology) - M&J Eye Institute', experience: 11, hospital: 'Apollo Hospitals, Navi Mumbai', fee: 499, offlineFee: 900, rating: 4.8, reviewsCount: 520, consultationMode: 'Both', registrationNumber: 'MCI-2011-89304', gender: 'female', bio: 'Pioneering eye surgeon specializing in blade-free LASIK, premium multi-focal cataract lenses, and dry eye syndromes.' },
+    { name: 'Dr. Sneha Nair', subSpecialty: 'Glaucoma & Pediatric Ophthalmology', qualification: 'MS (Ophthalmology) - GMC Trivandrum', experience: 12, hospital: 'Hinduja Hospital, Mahim, Mumbai', fee: 449, offlineFee: 800, rating: 4.7, reviewsCount: 310, consultationMode: 'Both', registrationNumber: 'MCI-2010-89124', gender: 'female', bio: 'Dedicated pediatric eye care consultant and glaucoma specialist. Focuses on early squint corrections and optic nerve care.' },
+    { name: 'Dr. Rajesh K. V.', subSpecialty: 'Retina & Diabetic Retinopathy', qualification: 'MBBS, MS, Fellowship Retina', experience: 16, hospital: 'Bombay Hospital & Medical Research Centre, Mumbai', fee: 599, offlineFee: 1100, rating: 4.9, reviewsCount: 460, consultationMode: 'Both', registrationNumber: 'MCI-2006-29184', gender: 'male', bio: 'Vitreoretinal surgeon dealing with diabetic macular edema, retinal detachments, laser photocoagulation, and clinical eye trauma.' }
+  ],
+  'Gastroenterology': [
+    { name: 'Dr. Vikram Kumar', subSpecialty: 'Acid Reflux, IBS & Endoscopy', qualification: 'MD, DM (Gastroenterology) - AIIMS', experience: 15, hospital: 'Fortis Hospital, Mulund, Mumbai', fee: 549, offlineFee: 1000, rating: 4.9, reviewsCount: 610, consultationMode: 'Both', registrationNumber: 'MCI-2007-89124', gender: 'male', bio: 'Top AIIMS clinical graduate. Expert in diagnostic/therapeutic endoscopy, colonoscopy, inflammatory bowel disease (IBD), and reflux solutions.' },
+    { name: 'Dr. Preeti Sen', subSpecialty: 'Hepatology & Liver Wellness', qualification: 'MBBS, MD, DM Gastroenterology', experience: 11, hospital: 'Kokilaben Dhirubhai Ambani Hospital, Mumbai', fee: 499, offlineFee: 900, rating: 4.7, reviewsCount: 280, consultationMode: 'Both', registrationNumber: 'MCI-2012-39281', gender: 'female', bio: 'Specialist in fatty liver diagnostics, chronic hepatitis management, cirrhosis protocols, and functional gall bladder disorders.' },
+    { name: 'Dr. Ashok Roy', subSpecialty: 'Peptic Ulcers & Pancreatic Disorders', qualification: 'MBBS, MD General Med, DNB', experience: 14, hospital: 'Lilavati Hospital & Research Centre, Mumbai', fee: 449, offlineFee: 800, rating: 4.6, reviewsCount: 190, consultationMode: 'Both', registrationNumber: 'MCI-2008-84210', gender: 'male', bio: 'Consultant gastroenterologist focusing on chronic gastritis, H. Pylori eradication, metabolic guts, and pancreatic therapies.' }
+  ],
+  'Endocrinology': [
+    { name: 'Dr. Meera Nair', subSpecialty: 'Diabetes Management & Thyroid Disorders', qualification: 'MD, DM (Endocrinology) - CMC Vellore', experience: 14, hospital: 'Jaslok Hospital & Research Centre, Mumbai', fee: 599, offlineFee: 1100, rating: 4.9, reviewsCount: 740, consultationMode: 'Both', registrationNumber: 'MCI-2008-39281', gender: 'female', bio: 'Renowned clinical endocrinologist focusing on insulin resistance, gestational diabetes, thyroid nodules, and hormonal imbalances.' },
+    { name: 'Dr. Suresh Gowda', subSpecialty: 'PCOS & Reproductive Endocrinology', qualification: 'MBBS, MD, DM Endocrinology', experience: 10, hospital: 'Apollo Hospitals, Navi Mumbai', fee: 499, offlineFee: 900, rating: 4.7, reviewsCount: 310, consultationMode: 'Both', registrationNumber: 'MCI-2013-89421', gender: 'male', bio: 'Vast clinical research in metabolic obesity, clinical PCOS profiles, pediatric short statures, and osteoporosis care.' },
+    { name: 'Dr. Nitin Patel', subSpecialty: 'Adrenal & Pituitary Disorders', qualification: 'MBBS, MD, DNB Endocrinology', experience: 8, hospital: 'Breach Candy Hospital, Mumbai', fee: 449, offlineFee: 800, rating: 4.5, reviewsCount: 150, consultationMode: 'Both', registrationNumber: 'MCI-2016-98432', gender: 'male', bio: 'Dedicated practitioner specializing in growth hormone delays, hyperthyroidism, and adrenal clinical therapies.' }
+  ],
+  'Pulmonology (Lungs & Chest)': [
+    { name: 'Dr. Sameer Sethi', subSpecialty: 'Asthma, COPD & Sleep Apnea', qualification: 'MBBS, MD Pulmonology, FCCP', experience: 16, hospital: 'Nanavati Max Super Speciality Hospital, Mumbai', fee: 499, offlineFee: 950, rating: 4.8, reviewsCount: 420, consultationMode: 'Both', registrationNumber: 'MCI-2006-89104', gender: 'male', bio: 'Senior pulmonologist expert in persistent allergic asthmas, chronic bronchitis (COPD), diagnostic bronchoscopies, and sleep study designs.' },
+    { name: 'Dr. Radhika Nair', subSpecialty: 'Interventional Pulmonology & Allergy', qualification: 'MBBS, MD Respiratory Med', experience: 11, hospital: 'Hinduja Hospital, Mahim, Mumbai', fee: 449, offlineFee: 800, rating: 4.6, reviewsCount: 230, consultationMode: 'Both', registrationNumber: 'MCI-2012-98421', gender: 'female', bio: 'Specialist in pulmonary lung fibrosis, dry chronic coughs, respiratory rehabilitation, and comprehensive allergy tests.' },
+    { name: 'Dr. Tarun Gupta', subSpecialty: 'Tuberculosis & Critical Care Med', qualification: 'MBBS, DNB Pulmonology', experience: 8, hospital: 'Jupiter Hospital, Thane, Mumbai', fee: 399, offlineFee: 700, rating: 4.5, reviewsCount: 115, consultationMode: 'Both', registrationNumber: 'MCI-2016-89410', gender: 'male', bio: 'Dedicated physician focused on infectious lung disorders, lung tissue checks, and pulmonary critical care.' }
+  ],
+  'Urology': [
+    { name: 'Dr. Sanjay Deshmukh', subSpecialty: 'Kidney Stones & Laser Endourology', qualification: 'MBBS, MS, M.Ch Urology', experience: 18, hospital: 'Bombay Hospital & Medical Research Centre, Mumbai', fee: 599, offlineFee: 1200, rating: 4.9, reviewsCount: 560, consultationMode: 'Both', registrationNumber: 'MCI-2004-98412', gender: 'male', bio: 'Expert urologist specializing in laser lithotripsy for kidney stones, urethral stricture repairs, and robotic prostatectomies.' },
+    { name: 'Dr. Alok Verma', subSpecialty: 'Prostate Health & Laparoscopic Urology', qualification: 'MBBS, DNB Urology', experience: 12, hospital: 'Lilavati Hospital & Research Centre, Mumbai', fee: 499, offlineFee: 900, rating: 4.7, reviewsCount: 290, consultationMode: 'Both', registrationNumber: 'MCI-2010-84321', gender: 'male', bio: 'Specialist in benign prostatic hyperplasia (BPH) management, clinical UTIs, and male sexual wellness protocols.' },
+    { name: 'Dr. Nilesh Shah', subSpecialty: 'Male Infertility & Reconstructive Urology', qualification: 'MBBS, MS, Fellowship Urology', experience: 9, hospital: 'Saifee Hospital, Charni Road, Mumbai', fee: 449, offlineFee: 800, rating: 4.5, reviewsCount: 140, consultationMode: 'Both', registrationNumber: 'MCI-2015-89104', gender: 'male', bio: 'Focused urologist dealing with male fertility pathways, microscopic varicocelectomy, and reconstructive bladder therapies.' }
+  ],
+  'Oncology (Cancer Care)': [
+    { name: 'Dr. Anita Sen', subSpecialty: 'Breast & Gynecological Oncology', qualification: 'MBBS, MD Radiotherapy, DM Oncology', experience: 17, hospital: 'Tata Memorial Hospital, Parel, Mumbai', fee: 699, offlineFee: 1400, rating: 4.9, reviewsCount: 680, consultationMode: 'Both', registrationNumber: 'MCI-2005-29184', gender: 'female', bio: 'Tata Memorial alumnus specializing in early breast cancer detection, personalized immunotherapies, and radiation oncology grids.' },
+    { name: 'Dr. Devendra Patel', subSpecialty: 'Gastrointestinal & Lung Oncology', qualification: 'MBBS, MS Surgery, M.Ch Surgical Onc', experience: 13, hospital: 'Kokilaben Dhirubhai Ambani Hospital, Mumbai', fee: 599, offlineFee: 1200, rating: 4.8, reviewsCount: 310, consultationMode: 'Both', registrationNumber: 'MCI-2009-84721', gender: 'male', bio: 'Expert surgical oncologist specializing in minimally invasive gastrointestinal resections and thoracic lung surgeries.' },
+    { name: 'Dr. Vinay Rao', subSpecialty: 'Hematological Oncology & Lymphomas', qualification: 'MBBS, MD, Fellowship Hematology', experience: 8, hospital: 'Fortis Hospital, Mulund, Mumbai', fee: 499, offlineFee: 1000, rating: 4.6, reviewsCount: 160, consultationMode: 'Both', registrationNumber: 'MCI-2016-39108', gender: 'male', bio: 'Specialist in clinical management of leukemias, myelomas, lymphomas, and bone marrow transplants.' }
+  ],
+  'Nephrology (Kidney)': [
+    { name: 'Dr. Sandeep Patil', subSpecialty: 'Chronic Kidney Disease & Kidney Transplants', qualification: 'MBBS, MD, DM Nephrology', experience: 16, hospital: 'H.N. Reliance Foundation Hospital, Mumbai', fee: 599, offlineFee: 1100, rating: 4.9, reviewsCount: 450, consultationMode: 'Both', registrationNumber: 'MCI-2006-89102', gender: 'male', bio: 'Expert clinical nephrologist with 16 years experience. Specializes in advanced hemodialysis, diabetic nephropathy, and pre/post kidney transplant care.' },
+    { name: 'Dr. Rajiv Mehta', subSpecialty: 'Clinical Hypertension & Glomerulonephritis', qualification: 'MBBS, MD Medicine, DNB Nephro', experience: 11, hospital: 'Lilavati Hospital & Research Centre, Mumbai', fee: 499, offlineFee: 900, rating: 4.7, reviewsCount: 220, consultationMode: 'Both', registrationNumber: 'MCI-2011-94821', gender: 'male', bio: 'Focused specialist in metabolic kidney stones prevention, clinical autoimmune kidney profiles, and specialized dialysis protocols.' },
+    { name: 'Dr. Shruti Iyer', subSpecialty: 'Pediatric Nephrology & Acute Renal Failure', qualification: 'MBBS, MD, Fellowship Nephrology', experience: 7, hospital: 'Wadia Children Hospital, Parel, Mumbai', fee: 399, offlineFee: 750, rating: 4.5, reviewsCount: 95, consultationMode: 'Both', registrationNumber: 'MCI-2017-89271', gender: 'female', bio: 'Dedicated nephrology consultant dealing with pediatric urinary infections, childhood nephrotic syndromes, and acute dialysis.' }
+  ],
+  'Dentistry': [
+    { name: 'Dr. Sanjay Gupta', subSpecialty: 'Prosthodontics & Robotic Implantology', qualification: 'BDS, MDS (Prosthodontics) - KGMU', experience: 14, hospital: 'Apollo White Dental, Navi Mumbai', fee: 299, offlineFee: 500, rating: 4.8, reviewsCount: 620, consultationMode: 'Both', registrationNumber: 'MCI-2008-89304', gender: 'male', bio: 'KGMU Lucknow gold medalist. Expert in computer-guided painless dental implants, complete oral rehabilitations, and aesthetic crowns.' },
+    { name: 'Dr. Neha Kulkarni', subSpecialty: 'Endodontics & Painless Root Canals (RCT)', qualification: 'BDS, MDS (Endodontics)', experience: 10, hospital: 'Private Clinic, Bandra West, Mumbai', fee: 249, offlineFee: 450, rating: 4.6, reviewsCount: 310, consultationMode: 'Both', registrationNumber: 'MCI-2012-98421', gender: 'female', bio: 'Specialist in single-sitting painless root canals, laser microscopic endodontics, and deep tooth restorations.' },
+    { name: 'Dr. Rahul Joshi', subSpecialty: 'Orthodontics & Invisible Aligners', qualification: 'BDS, MDS Orthodontics', experience: 8, hospital: 'Fortis Hospital, Mulund, Mumbai', fee: 199, offlineFee: 400, rating: 4.5, reviewsCount: 160, consultationMode: 'Both', registrationNumber: 'MCI-2015-89410', gender: 'male', bio: 'Certified invisalign provider specialized in dental braces, clear aligners, structural bite corrections, and childhood jaw alignments.' }
+  ]
+};
+
+const reviewTexts = [
+  'Absolutely brilliant doctor! Explained the root cause with so much patience and prescribed minimal medicine. Visible recovery inside 10 days.',
+  'Great clinical experience. The consultation was on time, and the staff followed absolute hygiene standards. highly recommended!',
+  'Very professional and kind-hearted specialist. Spent ample time understanding my medical history. Her diagnosis was 100% spot-on!',
+  'Had a video call and it was seamless. The prescription note was detailed, and she explained the diet rules perfectly.',
+  'Extremely satisfied. Best physician I have met. Very down-to-earth and explained everything in clear layman terms.',
+  'Excellent treatment. The joint pain treatment worked wonders for my mother after trying other clinics for months.'
+];
+
+const generateTestimonials = (specialty, docName, index) => {
+  const patientNames = [
+    ['Anjali M.', 'Rahul S.', 'Sneha K.'],
+    ['Vikram G.', 'Pooja R.', 'Karan J.'],
+    ['Sunita D.', 'Arjun B.', 'Meera N.']
+  ][index % 3];
+
+  const dates = ['March 2025', 'February 2025', 'January 2025'];
+  const modes = ['In-Person', 'Online', 'In-Person'];
+
+  return patientNames.map((pName, i) => {
+    const seed = (specialty.charCodeAt(0) + docName.charCodeAt(0) + i) % reviewTexts.length;
+    return {
+      patientName: pName,
+      rating: 4 + (seed % 2),
+      reviewText: reviewTexts[seed],
+      date: dates[i],
+      mode: modes[i]
+    };
+  });
+};
+
+const initialDoctors = [];
+let docIdCounter = 1;
+Object.entries(specialtiesData).forEach(([specialty, docs]) => {
+  docs.forEach((doc, idx) => {
+    initialDoctors.push({
+      id: `doc-${docIdCounter}`,
+      name: doc.name,
+      specialty: specialty,
+      subSpecialty: doc.subSpecialty,
+      avatar: `https://images.unsplash.com/photo-${doc.gender === 'female' ? '1559839734-2b71ea197ec2' : '1622253692010-333f2da6031d'}?auto=format&fit=crop&w=150&h=150&q=80`,
+      qualification: doc.qualification,
+      experience: `${doc.experience} Years Experience`,
+      hospital: doc.hospital,
+      fee: doc.fee,
+      offlineFee: doc.offlineFee,
+      languages: doc.languages || ["English", "Hindi"],
+      availableDays: doc.availableDays || ["Mon", "Wed", "Fri"],
+      timeSlots: doc.timeSlots || ["10:00 AM", "11:00 AM", "02:00 PM", "04:00 PM"],
+      rating: doc.rating,
+      reviewsCount: doc.reviewsCount,
+      consultationMode: doc.consultationMode,
+      registrationNumber: doc.registrationNumber,
+      bio: doc.bio,
+      testimonials: generateTestimonials(specialty, doc.name, idx),
+      online: doc.consultationMode === 'Online' || doc.consultationMode === 'Both',
+      availability: `Available ${(doc.availableDays || ["Mon", "Wed", "Fri"])[0]} & ${(doc.availableDays || ["Mon", "Wed", "Fri"])[1] || 'Wed'} (${(doc.timeSlots || ["10:00 AM"])[0]} - ${(doc.timeSlots || ["04:00 PM"])[(doc.timeSlots || ["04:00 PM"]).length - 1]})`
+    });
+    docIdCounter++;
+  });
+});
 
 const storedOrders = localStorage.getItem('em_orders') 
   ? JSON.parse(localStorage.getItem('em_orders')) 
@@ -739,12 +1428,14 @@ const initialState = {
   medicines: initialMedicines,
   labTests: initialLabTests,
   doctors: initialDoctors,
+  labs: initialLabs,
   orders: storedOrders,
   appointments: storedAppointments,
   labBookings: storedLabBookings,
   searchTerm: '',
   selectedCategory: 'All',
   selectedLocation: 'Mumbai, Maharashtra',
+  isPrescriptionFilterActive: false,
 };
 
 const productSlice = createSlice({
@@ -759,6 +1450,9 @@ const productSlice = createSlice({
     },
     setSelectedLocation: (state, action) => {
       state.selectedLocation = action.payload;
+    },
+    setPrescriptionFilterActive: (state, action) => {
+      state.isPrescriptionFilterActive = action.payload;
     },
     placeOrder: (state, action) => {
       state.orders.unshift(action.payload);
@@ -779,10 +1473,11 @@ export const {
   setSearchTerm,
   setSelectedCategory,
   setSelectedLocation,
+  setPrescriptionFilterActive,
   placeOrder,
   bookDoctorAppointment,
   bookLabPackage
 } = productSlice.actions;
 
 export default productSlice.reducer;
-export { initialMedicines, initialLabTests, initialDoctors };
+export { initialMedicines, initialLabTests, initialDoctors, initialLabs };

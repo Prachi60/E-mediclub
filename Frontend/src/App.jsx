@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import store from './app/store';
 import AppRoutes from './routes';
+import ScrollToTop from './shared/components/ScrollToTop';
 
 // Create premium custom Material UI theme matching Tailwind Forest Green + Teal
 const theme = createTheme({
@@ -88,6 +89,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
+          <ScrollToTop />
           <AppRoutes />
         </BrowserRouter>
       </ThemeProvider>

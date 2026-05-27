@@ -5,7 +5,7 @@ import { FiShoppingBag, FiTruck, FiBox, FiCheckCircle, FiChevronRight } from 're
 
 export default function OrdersPage() {
   const navigate = useNavigate();
-  const { orders } = useSelector(state => state.products);
+  const { orders = [] } = useSelector(state => state.products);
 
   const getStatusIcon = (status) => {
     switch (status) {
@@ -111,7 +111,7 @@ export default function OrdersPage() {
       ) : (
         <div className="bg-white rounded-3xl p-16 border border-slate-100 shadow-premium text-center flex flex-col items-center gap-3">
           <FiShoppingBag className="w-12 h-12 text-slate-350" />
-          <h4 className="font-extrabold text-slate-800 text-sm">No Orders Placed Yet</h4>
+          <h4 className="font-extrabold text-slate-800 text-sm">No active orders found.</h4>
           <p className="text-xs text-slate-400 font-semibold max-w-xs mx-auto leading-relaxed">
             Fill your health cabinet with prescription medicines and schedule specialized diagnostics instantly!
           </p>

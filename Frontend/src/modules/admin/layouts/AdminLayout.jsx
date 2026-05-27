@@ -8,7 +8,7 @@ import { FiHome, FiUsers, FiPackage, FiShoppingBag, FiLayers } from 'react-icons
 import { NavLink } from 'react-router-dom';
 
 export default function AdminLayout() {
-  const { isAuthenticated, user } = useSelector(state => state.auth);
+  const { isAuthenticated, adminUser } = useSelector(state => state.adminAuth || { isAuthenticated: false, adminUser: null });
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -29,9 +29,9 @@ export default function AdminLayout() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Secure Guard: Ensure user has 'admin' role, otherwise redirect to LoginPage
-  if (!isAuthenticated || !user || user.role !== 'admin') {
-    return <Navigate to="/login" replace state={{ from: location }} />;
+  // Secure Guard: Ensure user has 'admin' role, otherwise redirect to AdminLoginPage
+  if (!isAuthenticated || !adminUser || adminUser.role !== 'admin') {
+    return <Navigate to="/admin/login" replace state={{ from: location }} />;
   }
 
   const toggleSidebar = () => {
@@ -72,19 +72,9 @@ export default function AdminLayout() {
           isSidebarOpen={isSidebarOpen} 
         />
 
-        {/* Content canvas window with Framer Motion slide page transitions */}
+        {/* Content canvas window */}
         <main className="flex-1 p-4 sm:p-6 pb-24 md:pb-8">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.25, cubicBezier: [0.16, 1, 0.3, 1] }}
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
+          <Outlet />
         </main>
       </div>
 

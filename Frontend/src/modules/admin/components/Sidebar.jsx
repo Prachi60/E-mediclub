@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../auth/store/authSlice';
+import { adminLogout } from '../../auth/admin/store/adminAuthSlice';
 import Logo from '../../../shared/components/Logo';
 import { 
   FiGrid, FiUsers, FiPackage, FiShoppingBag, 
@@ -27,15 +27,15 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
   ];
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate('/login');
+    dispatch(adminLogout());
+    navigate('/admin/login');
   };
 
   return (
     <aside 
       className={`fixed top-0 left-0 z-40 h-screen transition-all duration-300 ${
-        isOpen ? 'w-64' : 'w-20'
-      } bg-white/80 backdrop-blur-md border-r border-slate-100/80 shadow-premium flex flex-col justify-between`}
+        isOpen ? 'w-64 translate-x-0' : 'w-20 md:translate-x-0 -translate-x-full'
+      } bg-white border-r border-slate-100 shadow-premium flex flex-col justify-between`}
     >
       {/* Sidebar Header with Brand */}
       <div>
@@ -86,17 +86,9 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
 
       {/* Sidebar Footer with system return & logout */}
       <div className="p-3.5 border-t border-slate-50 flex flex-col gap-1.5">
-        <NavLink
-          to="/"
-          className="flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-black tracking-wider uppercase text-slate-500 hover:bg-slate-50 hover:text-slate-800 transition-all"
-        >
-          <FiHome className="text-lg shrink-0" />
-          {isOpen && <span>Customer Site</span>}
-        </NavLink>
-
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3.5 px-4 py-3 w-full rounded-2xl text-xs font-black tracking-wider uppercase text-coral hover:bg-coral-light/60 transition-all text-left tap-scale"
+          className="flex items-center gap-3.5 px-4 py-3 w-full rounded-2xl text-xs font-black tracking-wider uppercase text-coral hover:bg-coral-light/60 transition-all text-left tap-scale cursor-pointer"
         >
           <FiLogOut className="text-lg shrink-0" />
           {isOpen && <span>Log Out</span>}

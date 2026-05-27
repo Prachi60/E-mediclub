@@ -299,33 +299,7 @@ export default function LoginPage() {
           )}
         </AnimatePresence>
 
-        {/* Quick Testing Console Drawer */}
-        <div className="mt-6 pt-5 border-t border-slate-100/60">
-          <p className="text-[9px] text-slate-400 font-extrabold text-center uppercase tracking-widest mb-3">Quick Login (SaaS Simulator)</p>
-          <div className="grid grid-cols-3 gap-2">
-            <button 
-              type="button"
-              onClick={() => handleQuickLogin('customer')}
-              className="px-2.5 py-2 border border-slate-100 bg-slate-50/50 hover:bg-teal-light hover:text-teal hover:border-teal/30 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all tap-scale text-slate-500 cursor-pointer"
-            >
-              Customer
-            </button>
-            <button 
-              type="button"
-              onClick={() => handleQuickLogin('admin')}
-              className="px-2.5 py-2 border border-slate-100 bg-slate-50/50 hover:bg-teal-light hover:text-teal hover:border-teal/30 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all tap-scale text-slate-500 cursor-pointer"
-            >
-              Admin
-            </button>
-            <button 
-              type="button"
-              onClick={() => handleQuickLogin('vendor')}
-              className="px-2.5 py-2 border border-slate-100 bg-slate-50/50 hover:bg-teal-light hover:text-teal hover:border-teal/30 rounded-xl text-[9px] font-black uppercase tracking-wider transition-all tap-scale text-slate-500 cursor-pointer"
-            >
-              Vendor
-            </button>
-          </div>
-        </div>
+
 
         {/* Health Disclaimer badges */}
         <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-center gap-4 text-[9px] text-slate-400 font-bold uppercase tracking-wider">

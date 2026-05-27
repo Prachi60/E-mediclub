@@ -10,13 +10,14 @@ import ProductCard from '../../../shared/components/ProductCard';
 import LabTestCard from '../../../shared/components/LabTestCard';
 import DoctorCard from '../../../shared/components/DoctorCard';
 import { setSelectedCategory, setSearchTerm } from '../store/productSlice';
+import { FiUploadCloud } from 'react-icons/fi';
 
 export default function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Selectors from products store
-  const { medicines, labTests, doctors } = useSelector(state => state.products);
+  const { medicines, labTests, doctors, selectedLocation } = useSelector(state => state.products);
 
   // States
   const [currentBanner, setCurrentBanner] = useState(0);
@@ -49,15 +50,92 @@ export default function HomePage() {
     }
   ];
 
+  const getCityKey = (loc) => {
+    if (!loc) return 'Mumbai, Maharashtra';
+    const normalized = loc.toLowerCase();
+    if (normalized.includes('mumbai')) return 'Mumbai, Maharashtra';
+    if (normalized.includes('bengaluru') || normalized.includes('bangalore')) return 'Bengaluru, Karnataka';
+    if (normalized.includes('delhi')) return 'New Delhi, Delhi';
+    if (normalized.includes('hyderabad')) return 'Hyderabad, Telangana';
+    if (normalized.includes('pune')) return 'Pune, Maharashtra';
+    if (normalized.includes('chennai')) return 'Chennai, Tamil Nadu';
+    if (normalized.includes('kolkata')) return 'Kolkata, West Bengal';
+    if (normalized.includes('ahmedabad')) return 'Ahmedabad, Gujarat';
+    return 'Mumbai, Maharashtra'; // Default fallback
+  };
+
+  const cityKey = getCityKey(selectedLocation);
+
+  const getDynamicCategoryObj = (key) => {
+    switch (key) {
+      case 'Bengaluru, Karnataka':
+        return { name: 'Sports Nutrition', icon: '🏋️‍♂️', desc: 'Sports Nutrition', route: '/categories', color: 'bg-indigo-50 text-indigo-600' };
+      case 'New Delhi, Delhi':
+        return { name: 'Respiratory Care', icon: '🫁', desc: 'Breathing Care', route: '/categories', color: 'bg-indigo-50 text-indigo-600' };
+      case 'Hyderabad, Telangana':
+        return { name: 'Diabetes Care', icon: '🩸', desc: 'Diabetes Care', route: '/categories', color: 'bg-indigo-50 text-indigo-600' };
+      case 'Pune, Maharashtra':
+        return { name: 'Homeopathy', icon: '🥛', desc: 'Natural Tonics', route: '/categories', color: 'bg-indigo-50 text-indigo-600' };
+      case 'Chennai, Tamil Nadu':
+        return { name: 'Geriatric Care', icon: '👵', desc: 'Geriatric Care', route: '/categories', color: 'bg-indigo-50 text-indigo-600' };
+      case 'Kolkata, West Bengal':
+        return { name: 'Herbal Extracts', icon: '🍯', desc: 'Herbal Extracts', route: '/categories', color: 'bg-indigo-50 text-indigo-600' };
+      case 'Ahmedabad, Gujarat':
+        return { name: 'Cardiac Care', icon: '❤️', desc: 'Cardiac Care', route: '/categories', color: 'bg-indigo-50 text-indigo-600' };
+      default:
+        return { name: 'Devices', icon: '🩸', desc: 'Health Monitors', route: '/categories', color: 'bg-indigo-50 text-indigo-600' };
+    }
+  };
+
+  const dynamicCategory = getDynamicCategoryObj(cityKey);
+
   // Quick categories configuration
   const quickCategories = [
-    { name: 'Medicines', icon: '💊', desc: 'Prescription Drugs', route: '/categories', color: 'bg-emerald-50 text-emerald-600' },
+    { name: 'Medicines', icon: '💊', desc: 'Prescription Drugs', route: '/medicines', color: 'bg-emerald-50 text-emerald-600' },
     { name: 'Lab Tests', icon: '🧪', desc: 'Diagnostic Kits', route: '/lab-tests', color: 'bg-teal-50 text-teal-600' },
     { name: 'Doctors', icon: '👨‍⚕️', desc: 'Expert Doctors', route: '/doctor-appointments', color: 'bg-blue-50 text-blue-600' },
-    { name: 'Ayurveda', icon: '🌿', desc: 'Natural Herbs', route: '/categories', color: 'bg-amber-50 text-amber-600' },
-    { name: 'Wellness', icon: '🧘', desc: 'Fitness & Care', route: '/categories', color: 'bg-rose-50 text-rose-600' },
-    { name: 'Devices', icon: '🩸', desc: 'Health Monitors', route: '/categories', color: 'bg-indigo-50 text-indigo-600' }
+    { name: 'Ayurveda', icon: '🌿', desc: 'Natural Herbs', route: '/ayurveda', color: 'bg-amber-50 text-amber-600' },
+    { name: 'Wellness', icon: '🧘', desc: 'Fitness & Care', route: '/wellness', color: 'bg-rose-50 text-rose-600' },
+    dynamicCategory
   ];
+
+  // Dynamic products priorities by location
+  const locationPriorities = {
+    'Mumbai, Maharashtra': ['med-4', 'med-1', 'med-10', 'med-2', 'med-6', 'med-9'],
+    'Bengaluru, Karnataka': ['med-3', 'med-6', 'med-11', 'med-1', 'med-9', 'med-2'],
+    'New Delhi, Delhi': ['med-13', 'med-3', 'med-12', 'med-6', 'med-2', 'med-11'],
+    'Hyderabad, Telangana': ['med-5', 'med-2', 'med-9', 'med-12', 'med-1', 'med-10'],
+    'Pune, Maharashtra': ['med-8', 'med-1', 'med-4', 'med-3', 'med-6', 'med-11'],
+    'Chennai, Tamil Nadu': ['med-6', 'med-9', 'med-12', 'med-2', 'med-1', 'med-10'],
+    'Kolkata, West Bengal': ['med-3', 'med-8', 'med-11', 'med-6', 'med-1', 'med-2'],
+    'Ahmedabad, Gujarat': ['med-2', 'med-4', 'med-5', 'med-12', 'med-9', 'med-6']
+  };
+
+  const getPrioritizedMedicines = (list, loc) => {
+    if (!list || list.length === 0) return [];
+    const normalized = (loc || '').toLowerCase();
+    let key = 'Mumbai, Maharashtra';
+    if (normalized.includes('mumbai')) key = 'Mumbai, Maharashtra';
+    else if (normalized.includes('bengaluru') || normalized.includes('bangalore')) key = 'Bengaluru, Karnataka';
+    else if (normalized.includes('delhi')) key = 'New Delhi, Delhi';
+    else if (normalized.includes('hyderabad')) key = 'Hyderabad, Telangana';
+    else if (normalized.includes('pune')) key = 'Pune, Maharashtra';
+    else if (normalized.includes('chennai')) key = 'Chennai, Tamil Nadu';
+    else if (normalized.includes('kolkata')) key = 'Kolkata, West Bengal';
+    else if (normalized.includes('ahmedabad')) key = 'Ahmedabad, Gujarat';
+    
+    const priorityIds = locationPriorities[key] || locationPriorities['Mumbai, Maharashtra'];
+    return [...list].sort((a, b) => {
+      const idxA = priorityIds.indexOf(a.id);
+      const idxB = priorityIds.indexOf(b.id);
+      if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+      if (idxA !== -1) return -1;
+      if (idxB !== -1) return 1;
+      return 0;
+    });
+  };
+
+  const prioritizedMedicines = getPrioritizedMedicines(medicines, selectedLocation);
 
   // Promo Coupons
   const coupons = [
@@ -189,6 +267,8 @@ export default function HomePage() {
         </div>
       </section>
 
+
+
       {/* 3. Promo Banner Section (Coupon Banner Strip) */}
       <section className="bg-forest-light/60 border border-forest/10 p-4 rounded-3xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 select-none">
         <div className="flex items-center gap-3">
@@ -220,15 +300,17 @@ export default function HomePage() {
             </h2>
             <p className="text-xs text-slate-400 font-semibold">Most bought healthcare and daily wellness essentials</p>
           </div>
-          <button 
-            onClick={() => { dispatch(setSelectedCategory('Medicines')); navigate('/categories'); }} 
-            className="text-xs font-black text-teal hover:underline"
-          >
-            SEE ALL
-          </button>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => { dispatch(setSelectedCategory('Medicines')); navigate('/categories'); }} 
+              className="text-xs font-black text-teal hover:underline"
+            >
+              SEE ALL
+            </button>
+          </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {medicines.slice(0, 8).map((med) => (
+          {prioritizedMedicines.slice(0, 8).map((med) => (
             <ProductCard key={med.id} product={med} />
           ))}
         </div>
@@ -243,12 +325,14 @@ export default function HomePage() {
             </h2>
             <p className="text-xs text-slate-400 font-semibold">Certified clinical labs. Accurate reports straight to email.</p>
           </div>
-          <button 
-            onClick={() => navigate('/lab-tests')} 
-            className="text-xs font-black text-teal hover:underline"
-          >
-            SEE ALL TESTS
-          </button>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => navigate('/lab-tests')} 
+              className="text-xs font-black text-teal hover:underline"
+            >
+              SEE ALL TESTS
+            </button>
+          </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {labTests.map((test) => (
@@ -314,113 +398,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      {/* 8. Trust Certifications & Bottom Footer (Tata 1mg resemblance) */}
-      <footer className="mt-12 bg-[#0E1012] border border-slate-900 shadow-premium rounded-3xl p-6 sm:p-10 md:p-12 flex flex-col gap-8 text-slate-400 text-xs font-semibold select-none animate-fade-in">
-        
-        {/* Upper footer features */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-          <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
-            <FiCheckCircle className="w-6 h-6 text-teal mb-2" />
-            <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">100% Genuine</h5>
-            <p className="text-[10px] text-slate-400 font-bold mt-1">Sourced from certified clinical partners.</p>
-          </div>
-          <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
-            <FiClock className="w-6 h-6 text-teal mb-2" />
-            <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">Express Delivery</h5>
-            <p className="text-[10px] text-slate-400 font-bold mt-1">Medicines delivered inside 4-6 hours.</p>
-          </div>
-          <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
-            <FiAward className="w-6 h-6 text-teal mb-2" />
-            <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">FDA Certified</h5>
-            <p className="text-[10px] text-slate-400 font-bold mt-1">Strict clinical pharmacy controls.</p>
-          </div>
-          <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
-            <FiPhoneCall className="w-6 h-6 text-teal mb-2" />
-            <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">Expert Support</h5>
-            <p className="text-[10px] text-slate-400 font-bold mt-1">24/7 dedicated pharmacy consultation help.</p>
-          </div>
-        </div>
-
-        {/* Brand details and links */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-4">
-          <div className="flex flex-col gap-2.5">
-            <h5 className="text-[10px] font-black text-white uppercase tracking-widest">About Mediclub</h5>
-            <a href="#about" className="text-slate-400 hover:text-white transition-colors">Who We Are</a>
-            <a href="#careers" className="text-slate-400 hover:text-white transition-colors">Careers</a>
-            <a href="#press" className="text-slate-400 hover:text-white transition-colors">Press Releases</a>
-            <a href="#blog" className="text-slate-400 hover:text-white transition-colors">Healthy Life Blog</a>
-          </div>
-          <div className="flex flex-col gap-2.5">
-            <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Our Policies</h5>
-            <a href="#privacy" className="text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#terms" className="text-slate-400 hover:text-white transition-colors">Terms & Conditions</a>
-            <a href="#editorial" className="text-slate-400 hover:text-white transition-colors">Editorial Policy</a>
-            <a href="#security" className="text-slate-400 hover:text-white transition-colors">Vulnerability Disclosure</a>
-          </div>
-          <div className="flex flex-col gap-2.5">
-            <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Customer Support</h5>
-            <a href="#contact" className="text-slate-400 hover:text-white transition-colors">Contact Helpdesk</a>
-            <a href="#faq" className="text-slate-400 hover:text-white transition-colors">Fulfillment FAQs</a>
-            <a href="#return" className="text-slate-400 hover:text-white transition-colors">Medicine Return Policy</a>
-            <a href="#refund" className="text-slate-400 hover:text-white transition-colors">Refund Status Tracker</a>
-          </div>
-          <div className="flex flex-col gap-3">
-            <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Download Our Mobile App</h5>
-            <p className="text-[10px] text-slate-400 font-bold leading-snug">Get exclusive health tip blogs and 20% discount coupon banners instantly inside the app.</p>
-            <div className="flex flex-col gap-2.5">
-              {/* Google Play Store Pill Button */}
-              <button className="flex items-center gap-3 bg-[#111314] text-white px-3.5 py-1.5 rounded-xl border border-slate-800 hover:border-teal/30 hover:bg-slate-950 hover:scale-[1.03] hover:shadow-premium-hover transition-all duration-300 select-none group text-left cursor-pointer w-full max-w-[175px]">
-                <svg className="w-5.5 h-5.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.25 2.5C3.08 2.66 3 2.92 3 3.25V20.75C3 21.08 3.08 21.34 3.25 21.5L3.34 21.58L12.56 12.36V11.64L3.34 2.42L3.25 2.5Z" fill="url(#gp_a)" />
-                  <path d="M15.63 15.43L12.56 12.36V11.64L15.63 8.57L15.71 8.62L19.35 10.69C20.39 11.28 20.39 12.24 19.35 12.83L15.71 14.9L15.63 15.43Z" fill="url(#gp_b)" />
-                  <path d="M15.71 14.9L12.56 11.75L3.25 21.06C3.59 21.42 4.14 21.44 4.77 21.08L15.71 14.9Z" fill="url(#gp_c)" />
-                  <path d="M15.71 8.62L4.77 2.42C4.14 2.06 3.59 2.08 3.25 2.44L12.56 11.75L15.71 8.62Z" fill="url(#gp_d)" />
-                  <defs>
-                    <linearGradient id="gp_a" x1="11.45" y1="21.11" x2="3" y2="12.66" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#00A0FF" />
-                      <stop offset="0.007" stopColor="#00A0FF" />
-                      <stop offset="1" stopColor="#00EAFF" />
-                    </linearGradient>
-                    <linearGradient id="gp_b" x1="20.38" y1="12.36" x2="13.2" y2="12.36" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#FFC700" />
-                      <stop offset="1" stopColor="#FFEB00" />
-                    </linearGradient>
-                    <linearGradient id="gp_c" x1="12.44" y1="12.44" x2="5.19" y2="19.69" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#FF2A00" />
-                      <stop offset="1" stopColor="#FF007A" />
-                    </linearGradient>
-                    <linearGradient id="gp_d" x1="5.19" y1="5.03" x2="12.44" y2="12.28" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#37A600" />
-                      <stop offset="1" stopColor="#10BA00" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <div className="text-left leading-tight">
-                  <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider block">GET IT ON</span>
-                  <span className="text-[12px] text-white font-bold block mt-0.5 font-sans">Google Play</span>
-                </div>
-              </button>
-
-              {/* Apple App Store Pill Button */}
-              <button className="flex items-center gap-3 bg-[#111314] text-white px-3.5 py-1.5 rounded-xl border border-slate-800 hover:border-teal/30 hover:bg-slate-950 hover:scale-[1.03] hover:shadow-premium-hover transition-all duration-300 select-none group text-left cursor-pointer w-full max-w-[175px]">
-                <svg className="w-5.5 h-5.5 fill-white shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.57 2.95-1.39z" />
-                </svg>
-                <div className="text-left leading-tight">
-                  <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider block">Download on the</span>
-                  <span className="text-[12px] text-white font-bold block mt-0.5 font-sans">App Store</span>
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Final Copyright */}
-        <div className="border-t border-slate-800 pt-6 text-center text-[10px] text-slate-500 font-bold">
-          <p>© 2026 E Mediclub India Inc. All rights reserved. Registered Clinical E-Pharmacy Lic. No. DL-392819-A.</p>
-        </div>
-      </footer>
 
     </div>
   );
