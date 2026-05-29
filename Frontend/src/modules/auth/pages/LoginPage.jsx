@@ -86,7 +86,7 @@ export default function LoginPage() {
       } else if (role === 'vendor') {
         mockUser = {
           ...mockUser,
-          name: 'Wellness Rx Manager',
+          name: 'MedPlus Wellness Manager',
           phone: '8888888888',
           email: 'vendor@emediclub.com',
           role: 'vendor'
@@ -298,6 +298,71 @@ export default function LoginPage() {
             </motion.form>
           )}
         </AnimatePresence>
+
+        {/* Dynamic Sandbox Demo Logins Expander - Great for testing! */}
+        <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col gap-2.5">
+          <p className="text-[10px] font-black text-slate-400 text-center uppercase tracking-widest">
+            Sandbox Fast-Track Logins
+          </p>
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              type="button"
+              onClick={() => handleQuickLogin('customer')}
+              className="py-1.5 px-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 rounded-xl text-[10px] font-extrabold uppercase transition-all"
+            >
+              Patient
+            </button>
+            <button
+              type="button"
+              onClick={() => handleQuickLogin('vendor')}
+              className="py-1.5 px-2 bg-teal-light/20 hover:bg-teal-light/40 border border-teal/20 text-teal-dark rounded-xl text-[10px] font-extrabold uppercase transition-all"
+            >
+              Vendor
+            </button>
+            <button
+              type="button"
+              onClick={() => handleQuickLogin('admin')}
+              className="py-1.5 px-2 bg-forest-light/30 hover:bg-forest-light/60 border border-forest/20 text-forest rounded-xl text-[10px] font-extrabold uppercase transition-all"
+            >
+              Admin
+            </button>
+          </div>
+        </div>
+
+        {/* Merchant Partner Portals */}
+        <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col gap-3">
+          <p className="text-[10px] font-black text-slate-400 text-center uppercase tracking-widest">
+            Merchant & Admin Access
+          </p>
+          <div className="grid grid-cols-2 gap-3 text-center">
+            <button
+              type="button"
+              onClick={() => navigate('/vendor/login')}
+              className="py-2.5 px-3 border border-slate-200 hover:border-teal hover:text-teal text-slate-600 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-slate-50/50 hover:bg-teal-light/10"
+            >
+              <FiShoppingBag className="w-3.5 h-3.5 shrink-0" />
+              <span>Seller Store</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/admin/login')}
+              className="py-2.5 px-3 border border-slate-200 hover:border-teal hover:text-teal text-slate-600 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-slate-50/50 hover:bg-teal-light/10"
+            >
+              <FiShield className="w-3.5 h-3.5 shrink-0" />
+              <span>Super Admin</span>
+            </button>
+          </div>
+          <div className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">
+            Want to list your pharmacy?{' '}
+            <button
+              type="button"
+              onClick={() => navigate('/vendor/signup')}
+              className="text-teal hover:underline font-black"
+            >
+              Register Here
+            </button>
+          </div>
+        </div>
 
 
 

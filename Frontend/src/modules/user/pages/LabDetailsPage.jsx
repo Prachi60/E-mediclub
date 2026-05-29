@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { 
@@ -17,6 +17,15 @@ export default function LabDetailsPage() {
 
   // Active gallery slide index
   const [activeSlide, setActiveSlide] = useState(0);
+
+  // Auto sliding facility gallery carousel timer
+  useEffect(() => {
+    if (!lab || !lab.gallery || lab.gallery.length <= 1) return;
+    const timer = setInterval(() => {
+      setActiveSlide(prev => (prev + 1) % lab.gallery.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [lab]);
 
   if (!lab) {
     return (
@@ -222,15 +231,18 @@ export default function LabDetailsPage() {
                 </div>
               </div>
 
-              {/* Google Map Placeholder */}
-              <div className="relative w-full h-32 rounded-2xl overflow-hidden border border-slate-100/50 mt-2 bg-sky-50 shadow-inner flex flex-col items-center justify-center text-center">
+              {/* Google Map Placeholder - Interactive Map click redirection */}
+              <div 
+                onClick={() => window.open(`https://maps.google.com/?q=${encodeURIComponent(lab.name + " " + lab.address)}`, "_blank")}
+                className="relative w-full h-32 rounded-2xl overflow-hidden border border-slate-200 mt-2 bg-sky-50 shadow-inner flex flex-col items-center justify-center text-center cursor-pointer hover:border-teal/50 hover:shadow-premium transition-all duration-300 group"
+              >
                 {/* Map grid lines simulation */}
                 <div className="absolute inset-0 bg-grid opacity-10" />
-                <div className="w-8 h-8 rounded-full bg-teal/20 text-teal flex items-center justify-center animate-bounce z-10">
+                <div className="w-8 h-8 rounded-full bg-teal/20 text-teal flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce z-10">
                   📍
                 </div>
-                <span className="text-[10px] text-slate-450 font-black uppercase mt-1 z-10">Click to View on Google Maps</span>
-                <span className="text-[8px] text-slate-400 font-bold z-10">Sector 15, Andheri East, Mumbai</span>
+                <span className="text-[10px] text-slate-500 font-black uppercase mt-1 z-10 group-hover:text-teal transition-colors">Open in Google Maps</span>
+                <span className="text-[8px] text-slate-400 font-bold z-10 truncate max-w-[90%]">{lab.address}</span>
               </div>
             </div>
 

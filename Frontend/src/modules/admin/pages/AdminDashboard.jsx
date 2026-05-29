@@ -27,13 +27,13 @@ export default function AdminDashboard() {
     }).join(' ');
 
     return (
-      <div className="w-full bg-white border border-slate-100 p-5 rounded-3xl shadow-premium relative">
-        <div className="flex items-center justify-between mb-6">
+      <div className="w-full bg-white border border-slate-100 p-4 sm:p-5 rounded-3xl shadow-premium relative">
+        <div className="flex items-center justify-between mb-4 sm:mb-6 gap-2">
           <div>
-            <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider">Revenue Growth Tendency</h3>
-            <p className="text-[10px] text-slate-400 font-bold uppercase mt-0.5">Monthly platform performance log</p>
+            <h3 className="text-xs sm:text-sm font-black text-slate-800 uppercase tracking-wider">Revenue Growth Tendency</h3>
+            <p className="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase mt-0.5">Monthly platform performance log</p>
           </div>
-          <span className="text-[10px] bg-teal-light text-teal font-black uppercase px-2 py-0.5 rounded-full">+35% YTD</span>
+          <span className="text-[9px] sm:text-[10px] bg-teal-light text-teal font-black uppercase px-2 py-0.5 rounded-full shrink-0">+35% YTD</span>
         </div>
         <div className="relative w-full overflow-hidden">
           <svg viewBox={`0 0 ${width} ${height}`} className="w-full overflow-visible">
@@ -113,24 +113,28 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="flex flex-col gap-6 animate-fade-in">
+    <div className="h-[calc(100vh-120px)] flex flex-col gap-4 sm:gap-6 overflow-y-auto custom-scrollbar pr-1 pb-4 animate-fade-in">
       
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+      <div className="flex flex-row items-center justify-between gap-2 border-b border-slate-100 pb-2 shrink-0">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-800 leading-none">Super Admin Analytics</h1>
-          <p className="text-xs text-slate-400 font-bold uppercase mt-2 tracking-wider">
+          <h1 className="text-base sm:text-xl font-extrabold text-slate-800 leading-none">Super Admin Analytics</h1>
+          <p className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase mt-1 tracking-wider leading-tight hidden sm:block">
             Consolidated overview of sellers, billing statements, and consult scheduling.
           </p>
+          <p className="text-[10px] text-slate-400 font-bold uppercase mt-1 tracking-wider leading-tight sm:hidden">
+            Overview of platform performance.
+          </p>
         </div>
-        <div className="text-[10px] font-black uppercase text-slate-400 flex items-center gap-1.5 bg-white border border-slate-100 px-3 py-1.5 rounded-2xl shadow-sm select-none">
-          <span className="w-2 h-2 rounded-full bg-teal animate-ping" />
-          <span>Realtime Feed Active</span>
+        <div className="text-[9px] sm:text-[10px] font-black uppercase text-slate-400 flex items-center gap-1.5 bg-white border border-slate-100 px-2 sm:px-3 py-1 sm:py-1.5 rounded-2xl shadow-sm select-none shrink-0">
+          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-teal animate-ping" />
+          <span className="hidden sm:inline">Realtime Feed Active</span>
+          <span className="sm:hidden">Active</span>
         </div>
       </div>
 
       {/* Primary KPI Deck */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 shrink-0">
         <StatsCard 
           title="Total Gross Revenue" 
           value={`₹${analytics.totalRevenue.toLocaleString()}`} 
@@ -178,31 +182,31 @@ export default function AdminDashboard() {
           
           {/* Quick Stats overview cards */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gradient-to-tr from-teal to-forest text-white p-5 rounded-3xl shadow-premium relative overflow-hidden">
+            <div className="bg-gradient-to-tr from-teal to-forest text-white p-4 sm:p-5 rounded-3xl shadow-premium relative overflow-hidden">
               <span className="text-[9px] font-black uppercase tracking-wider text-white/70">Verified Customer Core</span>
-              <h4 className="text-3xl font-black mt-2">{users.length} Active</h4>
+              <h4 className="text-2xl sm:text-3xl font-black mt-2">{users.length} Active</h4>
               <p className="text-[10px] font-bold text-white/80 mt-1 uppercase">With zero active disputes</p>
-              <div className="absolute right-4 bottom-4 w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center">
-                <FiUsers className="text-xl text-white" />
+              <div className="absolute right-3 bottom-3 sm:right-4 sm:bottom-4 w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-2xl flex items-center justify-center">
+                <FiUsers className="text-lg sm:text-xl text-white" />
               </div>
             </div>
-            <div className="bg-white border border-slate-100 p-5 rounded-3xl shadow-premium relative overflow-hidden">
+            <div className="bg-white border border-slate-100 p-4 sm:p-5 rounded-3xl shadow-premium relative overflow-hidden">
               <span className="text-[9px] font-black uppercase tracking-wider text-slate-400">Approval Queue</span>
-              <h4 className="text-3xl font-black mt-2 text-slate-800">{vendors.filter(v => v.status === 'pending').length} Pending</h4>
+              <h4 className="text-2xl sm:text-3xl font-black mt-2 text-slate-800">{vendors.filter(v => v.status === 'pending').length} Pending</h4>
               <p className="text-[10px] font-bold text-coral mt-1 uppercase">Awaiting KYC Documents</p>
-              <div className="absolute right-4 bottom-4 w-12 h-12 bg-coral-light rounded-2xl flex items-center justify-center">
-                <FiAlertCircle className="text-xl text-coral" />
+              <div className="absolute right-3 bottom-3 sm:right-4 sm:bottom-4 w-10 h-10 sm:w-12 sm:h-12 bg-coral-light rounded-2xl flex items-center justify-center">
+                <FiAlertCircle className="text-lg sm:text-coral" />
               </div>
             </div>
           </div>
         </div>
 
         {/* Right side: Live Logs Timeline */}
-        <div className="bg-white border border-slate-100 p-5 rounded-3xl shadow-premium flex flex-col h-full justify-between">
+        <div className="bg-white border border-slate-100 p-4 sm:p-5 rounded-3xl shadow-premium flex flex-col h-full justify-between">
           <div>
-            <div className="flex items-center justify-between mb-5 border-b border-slate-50 pb-3">
+            <div className="flex items-center justify-between mb-4 sm:mb-5 border-b border-slate-50 pb-3">
               <div>
-                <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider">Live System Audits</h3>
+                <h3 className="text-xs sm:text-sm font-black text-slate-800 uppercase tracking-wider">Live System Audits</h3>
                 <p className="text-[9px] text-slate-400 font-bold uppercase mt-0.5">Chronological platform activities</p>
               </div>
               <FiActivity className="text-teal animate-spin-slow" />

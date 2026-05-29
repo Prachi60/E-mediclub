@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Realistic mock data for Super Admin Panel
 const mockVendors = [
-  { id: 1, name: 'Wellness Rx Pharmacy', email: 'wellnessrx@gmail.com', phone: '9876500001', storeName: 'Wellness Rx Main Store', status: 'approved', kyc: 'verified', earnings: 145000, commissionRate: 10, joinedDate: '2026-01-10', bankName: 'HDFC Bank', accountNo: '*****9876' },
+  { id: 1, name: 'MedPlus Wellness Pharmacy', email: 'wellnessrx@gmail.com', phone: '9876500001', storeName: 'MedPlus Wellness Main Store', status: 'approved', kyc: 'verified', earnings: 145000, commissionRate: 10, joinedDate: '2026-01-10', bankName: 'HDFC Bank', accountNo: '*****9876' },
   { id: 2, name: 'Apothecary Labs', email: 'apothecary@gmail.com', phone: '9876500002', storeName: 'Apothecary Labs Biotech', status: 'pending', kyc: 'submitted', earnings: 0, commissionRate: 12, joinedDate: '2026-05-15', bankName: 'ICICI Bank', accountNo: '*****1234' },
   { id: 3, name: 'Medicare Essentials', email: 'medicare@gmail.com', phone: '9876500003', storeName: 'Medicare Lifeline', status: 'approved', kyc: 'verified', earnings: 82000, commissionRate: 8, joinedDate: '2026-03-05', bankName: 'SBI', accountNo: '*****5678' },
   { id: 4, name: 'Himalayan Herbal Care', email: 'himalayan@gmail.com', phone: '9876500004', storeName: 'Himalayan Ayurvedic Remedies', status: 'pending', kyc: 'submitted', earnings: 0, commissionRate: 15, joinedDate: '2026-05-24', bankName: 'Axis Bank', accountNo: '*****4321' },
@@ -52,7 +52,7 @@ const initialState = {
   recentActivities: [
     { id: 1, text: 'New vendor Himalayan Herbal Care submitted verification docs', time: '2 hours ago', type: 'vendor' },
     { id: 2, text: 'Customer Ramesh Kumar booked Complete Hemogram test', time: '4 hours ago', type: 'order' },
-    { id: 3, text: 'Payout request of ₹45,000 processed for Wellness Rx Pharmacy', time: '1 day ago', type: 'payout' },
+    { id: 3, text: 'Payout request of ₹45,000 processed for MedPlus Wellness Pharmacy', time: '1 day ago', type: 'payout' },
     { id: 4, text: 'Product Ashvagandha Tablets updated by Apothecary Labs', time: '1 day ago', type: 'catalog' }
   ]
 };
@@ -115,6 +115,15 @@ const adminSlice = createSlice({
       };
       state.cms.heroBanners.push(newBanner);
     },
+    deleteVendor: (state, action) => {
+      state.vendors = state.vendors.filter(v => v.id !== action.payload);
+      state.recentActivities.unshift({
+        id: Date.now(),
+        text: `Vendor ID ${action.payload} was removed from the directory`,
+        time: 'Just now',
+        type: 'vendor'
+      });
+    },
     toggleBannerStatus: (state, action) => {
       state.cms.heroBanners = state.cms.heroBanners.map(b => 
         b.id === action.payload ? { ...b, status: b.status === 'active' ? 'inactive' : 'active' } : b
@@ -126,6 +135,7 @@ const adminSlice = createSlice({
 export const {
   approveVendor,
   rejectVendor,
+  deleteVendor,
   updateCommissionRate,
   setGlobalCommission,
   toggleUserStatus,

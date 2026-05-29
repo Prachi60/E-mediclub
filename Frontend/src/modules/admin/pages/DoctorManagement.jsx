@@ -1,41 +1,50 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ReusableTable from '../components/ReusableTable';
-import { FiActivity, FiCheckCircle, FiFileText, FiShield } from 'react-icons/fi';
-
-const mockDoctors = [
-  { id: 1, name: 'Dr. Archana Sen', specialty: 'Orthopedics', experience: '15 Years', fee: 500, status: 'approved', hospital: 'Metro Ortho Clinic' },
-  { id: 2, name: 'Dr. Nitin Verma', specialty: 'Endocrinology', experience: '12 Years', fee: 600, status: 'approved', hospital: 'Diabetic Care Center' },
-  { id: 3, name: 'Dr. Shruti Kapoor', specialty: 'Ophthalmology', experience: '8 Years', fee: 400, status: 'pending', hospital: 'Eye Vision Center' },
-  { id: 4, name: 'Dr. Ramanujam Shastri', specialty: 'Ayurveda Specialist', experience: '22 Years', fee: 350, status: 'pending', hospital: 'Patanjali Wellness Hub' },
-];
+import { deleteDoctor } from '../../user/store/productSlice';
+import { FiCheckCircle, FiTrash2, FiUserCheck } from 'react-icons/fi';
 
 export default function DoctorManagement() {
-  const [doctors, setDoctors] = useState(mockDoctors);
+  const dispatch = useDispatch();
+  const { doctors, doctorSpecialties } = useSelector(state => state.products);
 
-  const handleApproveDoctor = (id) => {
-    setDoctors(doctors.map(doc => doc.id === id ? { ...doc, status: 'approved' } : doc));
+  const handleDelete = (id) => {
+    dispatch(deleteDoctor(id));
   };
 
-  // Define Grid Columns
+  // Define ReusableTable Columns
   const columns = [
     { 
       key: 'name', 
       header: 'Consultant Doctor',
       render: (row) => (
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-teal-light text-teal flex items-center justify-center font-black text-xs shrink-0 select-none">
-            👨‍⚕️
-          </div>
+          <img 
+            src={row.image || 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=80&q=80'} 
+            alt={row.name} 
+            className="w-8 h-8 rounded-xl object-cover border border-slate-100 shrink-0 select-none"
+          />
           <div>
             <span className="font-extrabold text-slate-800 block text-xs truncate max-w-xs">{row.name}</span>
-            <span className="text-[10px] text-slate-400 font-semibold block uppercase">{row.hospital}</span>
+            <span className="text-[10px] text-slate-400 font-semibold block uppercase">{row.hospital || 'Private Clinic'}</span>
           </div>
         </div>
       )
     },
-    { key: 'specialty', header: 'Specialty Core' },
-    { key: 'experience', header: 'Experience' },
+    { 
+      key: 'specialty', 
+      header: 'Specialty Core',
+      render: (row) => (
+        <span className="bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-lg text-[10px] font-black text-slate-650 uppercase tracking-wide">
+          {row.specialty}
+        </span>
+      )
+    },
+    { 
+      key: 'experience', 
+      header: 'Experience',
+      render: (row) => <span className="font-bold text-slate-600 text-2xs">{row.experience}</span>
+    },
     { 
       key: 'fee', 
       header: 'Consultation Fee',
@@ -43,42 +52,44 @@ export default function DoctorManagement() {
     },
     { 
       key: 'status', 
-      header: 'Audited Status',
+      header: 'License Auditing',
       render: (row) => {
-        if (row.status === 'approved') return <span className="bg-teal-light text-teal px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider">Approved</span>;
-        return <span className="bg-gold-light text-gold-dark px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider">Awaiting Audit</span>;
+        const isApproved = row.status === 'approved';
+        return (
+          <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${
+            isApproved 
+              ? 'bg-teal-light text-teal' 
+              : 'bg-gold-light text-gold-dark'
+          }`}>
+            {isApproved ? 'Verified License' : 'Awaiting Audit'}
+          </span>
+        );
       }
     }
   ];
 
   // Actions column trigger
-  const tableActions = (row) => {
-    if (row.status === 'pending') {
-      return (
-        <button 
-          onClick={() => handleApproveDoctor(row.id)}
-          className="flex items-center gap-1 px-3 py-1.5 bg-teal text-white rounded-xl text-[10px] font-black uppercase tracking-wider hover:bg-teal-dark shadow-sm transition-all cursor-pointer tap-scale"
-        >
-          <FiCheckCircle /> Verify License
-        </button>
-      );
-    }
-    return (
-      <span className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider flex items-center gap-1 select-none pr-3">
-        <FiCheckCircle className="text-teal text-xs" /> VERIFIED
-      </span>
-    );
-  };
+  const tableActions = (row) => (
+    <div className="flex items-center gap-2">
+      <button 
+        onClick={() => handleDelete(row.id)}
+        className="p-2 bg-coral-light/40 hover:bg-coral-light text-coral rounded-xl transition-all cursor-pointer tap-scale"
+        title="Deregister Practitioner"
+      >
+        <FiTrash2 className="text-sm shrink-0" />
+      </button>
+    </div>
+  );
 
   return (
-    <div className="flex flex-col gap-6 animate-fade-in">
+    <div className="h-[calc(100vh-120px)] flex flex-col gap-6 overflow-y-auto custom-scrollbar pr-1 pb-4 animate-fade-in font-sans">
       
       {/* Page Header */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-800 leading-none">Clinical Consultations Registry</h1>
+          <h1 className="text-xl font-extrabold text-slate-800 leading-none">Clinical Practitioners Listings</h1>
           <p className="text-xs text-slate-400 font-bold uppercase mt-2 tracking-wider">
-            Approve expert doctors list, review experience certificates, and manage clinical schedules.
+            Review registered doctors directory, specialty profiles, schedules, and active consultation fees.
           </p>
         </div>
       </div>
@@ -89,7 +100,7 @@ export default function DoctorManagement() {
         data={doctors}
         searchPlaceholder="Search doctor by name or specialty..."
         searchKey="name"
-        filterOptions={{ key: 'status', label: 'License Status', options: ['approved', 'pending'] }}
+        filterOptions={{ key: 'specialty', label: 'Specialty Core', options: doctorSpecialties }}
         actions={tableActions}
         fileName="emediclub-doctor-partners"
       />

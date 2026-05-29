@@ -9,7 +9,7 @@ import {
 
 export default function VendorDashboard() {
   const dispatch = useDispatch();
-  const { products, orders, appointments, withdrawals, analytics } = useSelector(state => state.vendor);
+  const { products, orders, withdrawals, analytics } = useSelector(state => state.vendor);
 
   // Filter low stock medicines (< 30 units)
   const lowStockProducts = products.filter(p => p.stock < 30);
@@ -191,29 +191,34 @@ export default function VendorDashboard() {
           )}
         </div>
 
-        {/* Right Side: Appointment timelines & earnings summary */}
+        {/* Right Side: Recent Payout Disbursals Ledger */}
         <div className="bg-white border border-slate-100 p-5 rounded-3xl shadow-premium flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between border-b border-slate-50 pb-3 mb-5">
               <div>
-                <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider">Doctor Slot Timelines</h3>
-                <p className="text-[9px] text-slate-400 font-bold uppercase mt-0.5">Upcoming outpatient schedulers</p>
+                <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider">Recent Payouts</h3>
+                <p className="text-[9px] text-slate-400 font-bold uppercase mt-0.5">Verified banking remittance feeds</p>
               </div>
-              <FiActivity className="text-teal" />
+              <FiDollarSign className="text-teal" />
             </div>
 
             <div className="flex flex-col gap-4 max-h-[350px] overflow-y-auto no-scrollbar pr-1">
-              {appointments.map((ap) => (
-                <div key={ap.id} className="p-3.5 border border-slate-100/60 rounded-2xl bg-slate-50/50 flex flex-col gap-2">
+              {withdrawals.map((w) => (
+                <div key={w.id} className="p-3.5 border border-slate-100/60 rounded-2xl bg-slate-50/50 flex flex-col gap-1.5">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-extrabold text-slate-800">{ap.patientName}</span>
-                    <span className={`text-[8px] font-black uppercase px-2 py-0.5 rounded-full ${ap.status === 'confirmed' ? 'bg-teal-light text-teal' : 'bg-gold-light text-gold-dark'}`}>
-                      {ap.status}
+                    <span className="font-extrabold text-slate-800">Req ID: {w.id}</span>
+                    <span className={`text-[8.5px] font-black uppercase px-2 py-0.5 rounded-full border
+                      ${w.status === 'approved' 
+                        ? 'bg-teal-light/20 text-teal border-teal/10' 
+                        : 'bg-gold-light/25 text-gold-dark border-gold/15'
+                      }`}
+                    >
+                      {w.status}
                     </span>
                   </div>
                   <div className="flex justify-between text-[10px] text-slate-500 font-semibold border-t border-slate-100 pt-2">
-                    <span>{ap.doctorName.split('(')[0]}</span>
-                    <span className="text-teal font-black">{ap.slot}</span>
+                    <span>{w.bankAccount.split(' - ')[0]}</span>
+                    <span className="text-slate-800 font-black">₹{w.amount.toLocaleString()}</span>
                   </div>
                 </div>
               ))}
@@ -222,7 +227,7 @@ export default function VendorDashboard() {
 
           <div className="border-t border-slate-50 pt-4 mt-5 flex justify-center">
             <span className="text-[9px] text-slate-400 font-black uppercase tracking-widest">
-              Last updated: Just now
+              Verified Banking Remittances
             </span>
           </div>
 

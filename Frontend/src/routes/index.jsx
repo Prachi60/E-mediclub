@@ -17,6 +17,7 @@ const LabTestsPage = lazy(() => import('../modules/user/pages/LabTestsPage'));
 const DoctorBookingPage = lazy(() => import('../modules/user/pages/DoctorBookingPage'));
 const LabTestBookingPage = lazy(() => import('../modules/user/pages/LabTestBookingPage'));
 const LabDetailsPage = lazy(() => import('../modules/user/pages/LabDetailsPage'));
+const ProductRatingsPage = lazy(() => import('../modules/user/pages/ProductRatingsPage'));
 
 
 // Auth Page (Customer)
@@ -36,10 +37,13 @@ const AdminResetPasswordPage = lazy(() => import('../modules/auth/admin/pages/Ad
 const AdminDashboard = lazy(() => import('../modules/admin/pages/AdminDashboard'));
 const VendorManagement = lazy(() => import('../modules/admin/pages/VendorManagement'));
 const ProductManagement = lazy(() => import('../modules/admin/pages/ProductManagement'));
+const MedicinesPage = lazy(() => import('../modules/admin/pages/MedicinesPage'));
 const OrdersManagement = lazy(() => import('../modules/admin/pages/OrdersManagement'));
 const UsersManagement = lazy(() => import('../modules/admin/pages/UsersManagement'));
 const DoctorManagement = lazy(() => import('../modules/admin/pages/DoctorManagement'));
+const DoctorSpecialtyRegistry = lazy(() => import('../modules/admin/pages/DoctorSpecialtyRegistry'));
 const LabTestsManagement = lazy(() => import('../modules/admin/pages/LabTestsManagement'));
+const LabCategoriesRegistry = lazy(() => import('../modules/admin/pages/LabCategoriesRegistry'));
 const CMSManagement = lazy(() => import('../modules/admin/pages/CMSManagement'));
 const SettingsPage = lazy(() => import('../modules/admin/pages/SettingsPage'));
 
@@ -54,8 +58,7 @@ const OnboardingPending = lazy(() => import('../modules/vendor/pages/OnboardingP
 const VendorDashboard = lazy(() => import('../modules/vendor/pages/VendorDashboard'));
 const VendorProductManagement = lazy(() => import('../modules/vendor/pages/VendorProductManagement'));
 const VendorOrdersManagement = lazy(() => import('../modules/vendor/pages/VendorOrdersManagement'));
-const VendorLabTestsManagement = lazy(() => import('../modules/vendor/pages/VendorLabTestsManagement'));
-const VendorAppointmentsPage = lazy(() => import('../modules/vendor/pages/VendorAppointmentsPage'));
+const VendorStocksManagement = lazy(() => import('../modules/vendor/pages/VendorStocksManagement'));
 const VendorEarnings = lazy(() => import('../modules/vendor/pages/VendorEarnings'));
 const VendorProfile = lazy(() => import('../modules/vendor/pages/VendorProfile'));
 
@@ -98,6 +101,7 @@ export default function AppRoutes() {
         <Route path="lab-tests" element={<PageSuspense><LabTestsPage /></PageSuspense>} />
         <Route path="lab-tests/:testId/book" element={<PageSuspense><LabTestBookingPage /></PageSuspense>} />
         <Route path="labs/:labId" element={<PageSuspense><LabDetailsPage /></PageSuspense>} />
+        <Route path="rate/:orderId" element={<PageSuspense><ProductRatingsPage /></PageSuspense>} />
         
         {/* Auth page routed inside layout to preserve navigation bars */}
         <Route path="login" element={<PageSuspense><LoginPage /></PageSuspense>} />
@@ -115,10 +119,13 @@ export default function AppRoutes() {
         <Route path="dashboard" element={<PageSuspense><AdminDashboard /></PageSuspense>} />
         <Route path="vendors" element={<PageSuspense><VendorManagement /></PageSuspense>} />
         <Route path="products" element={<PageSuspense><ProductManagement /></PageSuspense>} />
+        <Route path="medicines" element={<PageSuspense><MedicinesPage /></PageSuspense>} />
         <Route path="orders" element={<PageSuspense><OrdersManagement /></PageSuspense>} />
         <Route path="users" element={<PageSuspense><UsersManagement /></PageSuspense>} />
         <Route path="doctors" element={<PageSuspense><DoctorManagement /></PageSuspense>} />
+        <Route path="doctors-categories" element={<PageSuspense><DoctorSpecialtyRegistry /></PageSuspense>} />
         <Route path="lab-tests" element={<PageSuspense><LabTestsManagement /></PageSuspense>} />
+        <Route path="lab-categories" element={<PageSuspense><LabCategoriesRegistry /></PageSuspense>} />
         <Route path="cms" element={<PageSuspense><CMSManagement /></PageSuspense>} />
         <Route path="settings" element={<PageSuspense><SettingsPage /></PageSuspense>} />
       </Route>
@@ -136,8 +143,7 @@ export default function AppRoutes() {
         <Route path="dashboard" element={<PageSuspense><VendorDashboard /></PageSuspense>} />
         <Route path="products" element={<PageSuspense><VendorProductManagement /></PageSuspense>} />
         <Route path="orders" element={<PageSuspense><VendorOrdersManagement /></PageSuspense>} />
-        <Route path="lab-tests" element={<PageSuspense><VendorLabTestsManagement /></PageSuspense>} />
-        <Route path="appointments" element={<PageSuspense><VendorAppointmentsPage /></PageSuspense>} />
+        <Route path="stocks" element={<PageSuspense><VendorStocksManagement /></PageSuspense>} />
         <Route path="earnings" element={<PageSuspense><VendorEarnings /></PageSuspense>} />
         <Route path="profile" element={<PageSuspense><VendorProfile /></PageSuspense>} />
       </Route>

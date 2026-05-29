@@ -41,7 +41,7 @@ export default function VendorVerifyOtpPage() {
       if (code === "1234") {
         // Build mock merchant profile
         const mockVendor = tempVendorData || {
-          name: 'Wellness Rx Manager',
+          name: 'MedPlus Wellness Manager',
           email: 'vendor@emediclub.com',
           role: 'vendor',
           phone: tempPhone || '8888888888',

@@ -61,7 +61,7 @@ export default function VendorLoginPage() {
         const dummyPhone = "8888888888";
         dispatch(vendorSendOtpSuccess({ 
           phone: dummyPhone, 
-          vendorData: { name: 'Wellness Rx Manager', email, role: 'vendor' } 
+          vendorData: { name: 'MedPlus Wellness Manager', email, role: 'vendor' } 
         }));
         navigate('/vendor/verify-otp');
       } else {

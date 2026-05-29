@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 import VendorSidebar from '../components/VendorSidebar';
 import VendorNavbar from '../components/VendorNavbar';
-import { FiHome, FiPackage, FiShoppingBag, FiActivity, FiUser } from 'react-icons/fi';
+import { FiHome, FiPackage, FiShoppingBag, FiLayers, FiUser } from 'react-icons/fi';
 import { NavLink } from 'react-router-dom';
 
 export default function VendorLayout() {
@@ -106,11 +106,11 @@ export default function VendorLayout() {
           <span>Orders</span>
         </NavLink>
         <NavLink 
-          to="/vendor/appointments" 
+          to="/vendor/stocks" 
           className={({ isActive }) => `flex flex-col items-center gap-1 text-[9px] font-black uppercase tracking-wider ${isActive ? 'text-teal' : 'text-slate-400'}`}
         >
-          <FiActivity className="text-xl" />
-          <span>Slots</span>
+          <FiLayers className="text-xl" />
+          <span>Stocks</span>
         </NavLink>
         <NavLink 
           to="/vendor/profile" 

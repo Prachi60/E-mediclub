@@ -1,34 +1,51 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import { adminLogout } from '../../auth/admin/store/adminAuthSlice';
 import Logo from '../../../shared/components/Logo';
 import { 
   FiGrid, FiUsers, FiPackage, FiShoppingBag, 
   FiUserCheck, FiActivity, FiLayers, FiSettings, 
-  FiLogOut, FiHome, FiArrowLeft
+  FiLogOut, FiArrowLeft, FiChevronDown
 } from 'react-icons/fi';
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const menuItems = [
-    { name: 'Dashboard', path: '/admin/dashboard', icon: FiGrid },
-    { name: 'Vendors', path: '/admin/vendors', icon: FiUsers },
-    { name: 'Medicines', path: '/admin/products', icon: FiPackage },
-    { name: 'Orders', path: '/admin/orders', icon: FiShoppingBag },
-    { name: 'Customers', path: '/admin/users', icon: FiUserCheck },
-    { name: 'Doctors', path: '/admin/doctors', icon: FiActivity },
-    { name: 'Lab Tests', path: '/admin/lab-tests', icon: FiActivity },
-    { name: 'Offers & CMS', path: '/admin/cms', icon: FiLayers },
-    { name: 'Settings', path: '/admin/settings', icon: FiSettings },
-  ];
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(adminLogout());
     navigate('/admin/login');
+  };
+
+  // Helper function to render menu navlinks
+  const renderNavLink = (name, path, Icon) => {
+    return (
+      <NavLink
+        key={path}
+        to={path}
+        className={({ isActive }) => `
+          flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-black tracking-wider uppercase transition-all duration-200 tap-scale
+          ${isActive 
+            ? 'bg-forest/10 text-forest border border-forest/5 shadow-sm' 
+            : 'text-slate-500 hover:bg-slate-50/80 hover:text-slate-800'
+          }
+        `}
+      >
+        <Icon className="text-lg shrink-0" />
+        {isOpen && (
+          <motion.span
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="truncate"
+          >
+            {name}
+          </motion.span>
+        )}
+      </NavLink>
+    );
   };
 
   return (
@@ -54,33 +71,34 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
 
         {/* Navigation Items list */}
         <nav className="p-3.5 flex flex-col gap-1.5 overflow-y-auto no-scrollbar max-h-[calc(100vh-160px)]">
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) => `
-                  flex items-center gap-3.5 px-4 py-3 rounded-2xl text-xs font-black tracking-wider uppercase transition-all duration-200 tap-scale
-                  ${isActive 
-                    ? 'bg-forest/10 text-forest shadow-sm' 
-                    : 'text-slate-500 hover:bg-slate-50/80 hover:text-slate-800'
-                  }
-                `}
-              >
-                <Icon className="text-lg shrink-0" />
-                {isOpen && (
-                  <motion.span
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="truncate"
-                  >
-                    {item.name}
-                  </motion.span>
-                )}
-              </NavLink>
-            );
-          })}
+          
+          {/* 1. Dashboard Link */}
+          {renderNavLink('Dashboard', '/admin/dashboard', FiGrid)}
+
+          {/* 2. Vendors Link */}
+          {renderNavLink('Vendors', '/admin/vendors', FiUsers)}
+
+          {/* 3. Medicines Catalog Link */}
+          {renderNavLink('Medicines', '/admin/products', FiPackage)}
+
+          {/* 4. Doctors Link */}
+          {renderNavLink('Doctors', '/admin/doctors', FiActivity)}
+
+          {/* 5. Lab Tests Link */}
+          {renderNavLink('Lab Tests', '/admin/lab-tests', FiLayers)}
+
+          {/* 4. Orders Link */}
+          {renderNavLink('Orders', '/admin/orders', FiShoppingBag)}
+
+          {/* 5. Customers Link */}
+          {renderNavLink('Customers', '/admin/users', FiUserCheck)}
+
+          {/* 6. CMS Link */}
+          {renderNavLink('Offers & CMS', '/admin/cms', FiLayers)}
+
+          {/* 7. Settings Link */}
+          {renderNavLink('Settings', '/admin/settings', FiSettings)}
+
         </nav>
       </div>
 

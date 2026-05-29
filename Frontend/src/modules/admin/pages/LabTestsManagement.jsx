@@ -1,48 +1,15 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ReusableTable from '../components/ReusableTable';
-import { FiActivity, FiPlus, FiCheck, FiLayers, FiFileText } from 'react-icons/fi';
-
-const mockLabTests = [
-  { id: 1, name: 'Complete Blood Count (CBC) Panel', price: 299, parameters: 24, sampleType: 'Blood', homeCollection: 'Yes', duration: '24 Hours' },
-  { id: 2, name: 'Complete Body Health Package', price: 999, parameters: 82, sampleType: 'Blood / Urine', homeCollection: 'Yes', duration: '12 Hours' },
-  { id: 3, name: 'Kidney Function advanced (KFT)', price: 799, parameters: 12, sampleType: 'Blood', homeCollection: 'Yes', duration: '12 Hours' },
-  { id: 4, name: 'Liver Function advanced (LFT)', price: 699, parameters: 15, sampleType: 'Blood', homeCollection: 'Yes', duration: '12 Hours' },
-  { id: 5, name: 'Allergy screening panel', price: 1499, parameters: 36, sampleType: 'Blood', homeCollection: 'Yes', duration: '36 Hours' },
-];
+import { deleteLabTest } from '../../user/store/productSlice';
+import { FiTrash2, FiActivity } from 'react-icons/fi';
 
 export default function LabTestsManagement() {
-  const [labTests, setLabTests] = useState(mockLabTests);
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [newName, setNewName] = useState("");
-  const [newPrice, setNewPrice] = useState("");
-  const [newParams, setNewParams] = useState("");
-  const [newSample, setNewSample] = useState("Blood");
+  const dispatch = useDispatch();
+  const { labTests, labCategories } = useSelector(state => state.products);
 
-  const handleAddTest = (e) => {
-    e.preventDefault();
-    if (!newName || !newPrice) return;
-    
-    const newTest = {
-      id: Date.now(),
-      name: newName,
-      price: Number(newPrice),
-      parameters: Number(newParams) || 10,
-      sampleType: newSample,
-      homeCollection: 'Yes',
-      duration: '24 Hours'
-    };
-    
-    setLabTests([newTest, ...labTests]);
-    setShowAddModal(false);
-    // resets
-    setNewName("");
-    setNewPrice("");
-    setNewParams("");
-  };
-
-  const handlePriceChange = (id, price) => {
-    setLabTests(labTests.map(test => test.id === id ? { ...test, price: Number(price) } : test));
+  const handleDelete = (id) => {
+    dispatch(deleteLabTest(id));
   };
 
   // Define Columns
@@ -57,162 +24,73 @@ export default function LabTestsManagement() {
           </div>
           <div>
             <span className="font-extrabold text-slate-800 block text-xs truncate max-w-xs">{row.name}</span>
-            <span className="text-[10px] text-slate-400 font-semibold block uppercase">Home Collection Available</span>
+            <span className="text-[10px] text-slate-400 font-semibold block uppercase">{row.requirements || 'Home Collection Available'}</span>
           </div>
         </div>
       )
     },
     { 
-      key: 'parameters', 
-      header: 'Parameters covered',
-      render: (row) => <span className="font-extrabold text-slate-700">{row.parameters} parameters</span>
+      key: 'category', 
+      header: 'Diagnostic Class',
+      render: (row) => (
+        <span className="bg-slate-50 border border-slate-100 px-2.5 py-1 rounded-lg text-[10px] font-black text-slate-650 uppercase tracking-wide">
+          {row.category}
+        </span>
+      )
     },
-    { key: 'sampleType', header: 'Sample Type' },
-    { key: 'duration', header: 'TAT Report' },
+    { 
+      key: 'testsCount', 
+      header: 'Covered Parameters',
+      render: (row) => <span className="font-extrabold text-slate-700 text-2xs">{row.testsCount || row.parameters || 12} Parameters</span>
+    },
     { 
       key: 'price', 
       header: 'Listing Price',
       render: (row) => (
-        <div className="flex items-center gap-1.5">
-          <span className="text-slate-400 font-black">₹</span>
-          <input 
-            type="number" 
-            value={row.price} 
-            onChange={(e) => handlePriceChange(row.id, e.target.value)}
-            className="w-20 px-2 py-1 bg-slate-50 border border-slate-200 rounded-xl text-xs font-black outline-none focus:border-teal"
-          />
+        <div className="flex flex-col">
+          <span className="font-black text-slate-800 text-xs">₹{row.discountPrice || row.price}</span>
+          {row.discountPercent > 0 && (
+            <span className="text-[9px] text-teal font-extrabold">{row.discountPercent}% OFF</span>
+          )}
         </div>
       )
     }
   ];
 
+  // Actions column trigger
+  const tableActions = (row) => (
+    <button 
+      onClick={() => handleDelete(row.id)}
+      className="p-2 bg-coral-light/40 hover:bg-coral-light text-coral rounded-xl transition-all cursor-pointer tap-scale"
+      title="Delete Lab Package"
+    >
+      <FiTrash2 className="text-sm shrink-0" />
+    </button>
+  );
+
   return (
-    <div className="flex flex-col gap-6 animate-fade-in">
+    <div className="h-[calc(100vh-120px)] flex flex-col gap-6 overflow-y-auto custom-scrollbar pr-1 pb-4 animate-fade-in font-sans">
       
-      {/* Header deck */}
+      {/* Page Header */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-800 leading-none">Diagnostic Lab Packages</h1>
+          <h1 className="text-xl font-extrabold text-slate-800 leading-none">Diagnostic Catalog Directory</h1>
           <p className="text-xs text-slate-400 font-bold uppercase mt-2 tracking-wider">
-            Configure health diagnostic tests pricing, Covered clinical parameters, and home collections details.
+            Browse and manage diagnostic checkup panels, parameter counts, pricing structures, and test preps.
           </p>
         </div>
-        <button 
-          onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-1.5 px-4.5 py-2.5 bg-teal text-white text-xs font-black tracking-wider uppercase rounded-2xl shadow-sm hover:bg-teal-dark transition-all cursor-pointer tap-scale"
-        >
-          <FiPlus /> Add Package
-        </button>
       </div>
 
-      {/* Grid view */}
+      {/* Reusable Data Table Grid */}
       <ReusableTable 
         columns={columns}
         data={labTests}
-        searchPlaceholder="Search diagnostic test panel..."
+        searchPlaceholder="Search diagnostic test panels..."
         searchKey="name"
+        filterOptions={{ key: 'category', label: 'Diagnostic Class', options: labCategories }}
+        actions={tableActions}
         fileName="emediclub-labtests-catalog"
       />
-
-      {/* Add package modal dialog */}
-      <AnimatePresence>
-        {showAddModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowAddModal(false)}
-              className="fixed inset-0 bg-slate-900"
-            />
-
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              className="bg-white rounded-[32px] border border-slate-100 shadow-premium max-w-md w-full p-6 sm:p-8 z-10 relative overflow-hidden"
-            >
-              <h3 className="text-base font-black text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-2">
-                <FiLayers className="text-teal" /> Create Health Package
-              </h3>
-              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider border-b border-slate-50 pb-3 mb-6">
-                Publish a new diagnostic test list to customers.
-              </p>
-
-              <form onSubmit={handleAddTest} className="flex flex-col gap-4">
-                <div className="flex flex-col gap-1">
-                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Test Package Name</label>
-                  <input 
-                    type="text" 
-                    required
-                    placeholder="e.g., Complete Liver Scan Panel"
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    className="px-3.5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:border-teal"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1">
-                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Listing Price (₹)</label>
-                    <input 
-                      type="number" 
-                      required
-                      placeholder="e.g., 599"
-                      value={newPrice}
-                      onChange={(e) => setNewPrice(e.target.value)}
-                      className="px-3.5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:border-teal"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Parameters Covered</label>
-                    <input 
-                      type="number" 
-                      placeholder="e.g., 18"
-                      value={newParams}
-                      onChange={(e) => setNewParams(e.target.value)}
-                      className="px-3.5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:border-teal"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Sample Type</label>
-                  <select 
-                    value={newSample} 
-                    onChange={(e) => setNewSample(e.target.value)}
-                    className="px-3.5 py-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-black uppercase tracking-wide outline-none focus:border-teal"
-                  >
-                    <option value="Blood">Blood Sample</option>
-                    <option value="Urine">Urine Sample</option>
-                    <option value="Swab">Nasal Swab</option>
-                    <option value="Blood / Urine">Blood & Urine Panel</option>
-                  </select>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 mt-4 border-t border-slate-50 pt-5">
-                  <button
-                    type="button"
-                    onClick={() => setShowAddModal(false)}
-                    className="py-3 border border-slate-200 hover:bg-slate-50 text-slate-500 text-xs font-black uppercase tracking-wider rounded-2xl transition-all cursor-pointer tap-scale"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="py-3 bg-teal hover:bg-teal-dark text-white text-xs font-black uppercase tracking-wider rounded-2xl shadow-sm transition-all cursor-pointer tap-scale"
-                  >
-                    Publish Package
-                  </button>
-                </div>
-              </form>
-
-            </motion.div>
-
-          </div>
-        )}
-      </AnimatePresence>
 
     </div>
   );

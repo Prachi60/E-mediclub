@@ -937,6 +937,294 @@ const initialMedicines = [
     warnings: 'Store in dry airtight container.',
     dosage: 'Mix 2 teaspoons in hot milk twice daily, stir well.',
     inStock: true
+  },
+  {
+    id: 'med-53',
+    name: 'Lipitor Atorvastatin 10mg',
+    category: 'Medicines',
+    brand: 'Pfizer Limited India',
+    price: 180,
+    discountPrice: 153,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 290,
+    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 10 tablets',
+    composition: 'Atorvastatin 10mg',
+    benefits: 'Used to lower cholesterol, reduce the risk of heart disease, and prevent heart attacks and strokes.',
+    warnings: 'Avoid grapefruit juice. Do not use during pregnancy.',
+    dosage: 'One tablet daily at bedtime or as advised by your cardiologist.',
+    inStock: true
+  },
+  {
+    id: 'med-54',
+    name: 'Amlokind Amlodipine 5mg',
+    category: 'Medicines',
+    brand: 'Mankind Pharma Ltd',
+    price: 25,
+    discountPrice: 21,
+    discountPercent: 16,
+    rating: 4.6,
+    reviewsCount: 140,
+    image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 15 tablets',
+    composition: 'Amlodipine Besylate 5mg',
+    benefits: 'Prescribed for treating high blood pressure (hypertension) and chest pain (angina).',
+    warnings: 'May cause dizziness or ankle swelling. Do not stop abruptly.',
+    dosage: '1 tablet once daily in the morning or as directed.',
+    inStock: true
+  },
+  {
+    id: 'med-55',
+    name: 'Metocard XL Metoprolol 25',
+    category: 'Medicines',
+    brand: 'Torrent Pharmaceuticals Ltd',
+    price: 85,
+    discountPrice: 72,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 198,
+    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 10 tablets',
+    composition: 'Metoprolol Succinate 25mg',
+    benefits: 'Helps control high blood pressure, irregular heartbeat (arrhythmia), and prevents future heart attacks.',
+    warnings: 'Monitor heart rate. Take regularly as prescribed.',
+    dosage: 'One tablet daily with or after breakfast.',
+    inStock: true
+  },
+  {
+    id: 'med-56',
+    name: 'SleepWell Melatonin 5mg',
+    category: 'Wellness',
+    brand: 'Inlife Healthcare India',
+    price: 450,
+    discountPrice: 382,
+    discountPercent: 15,
+    rating: 4.5,
+    reviewsCount: 120,
+    image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 60 capsules',
+    composition: 'Melatonin 5mg & L-Theanine',
+    benefits: 'Supports natural sleep cycles, treats jet lag, and helps relax the mind before bedtime.',
+    warnings: 'Do not drive or operate machinery after consumption.',
+    dosage: '1 capsule 30-60 minutes before scheduled bedtime with water.',
+    inStock: true
+  },
+  {
+    id: 'med-57',
+    name: 'Himalaya Tagara Sleep Support',
+    category: 'Ayurveda',
+    brand: 'The Himalaya Drug Company',
+    price: 180,
+    discountPrice: 153,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 340,
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 60 tablets',
+    composition: 'Tagara (Valeriana wallichii) root extract 250mg',
+    benefits: 'Herbal sleep aid that calms the mind, relieves anxiety, and promotes undisturbed sleep.',
+    warnings: 'Safe for long term use under expert medical advice.',
+    dosage: '1 tablet twice daily or as advised.',
+    inStock: true
+  },
+  {
+    id: 'med-58',
+    name: 'Divya Brahmi Vati Extra',
+    category: 'Ayurveda',
+    brand: 'Patanjali Ayurved Ltd',
+    price: 120,
+    discountPrice: 102,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 220,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Jar of 40 tablets',
+    composition: 'Brahmi, Shankhapushpi, and Ayurvedic Minerals',
+    benefits: 'Excellent brain tonic that reduces mental exhaustion, fights stress, and boosts retention.',
+    warnings: 'Close container tightly. Avoid humidity.',
+    dosage: '1-2 tablets twice daily with warm milk or water.',
+    inStock: true
+  },
+  {
+    id: 'med-59',
+    name: 'Himalaya Baby Powder Care',
+    category: 'Wellness',
+    brand: 'The Himalaya Drug Company',
+    price: 160,
+    discountPrice: 136,
+    discountPercent: 15,
+    rating: 4.8,
+    reviewsCount: 950,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 200 g',
+    composition: 'Olive Oil, Almond Oil, Khus Grass, and Natural Zinc',
+    benefits: 'Keeps baby skin cool and fresh, prevents diaper rash, and absorbs excessive sweat.',
+    warnings: 'Keep powder away from baby nose and mouth to prevent inhalation.',
+    dosage: 'Sprinkle powder onto your hands and apply gently on babys body after bath.',
+    inStock: true
+  },
+  {
+    id: 'med-60',
+    name: 'Dabur Lal Tail Massage Oil',
+    category: 'Ayurveda',
+    brand: 'Dabur India Ltd',
+    price: 240,
+    discountPrice: 204,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 1120,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 200 ml',
+    composition: 'Til Tail, Shankhapushpi, Masha, and Ratanjot',
+    benefits: 'Ayurvedic baby massage oil clinically proven to accelerate baby physical growth and bone strength.',
+    warnings: 'Discontinue if any skin hypersensitivity or redness is noticed.',
+    dosage: 'Warm slightly. Massage gently all over baby body daily prior to bathing.',
+    inStock: true
+  },
+  {
+    id: 'med-61',
+    name: 'Bio-Oil Skin Care Treatment',
+    category: 'Wellness',
+    brand: 'Union-Swiss Pvt Ltd',
+    price: 495,
+    discountPrice: 420,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 580,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 60 ml',
+    composition: 'PurCellin Oil, Vitamin A, Vitamin E, Calendula and Lavender oils',
+    benefits: 'Specialist skin care oil for fading stretch marks, scars, dry skin patches, and uneven skin tone.',
+    warnings: 'For external skin care application only. Do not use on broken skin.',
+    dosage: 'Apply twice daily in circular motions until fully absorbed.',
+    inStock: true
+  },
+  {
+    id: 'med-62',
+    name: 'Mother Sparsh Water Wipes',
+    category: 'Wellness',
+    brand: 'Mother Sparsh Baby Care',
+    price: 299,
+    discountPrice: 254,
+    discountPercent: 15,
+    rating: 4.8,
+    reviewsCount: 650,
+    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Pack of 72 wipes',
+    composition: '99% Pure Water & Aloe Vera extracts',
+    benefits: 'Super soft, 100% biodegradable medical-grade wipes for baby sensitive skin. Alcohol-free.',
+    warnings: 'Reseal the pack firmly after each use to keep wipes moist.',
+    dosage: 'Gently wipe baby skin during diaper changes or generic face cleaning.',
+    inStock: true
+  },
+  {
+    id: 'med-63',
+    name: 'Glycomet Metformin 500mg',
+    category: 'Medicines',
+    brand: 'USV Private Limited',
+    price: 60,
+    discountPrice: 51,
+    discountPercent: 15,
+    rating: 4.7,
+    reviewsCount: 880,
+    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 15 tablets',
+    composition: 'Metformin Hydrochloride 500mg',
+    benefits: 'Highly effective oral anti-diabetic drug that regulates blood glucose levels in Type 2 diabetes.',
+    warnings: 'Take with meals to avoid stomach upset. Monitor kidney function regularly.',
+    dosage: '1 tablet twice daily with breakfast and dinner, or as prescribed.',
+    inStock: true
+  },
+  {
+    id: 'med-64',
+    name: 'Amaryl Glimepiride 1mg',
+    category: 'Medicines',
+    brand: 'Sanofi India Ltd',
+    price: 75,
+    discountPrice: 63,
+    discountPercent: 16,
+    rating: 4.6,
+    reviewsCount: 310,
+    image: 'https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Strip of 10 tablets',
+    composition: 'Glimepiride 1mg',
+    benefits: 'Stimulates pancreas to release more insulin, reducing blood sugar spikes after meals.',
+    warnings: 'Can cause hypoglycemia (low blood sugar). Keep sugar candy handy.',
+    dosage: 'One tablet daily immediately before major morning meal.',
+    inStock: true
+  },
+  {
+    id: 'med-65',
+    name: 'Baidyanath Karela Jamun Juice',
+    category: 'Ayurveda',
+    brand: 'Shree Baidyanath Ayurved Bhawan',
+    price: 310,
+    discountPrice: 263,
+    discountPercent: 15,
+    rating: 4.6,
+    reviewsCount: 420,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 1 L',
+    composition: 'Pure Karela (Bitter Gourd) & Jamun (Black Plum) juice',
+    benefits: 'Ayurvedic blood sugar regulator that boosts insulin activity and supports pancreas health.',
+    warnings: 'Avoid intake if pregnant. Shake well before drinking.',
+    dosage: '30ml juice mixed with 30ml warm water, empty stomach in morning.',
+    inStock: true
+  },
+  {
+    id: 'med-66',
+    name: 'Itone Sterile Eye Drops',
+    category: 'Medicines',
+    brand: 'Dey\'s Medical India',
+    price: 65,
+    discountPrice: 55,
+    discountPercent: 15,
+    rating: 4.8,
+    reviewsCount: 890,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 10 ml',
+    composition: 'Neem, Tulsi, Honey, and Ayurvedic Distillates',
+    benefits: 'Sterile ayurvedic eye drops that soothe eye strain, redness, dry eye, and allergy irritation.',
+    warnings: 'Do not touch tip of container. Keep bottle tightly closed.',
+    dosage: '2 drops in each eye twice daily or as required.',
+    inStock: true
+  },
+  {
+    id: 'med-67',
+    name: 'Refresh Tears Eye Drops',
+    category: 'Medicines',
+    brand: 'Allergan India Pvt Ltd',
+    price: 150,
+    discountPrice: 127,
+    discountPercent: 15,
+    rating: 4.8,
+    reviewsCount: 1450,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 10 ml',
+    composition: 'Carboxymethylcellulose Sodium 0.5%',
+    benefits: 'Provides temporary clinical relief from burning, irritation, and dryness due to screen exposure.',
+    warnings: 'Discard bottle 1 month after opening. Safe for contact lens wearers.',
+    dosage: 'Instill 1 or 2 drops in the affected eye(s) as needed.',
+    inStock: true
+  },
+  {
+    id: 'med-68',
+    name: 'Divya Drishti Eye Drops',
+    category: 'Ayurveda',
+    brand: 'Patanjali Ayurved Ltd',
+    price: 45,
+    discountPrice: 38,
+    discountPercent: 15,
+    rating: 4.5,
+    reviewsCount: 650,
+    image: 'https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=400&q=80',
+    packSize: 'Bottle of 15 ml',
+    composition: 'Allium Cepa juice, Zingiber officinale juice, Citrus limon juice, Honey',
+    benefits: 'Helps maintain ocular strength, clears cataracts early, and improves visual clarity.',
+    warnings: 'Slight burning sensation is normal and temporary. Keep in cool storage.',
+    dosage: '1-2 drops twice daily or under medical advice.',
+    inStock: true
   }
 ];
 
@@ -1436,6 +1724,9 @@ const initialState = {
   selectedCategory: 'All',
   selectedLocation: 'Mumbai, Maharashtra',
   isPrescriptionFilterActive: false,
+  medicineCategories: ['Allopathy', 'Ayurveda', 'Homeopathy', 'Wellness', 'Surgical', 'Devices', 'Supplements', 'OTC'],
+  doctorSpecialties: ['Cardiologist', 'Dermatologist', 'Pediatrician', 'Orthopedic', 'Neurologist', 'General Physician'],
+  labCategories: ['Blood Test', 'Thyroid', 'Diabetes', 'Full Body Checkup', 'Vitamin Tests', 'Urine Test']
 };
 
 const productSlice = createSlice({
@@ -1465,6 +1756,109 @@ const productSlice = createSlice({
     bookLabPackage: (state, action) => {
       state.labBookings.unshift(action.payload);
       localStorage.setItem('em_lab_bookings', JSON.stringify(state.labBookings));
+    },
+    completeDoctorAppointment: (state, action) => {
+      const apt = state.appointments.find(a => a.id === action.payload);
+      if (apt) {
+        apt.status = 'Completed';
+        localStorage.setItem('em_appointments', JSON.stringify(state.appointments));
+      }
+    },
+    completeLabBooking: (state, action) => {
+      const booking = state.labBookings.find(b => b.id === action.payload);
+      if (booking) {
+        booking.status = 'Completed';
+        localStorage.setItem('em_lab_bookings', JSON.stringify(state.labBookings));
+      }
+    },
+    updateOrderStatus: (state, action) => {
+      const { orderId, status } = action.payload;
+      const order = state.orders.find(o => o.id === orderId);
+      if (order) {
+        order.status = status;
+        localStorage.setItem('em_orders', JSON.stringify(state.orders));
+      }
+    },
+    addMedicineCategory: (state, action) => {
+      if (!state.medicineCategories.includes(action.payload)) {
+        state.medicineCategories.push(action.payload);
+      }
+    },
+    addDoctorSpecialty: (state, action) => {
+      if (!state.doctorSpecialties.includes(action.payload)) {
+        state.doctorSpecialties.push(action.payload);
+      }
+    },
+    addLabCategory: (state, action) => {
+      if (!state.labCategories.includes(action.payload)) {
+        state.labCategories.push(action.payload);
+      }
+    },
+    addNewMedicine: (state, action) => {
+      const newMed = {
+        id: `med-${Date.now()}`,
+        rating: 5.0,
+        reviewsCount: 0,
+        inStock: true,
+        ...action.payload
+      };
+      state.medicines.unshift(newMed);
+    },
+    deleteMedicine: (state, action) => {
+      state.medicines = state.medicines.filter(m => m.id !== action.payload);
+    },
+    addNewDoctor: (state, action) => {
+      const newDoc = {
+        id: `doc-${Date.now()}`,
+        rating: 5.0,
+        reviewsCount: 0,
+        offlineFee: action.payload.fee + 100,
+        languages: ["English", "Hindi"],
+        availableDays: ["Mon", "Wed", "Fri"],
+        timeSlots: ["10:00 AM", "11:00 AM", "02:00 PM", "04:00 PM"],
+        consultationMode: "Both",
+        bio: action.payload.bio || "Certified medical professional dedicated to clinical care.",
+        online: true,
+        status: "approved",
+        qualification: action.payload.qualification || "MBBS, MD",
+        ...action.payload
+      };
+      state.doctors.unshift(newDoc);
+    },
+    deleteDoctor: (state, action) => {
+      state.doctors = state.doctors.filter(d => d.id !== action.payload);
+    },
+    addNewLabTest: (state, action) => {
+      const newTest = {
+        id: `test-${Date.now()}`,
+        duration: "24 Hours",
+        homeCollection: "Yes",
+        ...action.payload
+      };
+      state.labTests.unshift(newTest);
+    },
+    deleteLabTest: (state, action) => {
+      state.labTests = state.labTests.filter(l => l.id !== action.payload);
+    },
+    submitAppointmentFeedback: (state, action) => {
+      const { id, rating, feedback } = action.payload;
+      const apt = state.appointments.find(a => a.id === id);
+      if (apt) {
+        apt.rating = rating;
+        apt.feedback = feedback;
+        apt.isRated = true;
+        localStorage.setItem('em_appointments', JSON.stringify(state.appointments));
+      }
+    },
+    submitLabFeedback: (state, action) => {
+      const { id, rating, feedback } = action.payload;
+      const bk = state.labBookings.find(b => b.id === id);
+      if (bk) {
+        bk.rating = rating;
+        bk.feedback = feedback;
+        bk.isRated = true;
+        localStorage.setItem('em_lab_bookings', JSON.stringify(state.labBookings));
+      }
     }
   }
 });
@@ -1476,7 +1870,21 @@ export const {
   setPrescriptionFilterActive,
   placeOrder,
   bookDoctorAppointment,
-  bookLabPackage
+  bookLabPackage,
+  completeDoctorAppointment,
+  completeLabBooking,
+  updateOrderStatus,
+  addMedicineCategory,
+  addDoctorSpecialty,
+  addLabCategory,
+  addNewMedicine,
+  deleteMedicine,
+  addNewDoctor,
+  deleteDoctor,
+  addNewLabTest,
+  deleteLabTest,
+  submitAppointmentFeedback,
+  submitLabFeedback
 } = productSlice.actions;
 
 export default productSlice.reducer;
