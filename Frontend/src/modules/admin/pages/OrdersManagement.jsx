@@ -78,7 +78,7 @@ export default function OrdersManagement() {
   );
 
   return (
-    <div className="flex flex-col gap-6 animate-fade-in">
+    <div className="h-[calc(100vh-120px)] flex flex-col gap-6 overflow-y-auto custom-scrollbar pr-1 pb-4 animate-fade-in">
       
       {/* Page Header */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-4">

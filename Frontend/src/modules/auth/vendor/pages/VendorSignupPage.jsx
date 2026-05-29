@@ -163,7 +163,7 @@ export default function VendorSignupPage() {
                 required
                 register={{ value: storeName, onChange: (e) => setStoreName(e.target.value) }}
               />
-              <div className="grid grid-cols-2 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <AuthInput
                   label="Drug License Number"
                   placeholder="DL-20831/15"
@@ -187,7 +187,7 @@ export default function VendorSignupPage() {
           {/* Step 1: Address parameters */}
           {step === 1 && (
             <div className="flex flex-col gap-4 animate-fade-in">
-              <div className="grid grid-cols-2 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <AuthInput
                   label="Seller Email"
                   type="email"
@@ -206,7 +206,7 @@ export default function VendorSignupPage() {
                   register={{ value: phone, onChange: (e) => setPhone(e.target.value.replace(/\D/g, '')) }}
                 />
               </div>
-              <div className="grid grid-cols-2 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <AuthInput
                   label="Corporate PAN ID"
                   placeholder="ABCDE1234F"
@@ -232,7 +232,7 @@ export default function VendorSignupPage() {
                 required
                 register={{ value: address, onChange: (e) => setAddress(e.target.value) }}
               />
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <AuthInput
                   label="City"
                   placeholder="Mumbai"

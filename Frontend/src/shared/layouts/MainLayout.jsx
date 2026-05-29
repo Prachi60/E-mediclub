@@ -3,7 +3,8 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
   FiSearch, FiShoppingBag, FiMapPin, FiUser, FiMenu, FiChevronDown, 
-  FiX, FiHome, FiActivity, FiCalendar, FiShoppingCart, FiPercent, FiTrash2, FiUploadCloud
+  FiX, FiHome, FiActivity, FiCalendar, FiShoppingCart, FiPercent, FiTrash2, FiUploadCloud,
+  FiPlusCircle, FiShield
 } from 'react-icons/fi';
 import { AnimatePresence, motion } from 'framer-motion';
 import Logo from '../components/Logo';
@@ -146,8 +147,8 @@ export default function MainLayout() {
                     onClick={() => navigate('/profile')} 
                     className="flex items-center gap-2 hover:text-forest text-slate-600 transition-colors"
                   >
-                    <div className="w-8 h-8 rounded-full bg-forest text-white flex items-center justify-center font-bold text-sm">
-                      {user?.name === 'Super Admin' ? 'U' : (user?.name?.[0]?.toUpperCase() || 'U')}
+                    <div className="w-8 h-8 rounded-full bg-forest-light/60 text-forest flex items-center justify-center shadow-sm border border-forest/10">
+                      <FiUser className="w-4 h-4 text-teal" />
                     </div>
                     <span className="text-xs font-black uppercase text-slate-500 tracking-wider">
                       Hi, {user?.name === 'Super Admin' ? 'User' : user?.name}
@@ -157,8 +158,14 @@ export default function MainLayout() {
               ) : (
                 <div className="hidden md:flex items-center gap-3">
                   <button 
+                    onClick={() => navigate('/vendor/login')} 
+                    className="px-4 py-2 border border-teal text-teal hover:bg-teal-light font-extrabold text-xs rounded-full transition-all duration-300"
+                  >
+                    Sell on Mediclub
+                  </button>
+                  <button 
                     onClick={() => navigate('/login')} 
-                    className="px-4 py-2 border border-forest text-forest hover:bg-forest-light font-extrabold text-xs rounded-full transition-colors"
+                    className="px-4 py-2 bg-forest text-white hover:bg-forest-dark font-extrabold text-xs rounded-full transition-all duration-300 shadow-sm"
                   >
                     Login / Sign Up
                   </button>
@@ -253,110 +260,112 @@ export default function MainLayout() {
         <Outlet />
       </main>
 
-      {/* Global Footer (Pure Black #000000 background) */}
+      {/* Global Footer (Pure Black #000000 background) - Hidden on Mobile */}
       {location.pathname !== '/login' && (
-        <footer className="w-full max-w-7xl mx-auto mt-12 bg-[#000000] border border-slate-900 shadow-premium rounded-3xl p-6 sm:p-10 md:p-12 flex flex-col gap-8 text-slate-400 text-xs font-semibold select-none animate-fade-in mb-6">
-          {/* Upper footer features */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
-              <span className="text-teal mb-2 text-base">✔️</span>
-              <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">100% Genuine</h5>
-              <p className="text-[10px] text-slate-400 font-bold mt-1">Sourced from certified clinical partners.</p>
-            </div>
-            <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
-              <span className="text-teal mb-2 text-base">🕒</span>
-              <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">Express Delivery</h5>
-              <p className="text-[10px] text-slate-400 font-bold mt-1">Medicines delivered inside 4-6 hours.</p>
-            </div>
-            <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
-              <span className="text-teal mb-2 text-base">🏆</span>
-              <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">FDA Certified</h5>
-              <p className="text-[10px] text-slate-400 font-bold mt-1">Strict clinical pharmacy controls.</p>
-            </div>
-            <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
-              <span className="text-teal mb-2 text-base">📞</span>
-              <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">Expert Support</h5>
-              <p className="text-[10px] text-slate-400 font-bold mt-1">24/7 dedicated pharmacy consultation help.</p>
-            </div>
-          </div>
-
-          {/* Brand details and links */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-4">
-            <div className="flex flex-col gap-2.5">
-              <h5 className="text-[10px] font-black text-white uppercase tracking-widest">About Mediclub</h5>
-              <a href="#about" className="text-slate-400 hover:text-white transition-colors">Who We Are</a>
-              <a href="#careers" className="text-slate-400 hover:text-white transition-colors">Careers</a>
-              <a href="#press" className="text-slate-400 hover:text-white transition-colors">Press Releases</a>
-              <a href="#blog" className="text-slate-400 hover:text-white transition-colors">Healthy Life Blog</a>
-            </div>
-            <div className="flex flex-col gap-2.5">
-              <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Our Policies</h5>
-              <a href="#privacy" className="text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#terms" className="text-slate-400 hover:text-white transition-colors">Terms & Conditions</a>
-              <a href="#editorial" className="text-slate-400 hover:text-white transition-colors">Editorial Policy</a>
-              <a href="#security" className="text-slate-400 hover:text-white transition-colors">Vulnerability Disclosure</a>
-            </div>
-            <div className="flex flex-col gap-2.5">
-              <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Customer Support</h5>
-              <a href="#contact" className="text-slate-400 hover:text-white transition-colors">Contact Helpdesk</a>
-              <a href="#faq" className="text-slate-400 hover:text-white transition-colors">Fulfillment FAQs</a>
-              <a href="#return" className="text-slate-400 hover:text-white transition-colors">Medicine Return Policy</a>
-              <a href="#refund" className="text-slate-400 hover:text-white transition-colors">Refund Status Tracker</a>
-            </div>
-            <div className="flex flex-col gap-3">
-              <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Download Our Mobile App</h5>
-              <p className="text-[10px] text-slate-400 font-bold leading-snug">Get exclusive health tip blogs and 20% discount coupon banners instantly inside the app.</p>
-              <div className="flex flex-col gap-2.5">
-                {/* Google Play Store Pill Button */}
-                <button className="flex items-center gap-3 bg-[#111314] text-white px-3.5 py-1.5 rounded-xl border border-slate-800 hover:border-teal/30 hover:bg-slate-950 hover:scale-[1.03] hover:shadow-premium-hover transition-all duration-300 select-none group text-left cursor-pointer w-full max-w-[175px]">
-                  <svg className="w-5.5 h-5.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.25 2.5C3.08 2.66 3 2.92 3 3.25V20.75C3 21.08 3.08 21.34 3.25 21.5L3.34 21.58L12.56 12.36V11.64L3.34 2.42L3.25 2.5Z" fill="url(#gp_a)" />
-                    <path d="M15.63 15.43L12.56 12.36V11.64L15.63 8.57L15.71 8.62L19.35 10.69C20.39 11.28 20.39 12.24 19.35 12.83L15.71 14.9L15.63 15.43Z" fill="url(#gp_b)" />
-                    <path d="M15.71 14.9L12.56 11.75L3.25 21.06C3.59 21.42 4.14 21.44 4.77 21.08L15.71 14.9Z" fill="url(#gp_c)" />
-                    <path d="M15.71 8.62L4.77 2.42C4.14 2.06 3.59 2.08 3.25 2.44L12.56 11.75L15.71 8.62Z" fill="url(#gp_d)" />
-                    <defs>
-                      <linearGradient id="gp_a" x1="11.45" y1="21.11" x2="3" y2="12.66" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stopColor="#00A0FF" />
-                        <stop offset="0.007" stopColor="#00A0FF" />
-                        <stop offset="1" stopColor="#00EAFF" />
-                      </linearGradient>
-                      <linearGradient id="gp_b" x1="20.38" y1="12.36" x2="13.2" y2="12.36" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stopColor="#FFC700" />
-                        <stop offset="1" stopColor="#FFEB00" />
-                      </linearGradient>
-                      <linearGradient id="gp_c" x1="12.44" y1="12.44" x2="5.19" y2="19.69" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stopColor="#FF2A00" />
-                        <stop offset="1" stopColor="#FF007A" />
-                      </linearGradient>
-                      <linearGradient id="gp_d" x1="5.19" y1="5.03" x2="12.44" y2="12.28" gradientUnits="userSpaceOnUse">
-                        <stop offset="0" stopColor="#37A600" />
-                        <stop offset="1" stopColor="#10BA00" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  <div className="text-left leading-tight">
-                    <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider block">GET IT ON</span>
-                    <span className="text-[12px] text-white font-bold block mt-0.5 font-sans">Google Play</span>
-                  </div>
-                </button>
-
-                {/* Apple App Store Pill Button */}
-                <button className="flex items-center gap-3 bg-[#111314] text-white px-3.5 py-1.5 rounded-xl border border-slate-800 hover:border-teal/30 hover:bg-slate-950 hover:scale-[1.03] hover:shadow-premium-hover transition-all duration-300 select-none group text-left cursor-pointer w-full max-w-[175px]">
-                  <svg className="w-5.5 h-5.5 fill-white shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.57 2.95-1.39z" />
-                  </svg>
-                  <div className="text-left leading-tight">
-                    <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider block">Download on the</span>
-                    <span className="text-[12px] text-white font-bold block mt-0.5 font-sans">App Store</span>
-                  </div>
-                </button>
+        <footer className="hidden md:block w-full bg-[#000000] mt-16 py-12 px-6 border-t border-slate-900 text-slate-450 font-sans select-none animate-fade-in">
+          <div className="max-w-7xl mx-auto flex flex-col gap-8 text-xs font-semibold text-slate-400">
+            {/* Upper footer features */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
+                <span className="text-teal mb-2 text-base">✔️</span>
+                <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">100% Genuine</h5>
+                <p className="text-[10px] text-slate-400 font-bold mt-1">Sourced from certified clinical partners.</p>
+              </div>
+              <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
+                <span className="text-teal mb-2 text-base">🕒</span>
+                <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">Express Delivery</h5>
+                <p className="text-[10px] text-slate-400 font-bold mt-1">Medicines delivered inside 4-6 hours.</p>
+              </div>
+              <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
+                <span className="text-teal mb-2 text-base">🏆</span>
+                <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">FDA Certified</h5>
+                <p className="text-[10px] text-slate-400 font-bold mt-1">Strict clinical pharmacy controls.</p>
+              </div>
+              <div className="flex flex-col items-center p-4 bg-slate-900/40 border border-slate-800/60 rounded-2xl shadow-inner select-none transition-all duration-300 hover:scale-[1.02] hover:bg-slate-900/60">
+                <span className="text-teal mb-2 text-base">📞</span>
+                <h5 className="font-extrabold text-white text-[11px] uppercase tracking-wide">Expert Support</h5>
+                <p className="text-[10px] text-slate-400 font-bold mt-1">24/7 dedicated pharmacy consultation help.</p>
               </div>
             </div>
-          </div>
 
-          {/* Final Copyright */}
-          <div className="border-t border-slate-800 pt-6 text-center text-[10px] text-slate-500 font-bold">
-            <p>© 2026 E Mediclub India Inc. All rights reserved. Registered Clinical E-Pharmacy Lic. No. DL-392819-A.</p>
+            {/* Brand details and links */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-4">
+              <div className="flex flex-col gap-2.5">
+                <h5 className="text-[10px] font-black text-white uppercase tracking-widest">About Mediclub</h5>
+                <a href="#about" className="text-slate-400 hover:text-white transition-colors">Who We Are</a>
+                <a href="#careers" className="text-slate-400 hover:text-white transition-colors">Careers</a>
+                <a href="#press" className="text-slate-400 hover:text-white transition-colors">Press Releases</a>
+                <a href="#blog" className="text-slate-400 hover:text-white transition-colors">Healthy Life Blog</a>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Our Policies</h5>
+                <a href="#privacy" className="text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#terms" className="text-slate-400 hover:text-white transition-colors">Terms & Conditions</a>
+                <a href="#editorial" className="text-slate-400 hover:text-white transition-colors">Editorial Policy</a>
+                <a href="#security" className="text-slate-400 hover:text-white transition-colors">Vulnerability Disclosure</a>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Customer Support</h5>
+                <a href="#contact" className="text-slate-400 hover:text-white transition-colors">Contact Helpdesk</a>
+                <a href="#faq" className="text-slate-400 hover:text-white transition-colors">Fulfillment FAQs</a>
+                <a href="#return" className="text-slate-400 hover:text-white transition-colors">Medicine Return Policy</a>
+                <a href="#refund" className="text-slate-400 hover:text-white transition-colors">Refund Status Tracker</a>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h5 className="text-[10px] font-black text-white uppercase tracking-widest">Download Our Mobile App</h5>
+                <p className="text-[10px] text-slate-400 font-bold leading-snug">Get exclusive health tip blogs and 20% discount coupon banners instantly inside the app.</p>
+                <div className="flex flex-col gap-2.5">
+                  {/* Google Play Store Pill Button */}
+                  <button className="flex items-center gap-3 bg-[#111314] text-white px-3.5 py-1.5 rounded-xl border border-slate-800 hover:border-teal/30 hover:bg-slate-950 hover:scale-[1.03] hover:shadow-premium-hover transition-all duration-300 select-none group text-left cursor-pointer w-full max-w-[175px]">
+                    <svg className="w-5.5 h-5.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.25 2.5C3.08 2.66 3 2.92 3 3.25V20.75C3 21.08 3.08 21.34 3.25 21.5L3.34 21.58L12.56 12.36V11.64L3.34 2.42L3.25 2.5Z" fill="url(#gp_a)" />
+                      <path d="M15.63 15.43L12.56 12.36V11.64L15.63 8.57L15.71 8.62L19.35 10.69C20.39 11.28 20.39 12.24 19.35 12.83L15.71 14.9L15.63 15.43Z" fill="url(#gp_b)" />
+                      <path d="M15.71 14.9L12.56 11.75L3.25 21.06C3.59 21.42 4.14 21.44 4.77 21.08L15.71 14.9Z" fill="url(#gp_c)" />
+                      <path d="M15.71 8.62L4.77 2.42C4.14 2.06 3.59 2.08 3.25 2.44L12.56 11.75L15.71 8.62Z" fill="url(#gp_d)" />
+                      <defs>
+                        <linearGradient id="gp_a" x1="11.45" y1="21.11" x2="3" y2="12.66" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stopColor="#00A0FF" />
+                          <stop offset="0.007" stopColor="#00A0FF" />
+                          <stop offset="1" stopColor="#00EAFF" />
+                        </linearGradient>
+                        <linearGradient id="gp_b" x1="20.38" y1="12.36" x2="13.2" y2="12.36" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stopColor="#FFC700" />
+                          <stop offset="1" stopColor="#FFEB00" />
+                        </linearGradient>
+                        <linearGradient id="gp_c" x1="12.44" y1="12.44" x2="5.19" y2="19.69" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stopColor="#FF2A00" />
+                          <stop offset="1" stopColor="#FF007A" />
+                        </linearGradient>
+                        <linearGradient id="gp_d" x1="5.19" y1="5.03" x2="12.44" y2="12.28" gradientUnits="userSpaceOnUse">
+                          <stop offset="0" stopColor="#37A600" />
+                          <stop offset="1" stopColor="#10BA00" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                    <div className="text-left leading-tight">
+                      <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider block">GET IT ON</span>
+                      <span className="text-[12px] text-white font-bold block mt-0.5 font-sans">Google Play</span>
+                    </div>
+                  </button>
+
+                  {/* Apple App Store Pill Button */}
+                  <button className="flex items-center gap-3 bg-[#111314] text-white px-3.5 py-1.5 rounded-xl border border-slate-800 hover:border-teal/30 hover:bg-slate-950 hover:scale-[1.03] hover:shadow-premium-hover transition-all duration-300 select-none group text-left cursor-pointer w-full max-w-[175px]">
+                    <svg className="w-5.5 h-5.5 fill-white shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.57 2.95-1.39z" />
+                    </svg>
+                    <div className="text-left leading-tight">
+                      <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider block">Download on the</span>
+                      <span className="text-[12px] text-white font-bold block mt-0.5 font-sans">App Store</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Final Copyright */}
+            <div className="border-t border-slate-800 pt-6 text-center text-[10px] text-slate-500 font-bold">
+              <p>© 2026 E Mediclub India Inc. All rights reserved. Registered Clinical E-Pharmacy Lic. No. DL-392819-A.</p>
+            </div>
           </div>
         </footer>
       )}
@@ -375,7 +384,7 @@ export default function MainLayout() {
             onClick={() => navigate('/categories')}
             className={`flex flex-col items-center gap-1 ${isActive('/categories') ? 'text-forest font-bold' : 'text-slate-400'}`}
           >
-            <FiActivity className="w-5 h-5" />
+            <FiPlusCircle className="w-5 h-5" />
             <span className="text-[10px]">Medicines</span>
           </button>
           <button 
@@ -389,22 +398,15 @@ export default function MainLayout() {
             onClick={() => navigate('/doctor-appointments')}
             className={`flex flex-col items-center gap-1 ${isActive('/doctor-appointments') ? 'text-forest font-bold' : 'text-slate-400'}`}
           >
-            <FiUser className="w-5 h-5" />
+            <FiActivity className="w-5 h-5" />
             <span className="text-[10px]">Doctors</span>
           </button>
           <button 
             onClick={() => navigate(isAuthenticated ? '/profile' : '/login')}
             className={`flex flex-col items-center gap-1 ${isActive('/profile') ? 'text-forest font-bold' : 'text-slate-400'}`}
           >
-            <div className="relative">
-              <FiShoppingCart className="w-5 h-5" />
-              {totalItemsCount > 0 && (
-                <span className="absolute -top-1.5 -right-2.5 bg-coral text-white text-[8px] font-black w-4.5 h-4.5 flex items-center justify-center rounded-full border-2 border-white">
-                  {totalItemsCount}
-                </span>
-              )}
-            </div>
-            <span className="text-[10px]">Cart ({totalItemsCount})</span>
+            <FiUser className="w-5 h-5" />
+            <span className="text-[10px]">Profile</span>
           </button>
         </nav>
       )}
@@ -435,20 +437,23 @@ export default function MainLayout() {
       {/* 5. Location Popup Drawer (Tata 1mg Style) */}
       <AnimatePresence>
         {showLocationPopup && (
-          <>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowLocationPopup(false)}
-              className="fixed inset-0 z-50 bg-black bg-opacity-40"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: -20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-lg bg-white rounded-3xl p-6 shadow-premium-hover border border-slate-100"
-            >
+          <motion.div 
+            key="location-popup-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowLocationPopup(false)}
+            className="fixed inset-0 z-50 bg-black bg-opacity-40"
+          />
+        )}
+        {showLocationPopup && (
+          <motion.div 
+            key="location-popup-card"
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-lg bg-white rounded-3xl p-6 shadow-premium-hover border border-slate-100"
+          >
               <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
                 <h3 className="font-bold text-slate-800 text-base flex items-center gap-2">
                   <FiMapPin className="text-teal" /> Choose your delivery location
@@ -497,30 +502,31 @@ export default function MainLayout() {
                 <span>Express home samples collection is currently available in these cities.</span>
               </div>
             </motion.div>
-          </>
         )}
       </AnimatePresence>
+
 
       {/* 6. Mobile Slide-in Drawer Menu */}
       <AnimatePresence>
         {showMobileSidebar && (
-          <>
-            {/* Backdrop */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowMobileSidebar(false)}
-              className="fixed inset-0 z-50 bg-black bg-opacity-40"
-            />
-            {/* Sidebar drawer */}
-            <motion.div 
-              initial={{ x: '-100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '-100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-              className="fixed top-0 bottom-0 left-0 z-50 w-72 bg-white flex flex-col shadow-premium"
-            >
+          <motion.div 
+            key="mobile-sidebar-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowMobileSidebar(false)}
+            className="fixed inset-0 z-50 bg-black bg-opacity-40"
+          />
+        )}
+        {showMobileSidebar && (
+          <motion.div 
+            key="mobile-sidebar-drawer"
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+            className="fixed top-0 bottom-0 left-0 z-50 w-72 bg-white flex flex-col shadow-premium"
+          >
               {/* Header inside drawer */}
               <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-forest text-white">
                 <Logo showText={true} />
@@ -589,6 +595,22 @@ export default function MainLayout() {
                 >
                   <FiUser className="text-teal" /> My Profile
                 </button>
+                
+                <div className="border-t border-slate-100 my-2 pt-2 flex flex-col gap-1">
+                  <p className="px-3 text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Merchant Services</p>
+                  <button 
+                    onClick={() => { navigate('/vendor/login'); setShowMobileSidebar(false); }}
+                    className="w-full flex items-center gap-3 px-3 py-2 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-50"
+                  >
+                    <FiShoppingBag className="text-teal shrink-0" /> Sell on Mediclub
+                  </button>
+                  <button 
+                    onClick={() => { navigate('/admin/login'); setShowMobileSidebar(false); }}
+                    className="w-full flex items-center gap-3 px-3 py-2 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-50"
+                  >
+                    <FiShield className="text-teal shrink-0" /> Super Admin Portal
+                  </button>
+                </div>
               </div>
 
               {/* Footer action inside drawer */}
@@ -610,9 +632,9 @@ export default function MainLayout() {
                 )}
               </div>
             </motion.div>
-          </>
         )}
       </AnimatePresence>
+
 
       {/* Global Prescription Upload Modal */}
       <PrescriptionUpload 

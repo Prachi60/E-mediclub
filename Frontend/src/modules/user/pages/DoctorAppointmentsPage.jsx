@@ -1,17 +1,90 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   FiCalendar, FiSearch, FiVideo, FiClock, FiCheckCircle,
-  FiFilter, FiX, FiActivity, FiUser, FiInfo, FiMessageSquare, FiMapPin, FiAward
+  FiFilter, FiX, FiActivity, FiUser, FiInfo, FiMessageSquare, FiMapPin, FiAward, FiVolume2, FiMic, FiCameraOff
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import DoctorCard from '../../../shared/components/DoctorCard';
+import { completeDoctorAppointment } from '../store/productSlice';
 
 export default function DoctorAppointmentsPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // Redux Selectors
   const { doctors, appointments } = useSelector(state => state.products);
+
+  // States
+  const [activeCallApt, setActiveCallApt] = useState(null);
+  const [isMicMuted, setIsMicMuted] = useState(false);
+  const [isCamOff, setIsCamOff] = useState(false);
+  const [callTimer, setCallTimer] = useState(0);
+  const [selectedCircleApt, setSelectedCircleApt] = useState(null);
+
+  const getTodayStr = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const getDoctorAvatar = (apt) => {
+    if (apt.avatar) return apt.avatar;
+    const doc = doctors.find(d => d.name === apt.doctorName || d.id === apt.doctorId);
+    return doc?.avatar || `https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=150&h=150&q=80`;
+  };
+
+  const isAppointmentActive = (apt) => {
+    if (!apt.date) return false;
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const todayStr = `${year}-${month}-${day}`;
+    
+    if (apt.date < todayStr) return false;
+    if (apt.date > todayStr) return true;
+    
+    const parts = apt.timeSlot.split(' - ');
+    if (parts.length < 2) return true;
+    const endTimeStr = parts[1].trim();
+    
+    const timeMatch = endTimeStr.match(/^(\d{2}):(\d{2})\s*(AM|PM)$/i);
+    if (!timeMatch) return true;
+    
+    let hour = parseInt(timeMatch[1]);
+    const min = parseInt(timeMatch[2]);
+    const ampm = timeMatch[3].toUpperCase();
+    
+    if (ampm === 'PM' && hour !== 12) hour += 12;
+    if (ampm === 'AM' && hour === 12) hour = 0;
+    
+    const currentHour = now.getHours();
+    const currentMin = now.getMinutes();
+    
+    if (currentHour > hour || (currentHour === hour && currentMin >= min)) {
+      return false;
+    }
+    return true;
+  };
+
+  const todayStr = getTodayStr();
+  const activeAppointments = appointments.filter(isAppointmentActive);
+
+  // Trigger active call timer simulation
+  useEffect(() => {
+    let interval;
+    if (activeCallApt) {
+      interval = setInterval(() => {
+        setCallTimer(prev => prev + 1);
+      }, 1000);
+    } else {
+      setCallTimer(0);
+    }
+    return () => clearInterval(interval);
+  }, [activeCallApt]);
 
   // Filter States
   const [selectedSpecialty, setSelectedSpecialty] = useState('All');
@@ -100,7 +173,7 @@ export default function DoctorAppointmentsPage() {
       {/* 1. Page Header */}
       <div className="border-b border-slate-100 pb-3 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-extrabold text-slate-800">Doctor Consultations</h1>
+          <h1 className="text-xl font-extrabold text-slate-805">Doctor Consultations</h1>
           <p className="text-xs text-slate-400 font-bold uppercase mt-1 tracking-wider">
             Verified specialists. Instantly book online video appointments or in-clinic visits.
           </p>
@@ -111,50 +184,59 @@ export default function DoctorAppointmentsPage() {
         </div>
       </div>
 
-      {/* 2. Upcoming Active Appointments timelines */}
-      {appointments.length > 0 && (
-        <section className="flex flex-col gap-3">
-          <h3 className="text-xs font-black text-slate-450 uppercase tracking-widest px-1">Upcoming Consultations</h3>
-          <div className="flex flex-col gap-3">
-            {appointments.map((apt) => (
-              <div
-                key={apt.id}
-                className="bg-white p-4 rounded-3xl border border-teal/15 bg-teal-light/20 shadow-premium flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-fade-in"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-teal text-white flex items-center justify-center text-lg font-bold shrink-0">
-                    👨‍⚕️
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-extrabold text-slate-800">{apt.doctorName}</h4>
-                    <p className="text-[10px] text-slate-450 font-bold uppercase mt-0.5">{apt.specialty} • {apt.type}</p>
-                  </div>
-                </div>
+      {/* 2. Upcoming Active Appointments in short in round circles */}
+      {activeAppointments.length > 0 && (
+        <section className="flex flex-col gap-3 bg-white border border-slate-100 p-5 rounded-3xl shadow-premium">
+          <div className="flex items-center justify-between px-1">
+            <h3 className="text-xs font-black text-slate-805 uppercase tracking-wider flex items-center gap-1.5">
+              <span className="flex h-2 w-2 relative shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal"></span>
+              </span>
+              Active consultations
+            </h3>
+            <span className="text-[9px] text-teal font-black uppercase tracking-wider bg-teal-light/20 px-2 py-0.5 rounded-md">
+              {activeAppointments.length} Scheduled
+            </span>
+          </div>
 
-                <div className="flex items-center gap-4 text-xs font-semibold text-slate-600">
-                  <div className="flex items-center gap-1.5">
-                    <FiCalendar className="text-teal" />
-                    <span>{apt.date}</span>
+          <div className="flex gap-4 overflow-x-auto no-scrollbar py-2 -mx-2 px-2 select-none">
+            {activeAppointments.map((apt) => {
+              const avatar = getDoctorAvatar(apt);
+              const isToday = apt.date === todayStr;
+              return (
+                <div
+                  key={apt.id}
+                  onClick={() => setSelectedCircleApt(apt)}
+                  className="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group transition-all"
+                >
+                  {/* Circle Avatar with Glowing Animated Ring */}
+                  <div className="relative w-16 h-16 rounded-full p-[3px] bg-gradient-to-tr from-teal via-emerald-400 to-forest shadow-md group-hover:scale-105 transition-all duration-300">
+                    <div className="w-full h-full rounded-full border-2 border-white overflow-hidden bg-slate-100">
+                      <img
+                        src={avatar}
+                        alt={apt.doctorName}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    {/* Status live indicator */}
+                    <span className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white animate-pulse" />
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <FiClock className="text-teal" />
-                    <span>{apt.timeSlot.split(' ')[0]}</span>
-                  </div>
-                </div>
 
-                <div className="flex items-center gap-3">
-                  <span className="bg-emerald-50 text-emerald-600 text-[10px] font-black uppercase px-3 py-1.5 rounded-full flex items-center gap-1">
-                    <FiCheckCircle className="stroke-[3px]" /> Confirmed
+                  {/* Doctor Short Name */}
+                  <span className="text-[10px] font-black text-slate-700 max-w-[80px] truncate text-center leading-none mt-1 group-hover:text-teal transition-colors">
+                    {apt.doctorName.replace('Dr. ', '')}
                   </span>
-                  <button
-                    onClick={() => navigate('/profile')}
-                    className="bg-teal text-white hover:bg-teal-dark font-bold text-xs px-4 py-2 rounded-xl shadow-sm flex items-center gap-1 shrink-0 cursor-pointer border-0"
-                  >
-                    <FiVideo /> JOIN CALL
-                  </button>
+
+                  {/* Short Time Badge */}
+                  <span className={`text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                    isToday ? 'bg-teal-light/25 text-teal border border-teal/10 animate-pulse' : 'bg-slate-100 text-slate-500'
+                  }`}>
+                    {isToday ? 'Today' : apt.date.split('-').slice(1).reverse().join('/')}
+                  </span>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}
@@ -361,12 +443,15 @@ export default function DoctorAppointmentsPage() {
       {/* 7. FULL DETAILED PROFILE DRAWER MODAL OVERLAY */}
       <AnimatePresence>
         {selectedProfileDoc && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 select-none">
+          <motion.div
+            key="doctor-profile-drawer-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 select-none"
+          >
             {/* Drawer Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <div
               onClick={() => setSelectedProfileDoc(null)}
               className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm cursor-pointer"
             />
@@ -478,7 +563,247 @@ export default function DoctorAppointmentsPage() {
               </button>
 
             </motion.div>
-          </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 8. SIMULATED TELEHEALTH VIDEO CALL MODAL OVERLAY */}
+      <AnimatePresence>
+        {activeCallApt && (
+          <motion.div
+            key="telehealth-call-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-0 bg-slate-950"
+          >
+            {/* Immersive Dark Call Interface */}
+            <div className="relative w-full h-full flex flex-col justify-between p-6 select-none max-w-4xl mx-auto">
+              
+              {/* Top Bar */}
+              <div className="flex items-center justify-between text-white z-10 bg-slate-900/60 backdrop-blur-md p-4 rounded-2xl border border-slate-800">
+                <div className="flex items-center gap-3">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+                  <div>
+                    <h3 className="text-xs font-black uppercase tracking-wider">Clinical Live Stream</h3>
+                    <p className="text-[10px] text-slate-400 font-semibold mt-0.5">{activeCallApt.doctorName} • {activeCallApt.specialty}</p>
+                  </div>
+                </div>
+                
+                {/* Timer split */}
+                <div className="bg-slate-800/80 px-4 py-1.5 rounded-xl border border-slate-700 text-xs font-black tracking-widest font-mono text-emerald-400">
+                  {(() => {
+                    const mins = Math.floor(callTimer / 60).toString().padStart(2, '0');
+                    const secs = (callTimer % 60).toString().padStart(2, '0');
+                    return `${mins}:${secs}`;
+                  })()}
+                </div>
+              </div>
+
+              {/* Main Doctor Feed / Connection Stream */}
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-950">
+                {/* Doctor Visual Frame */}
+                {callTimer < 2 ? (
+                  <div className="flex flex-col items-center gap-3 text-center z-10">
+                    <div className="w-16 h-16 rounded-full border-4 border-slate-800 border-t-teal animate-spin" />
+                    <span className="text-xs text-slate-400 font-black uppercase tracking-widest">Connecting secure telehealth line...</span>
+                  </div>
+                ) : (
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="relative w-full h-full flex items-center justify-center"
+                  >
+                    {/* Simulated Doctor Video image background */}
+                    <img 
+                      src={activeCallApt.avatar || "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80"} 
+                      alt="Doctor feed" 
+                      className="w-full h-full object-cover opacity-35 filter blur-sm absolute inset-0"
+                    />
+                    
+                    {/* Centered Profile Avatar card with animated sonar waves */}
+                    <div className="relative flex flex-col items-center gap-3 z-10 bg-slate-900/80 border border-slate-850 p-8 rounded-[36px] shadow-2xl max-w-sm">
+                      <div className="absolute -inset-1 rounded-[38px] bg-gradient-to-r from-teal to-forest opacity-30 blur animate-pulse" />
+                      <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-teal shadow-xl bg-slate-800 shrink-0">
+                        <img 
+                          src={activeCallApt.avatar || "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&h=300&q=80"} 
+                          alt={activeCallApt.doctorName} 
+                          className="w-full h-full object-cover" 
+                        />
+                      </div>
+                      <h4 className="text-sm font-black text-white">{activeCallApt.doctorName}</h4>
+                      <span className="text-[10px] text-teal font-black uppercase tracking-wider bg-teal-light/10 px-3 py-1 rounded-full border border-teal/20">Video Channel Active</span>
+                      <p className="text-[10px] text-slate-450 font-bold text-center leading-normal">Pathology records have been loaded. Please start describing your clinical concerns.</p>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Patient Corner Picture-in-Picture Preview */}
+              <div className="absolute bottom-28 right-6 w-24 h-32 md:w-32 md:h-44 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl z-10 flex flex-col items-center justify-center text-center">
+                {isCamOff ? (
+                  <div className="flex flex-col items-center gap-1 text-slate-500">
+                    <FiCameraOff className="text-xl" />
+                    <span className="text-[8px] font-black uppercase">CAM OFF</span>
+                  </div>
+                ) : (
+                  <div className="relative w-full h-full bg-slate-800 flex items-center justify-center">
+                    {/* Patient silhouette */}
+                    <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-white text-base">👤</div>
+                    <span className="absolute bottom-1.5 left-1.5 text-[8px] font-black bg-black/60 text-white px-1.5 py-0.5 rounded uppercase tracking-wider">You (Self)</span>
+                    {/* Micro green glowing light */}
+                    <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 block animate-pulse" />
+                  </div>
+                )}
+              </div>
+
+              {/* Bottom Control Bar */}
+              <div className="flex items-center justify-center gap-4.5 z-10 w-full bg-slate-900/60 backdrop-blur-md p-4 rounded-2xl border border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => setIsMicMuted(!isMicMuted)}
+                  className={`p-3 rounded-full border-0 cursor-pointer text-base transition-colors ${
+                    isMicMuted ? 'bg-red-500/25 text-red-500 border border-red-500/30' : 'bg-slate-800 hover:bg-slate-700 text-white'
+                  }`}
+                >
+                  <FiMic />
+                </button>
+                
+                {/* Hangup Trigger */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(completeDoctorAppointment(activeCallApt.id));
+                    setActiveCallApt(null);
+                    alert("Consultation ended. Your prescription notes are syncing to your active profile.");
+                  }}
+                  className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white text-xs font-black uppercase tracking-wider rounded-2xl shadow-lg border-0 cursor-pointer transition-colors"
+                >
+                  📞 HANG UP & COMPLETE
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsCamOff(!isCamOff)}
+                  className={`p-3 rounded-full border-0 cursor-pointer text-base transition-colors ${
+                    isCamOff ? 'bg-red-500/25 text-red-500 border border-red-500/30' : 'bg-slate-800 hover:bg-slate-700 text-white'
+                  }`}
+                >
+                  <FiCameraOff />
+                </button>
+              </div>
+
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Active appointment circle detail modal */}
+      <AnimatePresence>
+        {selectedCircleApt && (
+          <motion.div
+            key="active-apt-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm select-none"
+          >
+            {/* Backdrop click close */}
+            <div 
+              onClick={() => setSelectedCircleApt(null)}
+              className="absolute inset-0 cursor-pointer"
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              className="relative w-full max-w-sm bg-white rounded-3xl p-6 border border-slate-100 shadow-premium z-10 flex flex-col gap-4.5"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedCircleApt(null)}
+                className="absolute top-4 right-4 p-1.5 bg-slate-50 hover:bg-slate-100 text-slate-450 hover:text-slate-650 rounded-lg cursor-pointer border-0 transition-colors"
+              >
+                <FiX className="text-sm shrink-0" />
+              </button>
+
+              <div className="text-center pt-2">
+                <span className="text-[10px] bg-teal-light/20 text-teal font-black px-2.5 py-1 rounded-full uppercase tracking-wider">
+                  Active Consultation Details
+                </span>
+              </div>
+
+              {/* Doctor Details */}
+              <div className="flex gap-4 items-center bg-slate-50/50 p-3 rounded-2xl border border-slate-100">
+                <div className="w-14 h-14 rounded-xl overflow-hidden bg-slate-150 shrink-0">
+                  <img 
+                    src={getDoctorAvatar(selectedCircleApt)} 
+                    alt={selectedCircleApt.doctorName} 
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+                <div className="min-w-0 text-left">
+                  <h4 className="text-sm font-extrabold text-slate-800 leading-tight truncate">{selectedCircleApt.doctorName}</h4>
+                  <p className="text-[10px] text-teal font-black uppercase tracking-wider mt-0.5">{selectedCircleApt.specialty}</p>
+                </div>
+              </div>
+
+              {/* Consultation Details Card */}
+              <div className="flex flex-col gap-2.5 text-xs font-semibold text-slate-650 border-t border-b border-slate-100 py-3 mt-1 text-left">
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Scheduled For:</span>
+                  <span className="text-slate-800 font-extrabold">{selectedCircleApt.date}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Appointment Slot:</span>
+                  <span className="text-slate-800 font-extrabold">{selectedCircleApt.timeSlot}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Consultation Mode:</span>
+                  <span className="text-slate-800 font-extrabold uppercase text-[10px]">{selectedCircleApt.type}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Booking Status:</span>
+                  <span className="text-[9px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded font-black uppercase tracking-wide">Confirmed & Verified</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col gap-2.5 w-full mt-2">
+                {selectedCircleApt.type.includes('Online') ? (
+                  <button
+                    onClick={() => {
+                      const apt = selectedCircleApt;
+                      setSelectedCircleApt(null);
+                      setActiveCallApt(apt);
+                    }}
+                    className="w-full py-3.5 bg-teal hover:bg-teal-dark text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-sm border-0 cursor-pointer outline-none flex items-center justify-center gap-1.5 animate-pulse"
+                  >
+                    <FiVideo className="text-sm shrink-0" />
+                    <span>JOIN CLINICAL CALL NOW</span>
+                  </button>
+                ) : (
+                  <div className="bg-amber-50/65 p-3 border border-amber-100 rounded-2xl text-center flex flex-col gap-1">
+                    <span className="text-lg">🏥</span>
+                    <h5 className="text-[10px] text-amber-800 font-extrabold uppercase tracking-wide">Clinic Location Visit</h5>
+                    <p className="text-[10px] text-slate-500 font-semibold leading-normal">
+                      This is an offline consult. Please visit the doctor's hospital counter 15 minutes before the time slot.
+                    </p>
+                  </div>
+                )}
+                
+                <button
+                  onClick={() => setSelectedCircleApt(null)}
+                  className="w-full py-3 bg-slate-100 hover:bg-slate-200/80 text-slate-500 hover:text-slate-700 text-xs font-black uppercase tracking-wider rounded-2xl border-0 cursor-pointer outline-none"
+                >
+                  Close Window
+                </button>
+              </div>
+
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 

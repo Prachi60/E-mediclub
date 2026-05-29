@@ -213,83 +213,11 @@ export default function CartPage() {
 
                 </div>
               ))}
-            </div>
-            
-            {/* Dynamic Location-Specific Recommended Products Section */}
-            {suggestedProducts && suggestedProducts.length > 0 && (
-              <div className="bg-white p-5 md:p-6 rounded-3xl border border-slate-100 shadow-premium flex flex-col gap-4 mt-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-50 pb-3">
-                  <h3 className="font-extrabold text-slate-800 text-sm flex items-center gap-2">
-                    <span>📍</span> Top Health Demands in <strong className="text-teal font-extrabold">{cityKey.split(',')[0]}</strong>
-                  </h3>
-                  <span className="text-[10px] bg-teal-light text-teal-dark font-black uppercase tracking-wider px-3 py-1 rounded-full self-start sm:self-auto">
-                    Frequently Bought Together
-                  </span>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {suggestedProducts.map((p) => {
-                    const cartItem = items.find(item => item.id === p.id && item.type === 'medicine');
-                    const qty = cartItem ? cartItem.qty : 0;
-                    return (
-                      <div key={p.id} className="bg-slate-50/50 hover:bg-slate-50 border border-slate-100 rounded-2xl p-4 flex flex-col justify-between gap-3 transition-all">
-                        <div className="flex gap-3">
-                          <img 
-                            src={p.image} 
-                            alt={p.name} 
-                            className="w-12 h-12 object-contain bg-white rounded-lg p-1 border border-slate-100 shrink-0" 
-                          />
-                          <div className="min-w-0">
-                            <span className="text-[8px] text-teal font-extrabold uppercase tracking-wide block truncate">{p.brand}</span>
-                            <h4 className="text-xs font-black text-slate-800 truncate leading-snug">{p.name}</h4>
-                            <p className="text-[9px] text-slate-400 font-bold mt-0.5">{p.packSize}</p>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-100/50">
-                          <div className="flex flex-col">
-                            <span className="text-xs font-extrabold text-slate-800">₹{p.discountPrice || p.price}</span>
-                            {p.discountPrice && (
-                              <span className="text-[9px] text-slate-400 line-through">₹{p.price}</span>
-                            )}
-                          </div>
-
-                          {qty > 0 ? (
-                            <div className="flex items-center bg-white border border-slate-200 rounded-full overflow-hidden p-0.5">
-                              <button 
-                                onClick={() => handleQtyChange(p.id, 'medicine', -1)} 
-                                className="p-1 hover:bg-slate-100 text-slate-600 rounded-full"
-                              >
-                                <FiMinus className="w-2.5 h-2.5 stroke-[3.5px]" />
-                              </button>
-                              <span className="px-2 text-[11px] font-black text-slate-800 select-none">{qty}</span>
-                              <button 
-                                onClick={() => handleQtyChange(p.id, 'medicine', 1)} 
-                                className="p-1 hover:bg-slate-100 text-slate-600 rounded-full"
-                              >
-                                <FiPlus className="w-2.5 h-2.5 stroke-[3.5px]" />
-                              </button>
-                            </div>
-                          ) : (
-                            <button
-                              onClick={(e) => handleQuickAdd(p, e)}
-                              className="px-3 py-1.5 bg-forest hover:bg-forest-dark text-white text-[10px] font-black uppercase rounded-xl transition-all cursor-pointer tap-scale"
-                            >
-                              + ADD
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
+            </div>            {/* Sticky Checkout section pricing sidebar */}
           </div>
 
           {/* Right panel: pricing & coupon splits */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 md:sticky md:top-24">
             
             {/* Promo coupon block */}
             <div className="bg-white p-5 rounded-3xl border border-slate-100 shadow-premium flex flex-col gap-3">
@@ -388,77 +316,6 @@ export default function CartPage() {
               Start Shopping Now
             </button>
           </div>
-
-          {/* Dynamic Location-Specific Recommended Products Section for Empty Cart */}
-          {suggestedProducts && suggestedProducts.length > 0 && (
-            <div className="bg-white p-5 md:p-6 rounded-3xl border border-slate-100 shadow-premium flex flex-col gap-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-50 pb-3">
-                <h3 className="font-extrabold text-slate-800 text-sm flex items-center gap-2">
-                  <span>📍</span> Top Health Demands in <strong className="text-teal font-extrabold">{cityKey.split(',')[0]}</strong>
-                </h3>
-                <span className="text-[10px] bg-teal-light text-teal-dark font-black uppercase tracking-wider px-3 py-1 rounded-full self-start sm:self-auto">
-                  Frequently Bought Together
-                </span>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {suggestedProducts.map((p) => {
-                  const cartItem = items.find(item => item.id === p.id && item.type === 'medicine');
-                  const qty = cartItem ? cartItem.qty : 0;
-                  return (
-                    <div key={p.id} className="bg-slate-50/50 hover:bg-slate-50 border border-slate-100 rounded-2xl p-4 flex flex-col justify-between gap-3 transition-all">
-                      <div className="flex gap-3">
-                        <img 
-                          src={p.image} 
-                          alt={p.name} 
-                          className="w-12 h-12 object-contain bg-white rounded-lg p-1 border border-slate-100 shrink-0" 
-                        />
-                        <div className="min-w-0">
-                          <span className="text-[8px] text-teal font-extrabold uppercase tracking-wide block truncate">{p.brand}</span>
-                          <h4 className="text-xs font-black text-slate-800 truncate leading-snug">{p.name}</h4>
-                          <p className="text-[9px] text-slate-400 font-bold mt-0.5">{p.packSize}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-2 pt-2 border-t border-slate-100/50">
-                        <div className="flex flex-col">
-                          <span className="text-xs font-extrabold text-slate-800">₹{p.discountPrice || p.price}</span>
-                          {p.discountPrice && (
-                            <span className="text-[9px] text-slate-400 line-through">₹{p.price}</span>
-                          )}
-                        </div>
-
-                        {qty > 0 ? (
-                          <div className="flex items-center bg-white border border-slate-200 rounded-full overflow-hidden p-0.5">
-                            <button 
-                              onClick={() => handleQtyChange(p.id, 'medicine', -1)} 
-                              className="p-1 hover:bg-slate-100 text-slate-600 rounded-full"
-                            >
-                              <FiMinus className="w-2.5 h-2.5 stroke-[3.5px]" />
-                            </button>
-                            <span className="px-2 text-[11px] font-black text-slate-800 select-none">{qty}</span>
-                            <button 
-                              onClick={() => handleQtyChange(p.id, 'medicine', 1)} 
-                              className="p-1 hover:bg-slate-100 text-slate-600 rounded-full"
-                              >
-                              <FiPlus className="w-2.5 h-2.5 stroke-[3.5px]" />
-                            </button>
-                          </div>
-                        ) : (
-                          <button
-                            onClick={(e) => handleQuickAdd(p, e)}
-                            className="px-3 py-1.5 bg-forest hover:bg-forest-dark text-white text-[10px] font-black uppercase rounded-xl transition-all cursor-pointer tap-scale"
-                          >
-                            + ADD
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
         </div>
       )}
 

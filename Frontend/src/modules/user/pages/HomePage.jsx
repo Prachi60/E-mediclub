@@ -292,73 +292,138 @@ export default function HomePage() {
       </section>
 
       {/* 4. Popular Medicines Section */}
-      <section className="flex flex-col gap-4">
+      <section className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-black text-slate-800 flex items-center gap-2">
+            <h2 className="text-base font-black text-slate-800 flex items-center gap-1.5">
               <FiTrendingUp className="text-teal" /> Trending Medicines
             </h2>
-            <p className="text-xs text-slate-400 font-semibold">Most bought healthcare and daily wellness essentials</p>
+            <p className="text-[11px] text-slate-400 font-semibold">Most bought daily healthcare essentials</p>
           </div>
-          <div className="flex items-center gap-3">
-            <button 
-              onClick={() => { dispatch(setSelectedCategory('Medicines')); navigate('/categories'); }} 
-              className="text-xs font-black text-teal hover:underline"
-            >
-              SEE ALL
-            </button>
-          </div>
+          <button 
+            onClick={() => { dispatch(setSelectedCategory('Medicines')); navigate('/categories'); }} 
+            className="text-[11px] font-black text-teal hover:text-teal-dark bg-transparent border-0 cursor-pointer outline-none uppercase tracking-wider"
+          >
+            See All Medicines
+          </button>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {prioritizedMedicines.slice(0, 8).map((med) => (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {prioritizedMedicines.filter(m => m.category === 'Medicines').slice(0, 4).map((med) => (
             <ProductCard key={med.id} product={med} />
           ))}
         </div>
       </section>
 
-      {/* 5. Diagnostic Lab Packages Section */}
-      <section className="flex flex-col gap-4">
+      {/* 5. Ayurveda Essentials Section */}
+      <section className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-black text-slate-800 flex items-center gap-2">
+            <h2 className="text-base font-black text-slate-800 flex items-center gap-1.5">
+              🌿 Ayurveda & Natural Herbs
+            </h2>
+            <p className="text-[11px] text-slate-400 font-semibold">Time-tested natural remedies and daily immunity tonics</p>
+          </div>
+          <button 
+            onClick={() => { dispatch(setSelectedCategory('Ayurveda')); navigate('/categories'); }} 
+            className="text-[11px] font-black text-teal hover:text-teal-dark bg-transparent border-0 cursor-pointer outline-none uppercase tracking-wider"
+          >
+            See All Ayurveda
+          </button>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {prioritizedMedicines.filter(m => m.category === 'Ayurveda').slice(0, 4).map((med) => (
+            <ProductCard key={med.id} product={med} />
+          ))}
+        </div>
+      </section>
+
+      {/* 6. Wellness & Fitness Care Section */}
+      <section className="flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-base font-black text-slate-800 flex items-center gap-1.5">
+              🧘 Wellness & Nutritional Care
+            </h2>
+            <p className="text-[11px] text-slate-400 font-semibold">Protein supplements, vitamins, and clinical skin care</p>
+          </div>
+          <button 
+            onClick={() => { dispatch(setSelectedCategory('Wellness')); navigate('/categories'); }} 
+            className="text-[11px] font-black text-teal hover:text-teal-dark bg-transparent border-0 cursor-pointer outline-none uppercase tracking-wider"
+          >
+            See All Wellness
+          </button>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {prioritizedMedicines.filter(m => m.category === 'Wellness').slice(0, 4).map((med) => (
+            <ProductCard key={med.id} product={med} />
+          ))}
+        </div>
+      </section>
+
+      {/* 7. Health Devices Section */}
+      <section className="flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-base font-black text-slate-800 flex items-center gap-1.5">
+              🩸 Diagnostic Devices & Monitors
+            </h2>
+            <p className="text-[11px] text-slate-400 font-semibold">Clinical glucometers and automated blood pressure cuffs</p>
+          </div>
+          <button 
+            onClick={() => { dispatch(setSelectedCategory('Health Devices')); navigate('/categories'); }} 
+            className="text-[11px] font-black text-teal hover:text-teal-dark bg-transparent border-0 cursor-pointer outline-none uppercase tracking-wider"
+          >
+            See All Devices
+          </button>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {prioritizedMedicines.filter(m => m.category === 'Health Devices').slice(0, 4).map((med) => (
+            <ProductCard key={med.id} product={med} />
+          ))}
+        </div>
+      </section>
+
+      {/* 8. Diagnostic Lab Packages Section */}
+      <section className="flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-base font-black text-slate-800 flex items-center gap-1.5">
               🧪 Diagnostic Health Packages
             </h2>
-            <p className="text-xs text-slate-400 font-semibold">Certified clinical labs. Accurate reports straight to email.</p>
+            <p className="text-[11px] text-slate-400 font-semibold">Accurate reports compiled by experienced path labs</p>
           </div>
-          <div className="flex items-center gap-3">
-            <button 
-              onClick={() => navigate('/lab-tests')} 
-              className="text-xs font-black text-teal hover:underline"
-            >
-              SEE ALL TESTS
-            </button>
-          </div>
+          <button 
+            onClick={() => navigate('/lab-tests')} 
+            className="text-[11px] font-black text-teal hover:text-teal-dark bg-transparent border-0 cursor-pointer outline-none uppercase tracking-wider"
+          >
+            See All Lab Tests
+          </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {labTests.map((test) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {labTests.slice(0, 4).map((test) => (
             <LabTestCard key={test.id} test={test} />
           ))}
         </div>
       </section>
 
-      {/* 6. Doctor Consultation Cards Section */}
-      <section className="flex flex-col gap-4">
+      {/* 9. Doctor Consultation Cards Section */}
+      <section className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-black text-slate-800 flex items-center gap-2">
-              👨‍⚕️ Verified Doctor Appointments
+            <h2 className="text-base font-black text-slate-800 flex items-center gap-1.5">
+              👨‍⚕️ Verified Doctor Consultations
             </h2>
-            <p className="text-xs text-slate-400 font-semibold">Consultations via HD video or clinic visitation.</p>
+            <p className="text-[11px] text-slate-400 font-semibold">Connect with certified specialists via secure HD video calls</p>
           </div>
           <button 
             onClick={() => navigate('/doctor-appointments')} 
-            className="text-xs font-black text-teal hover:underline"
+            className="text-[11px] font-black text-teal hover:text-teal-dark bg-transparent border-0 cursor-pointer outline-none uppercase tracking-wider"
           >
-            FIND DOCTORS
+            See All Doctors
           </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {doctors.map((doc) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {doctors.slice(0, 4).map((doc) => (
             <DoctorCard key={doc.id} doctor={doc} />
           ))}
         </div>

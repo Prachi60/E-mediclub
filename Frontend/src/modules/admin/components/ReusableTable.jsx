@@ -81,32 +81,32 @@ export default function ReusableTable({
   };
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-3.5">
       {/* Search and Filters Top Deck */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white p-4 rounded-3xl border border-slate-100 shadow-premium">
+      <div className="flex flex-row items-center justify-between gap-2 bg-white p-3 rounded-2xl border border-slate-100 shadow-premium">
         
         {/* Dynamic Search Box */}
-        <div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-slate-50 border border-slate-100 rounded-2xl w-full md:w-80">
-          <FiSearch className="text-slate-400 text-lg" />
+        <div className="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-100 rounded-xl flex-1 min-w-0">
+          <FiSearch className="text-slate-400 text-sm shrink-0" />
           <input 
             type="text" 
             placeholder={searchPlaceholder}
             value={searchQuery}
             onChange={handleSearchChange}
-            className="bg-transparent border-none outline-none text-xs font-semibold text-slate-700 w-full placeholder:text-slate-400"
+            className="bg-transparent border-none outline-none text-[11px] font-semibold text-slate-700 w-full placeholder:text-slate-400 animate-fade-in"
           />
         </div>
 
         {/* Category Selectors & Download Deck */}
-        <div className="flex items-center gap-3 self-end md:self-auto w-full md:w-auto justify-end">
+        <div className="flex items-center gap-2 shrink-0">
           
           {filterOptions && (
-            <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 px-3.5 py-2.5 rounded-2xl shrink-0">
-              <FiFilter className="text-slate-400 text-sm" />
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-100 px-2.5 py-2 rounded-xl shrink-0">
+              <FiFilter className="text-slate-400 text-[10px] shrink-0" />
               <select 
                 value={filterValue} 
                 onChange={handleFilterChange}
-                className="bg-transparent border-none outline-none text-xs font-black text-slate-600 uppercase tracking-wide cursor-pointer"
+                className="bg-transparent border-none outline-none text-[10px] font-black text-slate-650 uppercase tracking-wide cursor-pointer"
               >
                 <option value="all">All {filterOptions.label}s</option>
                 {filterOptions.options.map(opt => (
@@ -119,9 +119,10 @@ export default function ReusableTable({
           {/* Export to CSV Button */}
           <button 
             onClick={handleExportCSV}
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-teal text-white text-xs font-black tracking-wider uppercase rounded-2xl hover:bg-teal-dark shadow-sm transition-all duration-200 tap-scale shrink-0"
+            className="flex items-center justify-center gap-1 px-3 py-2.5 bg-teal text-white text-[10px] font-black tracking-wider uppercase rounded-xl hover:bg-teal-dark shadow-sm transition-all duration-200 tap-scale shrink-0 cursor-pointer min-w-[34px] min-h-[34px]"
+            title="Export CSV"
           >
-            <FiDownload className="text-sm" />
+            <FiDownload className="text-xs shrink-0" />
             <span className="hidden sm:inline">Export</span>
           </button>
         </div>

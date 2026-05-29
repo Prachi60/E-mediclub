@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { vendorLogout } from '../../auth/vendor/store/vendorAuthSlice';
 import Logo from '../../../shared/components/Logo';
 import { 
-  FiGrid, FiPackage, FiShoppingBag, FiActivity, 
+  FiGrid, FiPackage, FiShoppingBag, FiLayers, FiTrendingUp, 
   FiDollarSign, FiUser, FiHome, FiLogOut, FiArrowLeft
 } from 'react-icons/fi';
 
@@ -16,10 +16,9 @@ export default function VendorSidebar({ isOpen, toggleSidebar }) {
   const menuItems = [
     { name: 'Dashboard', path: '/vendor/dashboard', icon: FiGrid },
     { name: 'My Products', path: '/vendor/products', icon: FiPackage },
+    { name: 'Inventory Stocks', path: '/vendor/stocks', icon: FiLayers },
     { name: 'Store Orders', path: '/vendor/orders', icon: FiShoppingBag },
-    { name: 'Lab Panels', path: '/vendor/lab-tests', icon: FiActivity },
-    { name: 'Appointments', path: '/vendor/appointments', icon: FiActivity },
-    { name: 'Earnings & Payouts', path: '/vendor/earnings', icon: FiDollarSign },
+    { name: 'Sales Report', path: '/vendor/earnings', icon: FiTrendingUp },
     { name: 'Seller Profile', path: '/vendor/profile', icon: FiUser },
   ];
 

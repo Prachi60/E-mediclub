@@ -60,6 +60,10 @@ const authSlice = createSlice({
       localStorage.removeItem('em_user');
       localStorage.removeItem('em_token');
     },
+    updateUserProfile: (state, action) => {
+      state.user = { ...(state.user || {}), ...action.payload };
+      localStorage.setItem('em_user', JSON.stringify(state.user));
+    },
     addAddress: (state, action) => {
       const newAddress = { ...action.payload, id: Date.now() };
       if (newAddress.isDefault) {
@@ -100,6 +104,7 @@ export const {
   verifyOtpSuccess,
   authFailure,
   logout,
+  updateUserProfile,
   addAddress,
   updateAddress,
   deleteAddress,
